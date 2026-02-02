@@ -39,7 +39,7 @@ function getTextWithoutSymbol(text: string, symbol: string) {
 const users: IUser[] = [
   {
     name: 'Saimon',
-    age: 30,
+    age: 34,
     phone: 4555446266,
   },
 
@@ -59,7 +59,7 @@ const users: IUser[] = [
 
   {
     name: 'Elizabet',
-    age: 28,
+    age: 27,
     email: 'lizzy@gmail.com',
     phone: 455548908,
   },

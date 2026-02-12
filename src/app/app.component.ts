@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import './training';
-import { BasicColor } from '../enums/Color';
+import { Color } from '../enums/Color';
 
 @Component({
   selector: 'app-root',
@@ -10,30 +10,32 @@ import { BasicColor } from '../enums/Color';
 })
 export class AppComponent {
 
-  private DATE_KEY = 'last_visit';
-  private SUM_KEY = 'visits_count';
-
+  logoName: string = 'румтибет';
+  private ["DATE-KEY"]: string = 'last_visit';
+  private ["SUM-KEY"]: string = 'visits_count';
+  
   constructor() {
     this.saveDateLastVisit();
     this.saveSumVisit();
   }
 
   public isBasicColor(color: string): boolean {
-    return Object.values(BasicColor).includes(color as BasicColor);
+    const colors: string[] = Object.values(Color);
+    return colors.includes(color);
   }
 
   public saveDateLastVisit(): void {
-    const date = new Date().toISOString();
-    localStorage.setItem(this.DATE_KEY, date);
+    const date: string = new Date().toISOString();
+    localStorage.setItem(this["DATE-KEY"], date);
     console.log(`Дата последнего посещения сайта ${date}`);
   }
 
   public saveSumVisit(): void {
-    const visit = localStorage.getItem(this.SUM_KEY) || '0';
-    const visitNumber = parseInt(visit, 10);
-    const nextVisit = (visitNumber + 1).toString();
-    localStorage.setItem(this.SUM_KEY, nextVisit.toString());
-    console.log(`Количесто посещений сайта ${nextVisit}`);
+    const visit: string = localStorage.getItem(this["SUM-KEY"]) || '0';
+    let visitNumber: number = parseInt(visit, 10);
+    visitNumber++;
+    localStorage.setItem(this["SUM-KEY"], visitNumber.toString());
+    console.log(`Количесто посещений сайта ${visitNumber}`);
   }
   
 }

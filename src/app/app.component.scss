@@ -1,6 +1,6 @@
 .header {
   color: var(--white-color);
-  background: url('/images/bg-main.png') 50% / cover no-repeat;
+  background: url('/images/bg-mountains.png') 50% / cover no-repeat;
   min-height: 985px;
   padding-top: 16px;
 
@@ -23,8 +23,12 @@
       .logo-text {
         width: 130.47px;
         height: 11.23px;
-        margin-top: 8.79px;
-        margin-left: 3.09px;
+         margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        font-size: 18px;
       }
     }
 
@@ -115,8 +119,8 @@
             -moz-appearance: none;
           }
 
-          .dropdown-icon {
-            background-image: url('/images/dropdown-icon.svg');
+          .down-arrow-icon {
+            background-image: url('/images/down-arrow-icon.svg');
             background-repeat: no-repeat;
             background-position: right 16px center;
             background-size: 12px 8px;
@@ -155,14 +159,10 @@
           }
 
           .date-icon {
-            background-image: url('/images/square-icon.svg'), url('/images/element-icon.svg');
-            background-repeat: no-repeat, no-repeat;
-            background-position:
-              right 16px center,
-              right 16px top 16px;
-            background-size:
-              18px 16.88px,
-              18px 6.75px;
+            background-image: url('/images/calendar-icon.svg');
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 18px 18px;
           }
 
           .hint-text-container {

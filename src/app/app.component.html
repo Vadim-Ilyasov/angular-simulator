@@ -3,10 +3,10 @@
     <div class="main-info">
       <div class="logotype">
         <div class="logo-image">
-          <img src="/images/mountain-icon.png" />
+          <img src="/images/mountain-logo.svg" />
         </div>
-        <div class="logo-text">
-          <img src="/images/logo.png" />
+        <div>
+          <p class="logo-text">{{logoName}}</p>
         </div>
       </div>
       <div class="main-nav">
@@ -33,11 +33,11 @@
       <form class="search-block">
         <div class="select-section">
           <div class="location-tour">
-            <select class="selection-field dropdown-icon" id="my-tour" required>
+            <select class="selection-field down-arrow-icon" id="location-tour" required>
               <option value="" disabled selected hidden>Локация для тура</option>
-              <option value="1">1 участник</option>
-              <option value="2">2 участника</option>
-              <option value="3">3-5 участников</option>
+              <option value="1">Эльбрус</option>
+              <option value="2">Алтай</option>
+              <option value="3">Шерегеш</option>
             </select>
           </div>
           <div class="hint-text fs-14">
@@ -48,7 +48,7 @@
           <div class="location-tour">
             <input
               type="date"
-              class="selection-field selection-date date-icon"
+              class="selection-field selection-date date-icon" id="date-tour"
               data-placeholder="Дата похода"
               required
             />
@@ -59,7 +59,7 @@
         </div>
         <div class="select-section">
           <div class="location-tour">
-            <select class="selection-field dropdown-icon" id="my-tour" required>
+            <select class="selection-field down-arrow-icon" id="partaker" required>
               <option value="" disabled selected hidden>Участники</option>
               <option value="1">1 участник</option>
               <option value="2">2 участника</option>
@@ -70,7 +70,7 @@
             <label for="my-tour">выберите из списка</label>
           </div>
         </div>
-        <button class="search-tour">Найти программу</button>
+        <button class="search-tour" id="search-tour">Найти программу</button>
       </form>
     </div>
   </div>

@@ -1,1 +1,77 @@
-<h1 style="display: flex; justify-content: center; font-family: sans-serif;">NGX SIMULATOR</h1>
+<header class="header">
+  <div class="container">
+    <div class="main-info">
+      <div class="logotype">
+        <div class="logo-image">
+          <img src="/images/mountain-logo.svg" />
+        </div>
+        <div>
+          <p class="logo-text">{{logoName}}</p>
+        </div>
+      </div>
+      <div class="main-nav">
+        <nav class="menu fs-18 semi-bold white-text flex gap-24">
+          <a id="main-info">Главная</a>
+          <a id="guide-info">Про гида</a>
+          <a id="tour-program">Программа тура</a>
+          <a id="tour-cost">Стоимость</a>
+          <a id="tour-blog">Блог</a>
+          <a id="tour-contact">Контакты</a>
+        </nav>
+        <div class="consultation fs-16">
+          <a id="tour-consultation">Консультация</a>
+        </div>
+      </div>
+    </div>
+    <div class="title-container">
+      <h1 class="title">
+        Насладись прогулкой в горах
+        <br />с командой единомышленников
+      </h1>
+    </div>
+    <div class="search-info-container">
+      <form class="search-block">
+        <div class="select-section">
+          <div class="location-tour">
+            <select class="selection-field down-arrow-icon" id="location-tour" required>
+              <option value="" disabled selected hidden>Локация для тура</option>
+              <option value="1">Эльбрус</option>
+              <option value="2">Алтай</option>
+              <option value="3">Шерегеш</option>
+            </select>
+          </div>
+          <div class="hint-text fs-14">
+            <label for="my-tour">выберите из списка</label>
+          </div>
+        </div>
+        <div class="select-section">
+          <div class="location-tour">
+            <input
+              type="date"
+              class="selection-field selection-date date-icon" id="date-tour"
+              data-placeholder="Дата похода"
+              required
+            />
+          </div>
+          <div class="hint-text-container fs-14">
+            <label class="hint-text" for="my-tour">укажите дату</label>
+          </div>
+        </div>
+        <div class="select-section">
+          <div class="location-tour">
+            <select class="selection-field down-arrow-icon" id="partaker" required>
+              <option value="" disabled selected hidden>Участники</option>
+              <option value="1">1 участник</option>
+              <option value="2">2 участника</option>
+              <option value="3">3-5 участников</option>
+            </select>
+          </div>
+          <div class="hint-text fs-14">
+            <label for="my-tour">выберите из списка</label>
+          </div>
+        </div>
+        <button class="search-tour" id="search-tour">Найти программу</button>
+      </form>
+    </div>
+  </div>
+</header>

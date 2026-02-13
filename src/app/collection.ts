@@ -22,7 +22,7 @@ class Collection<T> {
     if (index >= 0 && index < this.products.length) {
       this.products.splice(index, 1);
     } else {
-      console.log(`индекс вне диапазона`);
+      throw new Error(`Index ${index} is out of bounds for products array.`);
     }
   }
 
@@ -30,8 +30,8 @@ class Collection<T> {
     if (index >= 0 && index < this.products.length) {
       this.products[index] = newProduct;
     } else {
-      console.log(`индекс вне диапазона`);
+      throw new Error(`Index ${index} is out of bounds for products array.`);
     }
   }
-  
+
 }

@@ -26,7 +26,6 @@ export class AppComponent {
     const DATE_KEY: string = 'last-visit';
     const date: string = new Date().toISOString();
     localStorage.setItem(DATE_KEY, date);
-    console.log(`Дата последнего посещения сайта ${date}`);
   }
 
   public saveSumVisit(): void {
@@ -35,7 +34,6 @@ export class AppComponent {
     let visitNumber: number = parseInt(visit, 10);
     visitNumber++;
     localStorage.setItem(SUM_KEY, visitNumber.toString());
-    console.log(`Количесто посещений сайта ${visitNumber}`);
   }
   
 }

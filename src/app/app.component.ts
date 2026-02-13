@@ -11,30 +11,30 @@ import { Color } from '../enums/Color';
 export class AppComponent {
 
   logoName: string = 'румтибет';
-  private ["DATE-KEY"]: string = 'last_visit';
-  private ["SUM-KEY"]: string = 'visits_count';
-  
+
   constructor() {
     this.saveDateLastVisit();
     this.saveSumVisit();
   }
 
   public isBasicColor(color: string): boolean {
-    const colors: string[] = Object.values(Color);
+    const colors: string[] = [Color.GREEN, Color.BLUE, Color.RED];
     return colors.includes(color);
   }
 
   public saveDateLastVisit(): void {
+    const dateKey: string = 'last_visit';
     const date: string = new Date().toISOString();
-    localStorage.setItem(this["DATE-KEY"], date);
+    localStorage.setItem(dateKey, date);
     console.log(`Дата последнего посещения сайта ${date}`);
   }
 
   public saveSumVisit(): void {
-    const visit: string = localStorage.getItem(this["SUM-KEY"]) || '0';
+    const sumKey: string = 'visits_count';
+    const visit: string = localStorage.getItem(sumKey) || '0';
     let visitNumber: number = parseInt(visit, 10);
     visitNumber++;
-    localStorage.setItem(this["SUM-KEY"], visitNumber.toString());
+    localStorage.setItem(sumKey, visitNumber.toString());
     console.log(`Количесто посещений сайта ${visitNumber}`);
   }
   

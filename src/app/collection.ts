@@ -1,4 +1,5 @@
 class Collection<T> {
+
   private products: T[] = [];
 
   constructor(initProducts: T[] = []) {
@@ -32,4 +33,5 @@ class Collection<T> {
       console.log(`индекс вне диапазона`);
     }
   }
+  
 }

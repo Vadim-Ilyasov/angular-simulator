@@ -23,18 +23,18 @@ export class AppComponent {
   }
 
   public saveDateLastVisit(): void {
-    const dateKey: string = 'last_visit';
+    const DATE_KEY: string = 'last-visit';
     const date: string = new Date().toISOString();
-    localStorage.setItem(dateKey, date);
+    localStorage.setItem(DATE_KEY, date);
     console.log(`Дата последнего посещения сайта ${date}`);
   }
 
   public saveSumVisit(): void {
-    const sumKey: string = 'visits_count';
-    const visit: string = localStorage.getItem(sumKey) || '0';
+    const SUM_KEY: string = 'visits-count';
+    const visit: string = localStorage.getItem(SUM_KEY) || '0';
     let visitNumber: number = parseInt(visit, 10);
     visitNumber++;
-    localStorage.setItem(sumKey, visitNumber.toString());
+    localStorage.setItem(SUM_KEY, visitNumber.toString());
     console.log(`Количесто посещений сайта ${visitNumber}`);
   }
   

@@ -1,0 +1,27 @@
+.primary-button {
+  background-color: #1a3e3e;
+  color: var(--white-color);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1.2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.minor-button {
+  background-color: var(--white-color);
+  color: #1a3e3e;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1.2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

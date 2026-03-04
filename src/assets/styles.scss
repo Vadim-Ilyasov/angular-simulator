@@ -1,15 +1,33 @@
 @use './fonts';
 @use './normalize';
+@use './button';
 
 * {
   font-family: 'Nunito Sans', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  margin: 0 auto;
-  max-width: 1180px;
-  display: flex;
-  flex-direction: column;
+  width: 1180px;
+  display: block;
+}
+
+.pre-title {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #f2be22;
+}
+
+.title-text {
+  font-family: Nunito Sans;
+  font-weight: 800;
+  font-style: ExtraBold;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: 0%;
 }
 
 :root {
@@ -53,6 +71,3 @@
 .gap-24 {
   gap: 24px;
 }
-
-
-

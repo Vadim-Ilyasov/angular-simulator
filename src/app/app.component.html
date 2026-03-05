@@ -156,13 +156,13 @@
         Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
         тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
       </div>
-      <div class="feature-list">
+      <div class="advantages-list">
         @for (feature of features; track feature.id) {
-          <div class="feature">
+          <div class="advantage-container">
             <div class="icon-container" [style.background-color]="feature.iconColor">
-              <img class="feature-icon" [src]="'/images/' + feature.image + '.svg'" />
+              <img class="advantage-icon" [src]="'/images/' + feature.image + '.svg'" />
             </div>
-            <div class="feature-text">
+            <div class="advantage-text">
               <h3 class="fs-18 bold">{{ feature.title }}</h3>
               <p class="fs-14 regular">{{ feature.description }}</p>
             </div>
@@ -173,7 +173,12 @@
         <a id="tour-program-price-btn">Стоимость программ</a>
       </div>
     </div>
-    <div class="tour-program-photo"></div>
+    <div class="tour-program-photo">
+      <img src="/images/lagoon-image.png">
+      <img src="/images/mountain-peak-image.png">
+      <img src="/images/snow-ride-image.png">
+      <img src="/images/valley-colors-image.png">
+    </div>
   </div>
 </section>
 

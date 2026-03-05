@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import './training';
 import { Color } from '../enums/Color';
-import { IFeature } from '../interfaces/IService';
+import { IFeature } from '../interfaces/IFeature';
 import { ISearchTours } from '../interfaces/ISearchTours';
 import { DatePipe } from '@angular/common';
 
@@ -64,7 +64,7 @@ export class AppComponent {
     this.saveDateLastVisit();
     this.saveSumVisit();
 
-    setInterval(() => {
+    setTimeout(() => {
       this.loading = false;
     }, 2000);
 

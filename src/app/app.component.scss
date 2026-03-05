@@ -375,12 +375,12 @@
       letter-spacing: 0%;
     }
 
-    .feature-list {
+    .advantages-list {
       display: flex;
       flex-direction: column;
       gap: 40px;
 
-      .feature {
+      .advantage-container {
         width: 580px;
         height: 64px;
         display: flex;
@@ -401,17 +401,17 @@
           border-radius: 4px;
         }
 
-        .feature-text {
+        .advantage-text {
           width: 514px;
         }
       }
 
-      .feature:hover {
+      .advantage-container:hover {
         transform: translateY(-8px);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       }
 
-      .feature:hover .icon-container {
+      .advantage-container:hover .icon-container {
         transform: scale(1.1) rotate(5deg);
       }
     }
@@ -425,14 +425,9 @@
   .tour-program-photo {
     width: 510px;
     height: 510px;
-    background-image:
-      url('/images/lagoon-image.png'), url('/images/mountain-peak-image.png'),
-      url('/images/snow-ride-image.png'), url('/images/valley-colors-image.png');
-    background-repeat: no-repeat;
-    background-position:
-      top left,
-      top right,
-      bottom left,
-      bottom right;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 10px;
   }
 }

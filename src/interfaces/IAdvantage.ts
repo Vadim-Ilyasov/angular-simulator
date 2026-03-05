@@ -1,4 +1,4 @@
-export interface IFeature {
+export interface IAdvantage {
     id: number;
     image: string;
     iconColor: string;

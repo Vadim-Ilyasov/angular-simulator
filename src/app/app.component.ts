@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import './training';
 import { Color } from '../enums/Color';
-import { IFeature } from '../interfaces/IFeature';
+import { IAdvantage } from '../interfaces/IAdvantage';
 import { ISearchTours } from '../interfaces/ISearchTours';
 import { DatePipe } from '@angular/common';
 
@@ -33,7 +33,7 @@ export class AppComponent {
 
   loading: boolean = true;
 
-  features: IFeature[] = [
+  advantages: IAdvantage[] = [
     {
       id: 1,
       image: 'guide-icon',

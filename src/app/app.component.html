@@ -157,14 +157,14 @@
         тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
       </div>
       <div class="advantages-list">
-        @for (feature of features; track feature.id) {
+        @for (advantage of advantages; track advantage.id) {
           <div class="advantage-container">
-            <div class="icon-container" [style.background-color]="feature.iconColor">
-              <img class="advantage-icon" [src]="'/images/' + feature.image + '.svg'" />
+            <div class="icon-container" [style.background-color]="advantage.iconColor">
+              <img class="advantage-icon" [src]="'/images/' + advantage.image + '.svg'" />
             </div>
             <div class="advantage-text">
-              <h3 class="fs-18 bold">{{ feature.title }}</h3>
-              <p class="fs-14 regular">{{ feature.description }}</p>
+              <h3 class="fs-18 bold">{{ advantage.title }}</h3>
+              <p class="fs-14 regular">{{ advantage.description }}</p>
             </div>
           </div>
         }

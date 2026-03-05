@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import './training';
 import { Color } from '../enums/Color';
-import { IService } from '../interfaces/IService';
+import { IFeature } from '../interfaces/IService';
+import { ISearchTours } from '../interfaces/ISearchTours';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -12,18 +13,17 @@ import { DatePipe } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
 
   logoName: string = 'румтибет';
 
-  searchTours = {
+  searchTours: ISearchTours = {
     location: '',
     date: '',
     tourist: '',
   };
 
   currentDate: Date = new Date();
-  private timerId: any;
 
   count: number = 0;
 
@@ -33,10 +33,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   loading: boolean = true;
 
-  services: IService[] = [
+  features: IFeature[] = [
     {
       id: 1,
-      image: '/images/guide-icon.svg',
+      image: 'guide-icon',
       iconColor: '#E5EEEB',
       title: 'Опытный гид',
       description:
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
     },
     {
       id: 1,
-      image: '/images/safety-icon.svg',
+      image: 'safety-icon',
       iconColor: '#E3E6EE',
       title: 'Безопасный поход',
       description:
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
     },
     {
       id: 1,
-      image: '/images/price-icon.svg',
+      image: 'price-icon',
       iconColor: '#F3F1E1',
       title: 'Лояльные цены',
       description:
@@ -67,36 +67,14 @@ export class AppComponent implements OnInit, OnDestroy {
     setInterval(() => {
       this.loading = false;
     }, 2000);
-  }
 
-  isTourReady(): boolean {
-    return !!(this.searchTours.location && this.searchTours.date && this.searchTours.tourist);
-  }
-
-  ngOnInit(): void {
-    this.timerId = setInterval(() => {
+    setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
   }
 
-  ngOnDestroy(): void {
-    if (this.timerId) {
-      clearInterval(this.timerId);
-    }
-  }
-
-  incrementNumber() {
-    this.count++;
-  }
-
-  decrementNumber() {
-    if (this.count > 0) {
-      this.count--;
-    }
-  }
-
-  toggleTask() {
-    this.toggle = !this.toggle;
+  isTourReady(): boolean {
+    return !!(this.searchTours.location && this.searchTours.date && this.searchTours.tourist);
   }
 
   isBasicColor(color: string): boolean {

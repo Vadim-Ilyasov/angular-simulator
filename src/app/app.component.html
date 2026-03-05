@@ -35,14 +35,14 @@
         </div>
       } @else {
         <div class="counter-container">
-          <button (click)="decrementNumber()" class="counter-btn" id="reducing-btn" [disabled]="count === 0">
+          <button (click)="count = count - 1" class="counter-btn" id="reducing-btn" [disabled]="count === 0">
             -
           </button>
           <span class="count-display">{{ count }}</span>
-          <button (click)="incrementNumber()" class="counter-btn" id="increasing-btn">+</button>
+          <button (click)="count = count + 1" class="counter-btn" id="increasing-btn">+</button>
         </div>
       }
-      <button class="toggle-btn minor-button" id="toggle-btn" (click)="toggleTask()">
+      <button class="toggle-btn minor-button" id="toggle-btn" (click)="toggle = !toggle">
         {{ toggle ? 'Показать счетчик' : 'Показать таймер' }}
       </button>
     </div>
@@ -119,7 +119,7 @@
     </div>
   </div>
   <div class="input-container">
-    <input class="input-text" [(ngModel)]="text" />
+    <input class="input-text" id="input-text" [(ngModel)]="text" />
     <p>{{ text }}</p>
   </div>
 </header>
@@ -156,15 +156,15 @@
         Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
         тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
       </div>
-      <div class="service-list">
-        @for (service of services; track service.id) {
-          <div class="service">
-            <div class="icon-container" [style.background-color]="service.iconColor">
-              <img class="service-icon" [src]="service.image" />
+      <div class="feature-list">
+        @for (feature of features; track feature.id) {
+          <div class="feature">
+            <div class="icon-container" [style.background-color]="feature.iconColor">
+              <img class="feature-icon" [src]="'/images/' + feature.image + '.svg'" />
             </div>
-            <div class="service-text">
-              <h3 class="fs-18 bold">{{ service.title }}</h3>
-              <p class="fs-14 regular">{{ service.description }}</p>
+            <div class="feature-text">
+              <h3 class="fs-18 bold">{{ feature.title }}</h3>
+              <p class="fs-14 regular">{{ feature.description }}</p>
             </div>
           </div>
         }

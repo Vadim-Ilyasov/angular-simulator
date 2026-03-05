@@ -1,4 +1,4 @@
-export interface IService {
+export interface IFeature {
     id: number;
     image: string;
     iconColor: string;

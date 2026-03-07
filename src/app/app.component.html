@@ -1,12 +1,15 @@
+<div class="loading-container" *ngIf="loading">
+  <img src="/images/loading-icon.svg" alt="loading" class="spinner">
+</div>
 <header class="header">
-  <div class="container">
-    <div class="main-info">
+  <div class="super-header">
+    <div class="container super-header-container">
       <div class="logotype">
         <div class="logo-image">
           <img src="/images/mountain-logo.svg" />
         </div>
         <div>
-          <p class="logo-text">{{logoName}}</p>
+          <p class="logo-text">{{ logoName }}</p>
         </div>
       </div>
       <div class="main-nav">
@@ -18,22 +21,52 @@
           <a id="tour-blog">Блог</a>
           <a id="tour-contact">Контакты</a>
         </nav>
-        <div class="consultation fs-16">
-          <a id="tour-consultation">Консультация</a>
+        <div class="consultation-btn minor-button">
+          <a id="consultation-btn">Консультация</a>
         </div>
       </div>
     </div>
-    <div class="title-container">
-      <h1 class="title">
+    <div class="task-container">
+      @if (toggle) {
+        <div class="timer-container">
+          <span class="current-time">
+            {{ currentDate | date: 'dd.MM.yyyy HH:mm:ss' }}
+          </span>
+        </div>
+      } @else {
+        <div class="counter-container">
+          <button (click)="count = count - 1" class="counter-btn" id="reducing-btn" [disabled]="count === 0">
+            -
+          </button>
+          <span class="count-display">{{ count }}</span>
+          <button (click)="count = count + 1" class="counter-btn" id="increasing-btn">+</button>
+        </div>
+      }
+      <button class="toggle-btn minor-button" id="toggle-btn" (click)="toggle = !toggle">
+        {{ toggle ? 'Показать счетчик' : 'Показать таймер' }}
+      </button>
+    </div>
+  </div>
+  <div class="title">
+    <div class="container title-container">
+      <h1 class="title-text">
         Насладись прогулкой в горах
         <br />с командой единомышленников
       </h1>
     </div>
-    <div class="search-info-container">
+  </div>
+  <div class="search-info">
+    <div class="container search-info-container">
       <form class="search-block">
         <div class="select-section">
           <div class="location-tour">
-            <select class="selection-field down-arrow-icon" id="location-tour" required>
+            <select
+              name="location"
+              [(ngModel)]="searchTours.location"
+              class="selection-field down-arrow-icon"
+              id="location-tour"
+              required
+            >
               <option value="" disabled selected hidden>Локация для тура</option>
               <option value="1">Эльбрус</option>
               <option value="2">Алтай</option>
@@ -47,8 +80,11 @@
         <div class="select-section">
           <div class="location-tour">
             <input
+              name="date"
+              [(ngModel)]="searchTours.date"
               type="date"
-              class="selection-field selection-date date-icon" id="date-tour"
+              class="selection-field selection-date date-icon"
+              id="date-tour"
               data-placeholder="Дата похода"
               required
             />
@@ -59,7 +95,13 @@
         </div>
         <div class="select-section">
           <div class="location-tour">
-            <select class="selection-field down-arrow-icon" id="partaker" required>
+            <select
+              name="tourist"
+              [(ngModel)]="searchTours.tourist"
+              class="selection-field down-arrow-icon"
+              id="partaker"
+              required
+            >
               <option value="" disabled selected hidden>Участники</option>
               <option value="1">1 участник</option>
               <option value="2">2 участника</option>
@@ -70,8 +112,73 @@
             <label for="my-tour">выберите из списка</label>
           </div>
         </div>
-        <button class="search-tour" id="search-tour">Найти программу</button>
+        <button class="search-tour primary-button" id="search-tour" [disabled]="!isTourReady()">
+          Найти программу
+        </button>
       </form>
     </div>
   </div>
+  <div class="input-container">
+    <input class="input-text" id="input-text" [(ngModel)]="text" />
+    <p>{{ text }}</p>
+  </div>
 </header>
+<section>
+  <div class="mountain-description">
+    <div class="container mountain-description-container">
+      <div class="mountain-image-container"></div>
+      <div class="info-mountain-description">
+        <div class="title-mountain-description">
+          <p class="pre-title">о нашем походе</p>
+          <h2 class="title-text">Исследуйте все горные массивы мира вместе с нами</h2>
+        </div>
+        <div class="text-mountain">
+          Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+          тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
+          Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его
+          поисками в классической латинской литературе.
+        </div>
+        <div class="tour-program-btn primary-button">
+          <a id="tour-program-btn">Программа тура</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="tour-program-info-container">
+    <div class="tour-program-text">
+      <div class="tour-program-title">
+        <p class="pre-title">наше предложение</p>
+        <h2 class="title-text">Лучшие программы для тебя</h2>
+      </div>
+      <div class="explanation-text">
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
+      </div>
+      <div class="advantages-list">
+        @for (advantage of advantages; track advantage.id) {
+          <div class="advantage-container">
+            <div class="icon-container" [style.background-color]="advantage.iconColor">
+              <img class="advantage-icon" [src]="'/images/' + advantage.image + '.svg'" />
+            </div>
+            <div class="advantage-text">
+              <h3 class="fs-18 bold">{{ advantage.title }}</h3>
+              <p class="fs-14 regular">{{ advantage.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="tour-program-price-btn primary-button">
+        <a id="tour-program-price-btn">Стоимость программ</a>
+      </div>
+    </div>
+    <div class="tour-program-photo">
+      <img src="/images/lagoon-image.png">
+      <img src="/images/mountain-peak-image.png">
+      <img src="/images/snow-ride-image.png">
+      <img src="/images/valley-colors-image.png">
+    </div>
+  </div>
+</section>
+

@@ -1,36 +1,36 @@
 class Collection<T> {
 
-  private products: T[] = [];
+  private elements: T[] = [];
 
-  constructor(initProducts: T[] = []) {
-    this.products = initProducts;
+  constructor(initElements: T[] = []) {
+    this.elements = initElements;
   }
 
-  public getProducts(): T[] {
-    return [...this.products];
+  getProducts(): T[] {
+    return [...this.elements];
   }
 
-  public getByIndex(index: number): T | undefined {
-    return this.products[index];
+  getByIndex(index: number): T | undefined {
+    return this.elements[index];
   }
 
-  public clearProducts(): void {
-    this.products = [];
+  clearProducts(): void {
+    this.elements = [];
   }
 
-  public removeByIndex(index: number): void {
-    if (index >= 0 && index < this.products.length) {
-      this.products.splice(index, 1);
+  removeByIndex(index: number): void {
+    if (index >= 0 && index < this.elements.length) {
+      this.elements.splice(index, 1);
     } else {
-      throw new Error(`Index ${index} is out of bounds for products array.`);
+      throw new Error(`Index ${index} is out of bounds for elements array.`);
     }
   }
 
-  public updateByIndex(index: number, newProduct: T): void {
-    if (index >= 0 && index < this.products.length) {
-      this.products[index] = newProduct;
+  updateByIndex(index: number, newElement: T): void {
+    if (index >= 0 && index < this.elements.length) {
+      this.elements[index] = newElement;
     } else {
-      throw new Error(`Index ${index} is out of bounds for products array.`);
+      throw new Error(`Index ${index} is out of bounds for elements array.`);
     }
   }
 

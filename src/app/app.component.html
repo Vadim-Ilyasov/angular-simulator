@@ -1,6 +1,8 @@
-<div class="loading-container" *ngIf="loading">
-  <img src="/images/loading-icon.svg" alt="loading" class="spinner">
-</div>
+@if (loading) {
+  <div class="loading-container">
+    <img src="/images/loading-icon.svg" alt="loading" class="spinner" />
+  </div>
+}
 <header class="header">
   <div class="super-header">
     <div class="container super-header-container">
@@ -35,7 +37,12 @@
         </div>
       } @else {
         <div class="counter-container">
-          <button (click)="count = count - 1" class="counter-btn" id="reducing-btn" [disabled]="count === 0">
+          <button
+            (click)="count = count - 1"
+            class="counter-btn"
+            id="reducing-btn"
+            [disabled]="count === 0"
+          >
             -
           </button>
           <span class="count-display">{{ count }}</span>
@@ -123,62 +130,193 @@
     <p>{{ text }}</p>
   </div>
 </header>
-<section>
-  <div class="mountain-description">
-    <div class="container mountain-description-container">
-      <div class="mountain-image-container"></div>
-      <div class="info-mountain-description">
-        <div class="title-mountain-description">
-          <p class="pre-title">о нашем походе</p>
-          <h2 class="title-text">Исследуйте все горные массивы мира вместе с нами</h2>
-        </div>
-        <div class="text-mountain">
-          Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
-          тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
-          Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его
-          поисками в классической латинской литературе.
-        </div>
-        <div class="tour-program-btn primary-button">
-          <a id="tour-program-btn">Программа тура</a>
-        </div>
+<section class="mountain-description">
+  <div class="container mountain-description-container">
+    <div class="mountain-image-container"></div>
+    <div class="info-mountain-description">
+      <div class="title-mountain-description">
+        <p class="pre-title">о нашем походе</p>
+        <h2 class="title-text">Исследуйте все горные массивы мира вместе с нами</h2>
+      </div>
+      <div class="text-mountain">
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
+        Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его
+        поисками в классической латинской литературе.
+      </div>
+      <button
+        class="tour-program-btn primary-button"
+        id="tour-program-btn"
+        (click)="randomMessage()"
+      >
+        Программа тура
+      </button>
+      <div class="messages-container">
+        @for (msg of mgService.messages; track $index) {
+          <ng-container
+            [ngTemplateOutlet]="message"
+            [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
+          >
+          </ng-container>
+        }
       </div>
     </div>
   </div>
 </section>
-<section>
-  <div class="tour-program-info-container">
-    <div class="tour-program-text">
-      <div class="tour-program-title">
-        <p class="pre-title">наше предложение</p>
-        <h2 class="title-text">Лучшие программы для тебя</h2>
-      </div>
-      <div class="explanation-text">
-        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
-        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
-      </div>
-      <div class="advantages-list">
-        @for (advantage of advantages; track advantage.id) {
-          <div class="advantage-container">
-            <div class="icon-container" [style.background-color]="advantage.iconColor">
-              <img class="advantage-icon" [src]="'/images/' + advantage.image + '.svg'" />
+<section class="tour-program-info-container">
+  <div class="tour-program-text">
+    <div class="tour-program-title">
+      <p class="pre-title">наше предложение</p>
+      <h2 class="title-text">Лучшие программы для тебя</h2>
+    </div>
+    <div class="explanation-text">
+      Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+      тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
+    </div>
+    <div class="advantages-list">
+      @for (advantage of advantages; track advantage.id) {
+        <div class="advantage-container">
+          <div class="icon-container" [style.background-color]="advantage.iconColor">
+            <img class="advantage-icon" [src]="'/images/' + advantage.image + '.svg'" />
+          </div>
+          <div class="advantage-text">
+            <h3 class="fs-18 bold">{{ advantage.title }}</h3>
+            <p class="fs-14 regular">{{ advantage.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+    <button
+      class="tour-program-price-btn primary-button"
+      id="tour-program-price-btn"
+      (click)="randomMessage()"
+    >
+      Стоимость программ
+    </button>
+    <div class="messages-container">
+      @for (msg of mgService.messages; track $index) {
+        <ng-container
+          [ngTemplateOutlet]="message"
+          [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
+        >
+        </ng-container>
+      }
+    </div>
+  </div>
+  <div class="tour-program-photo">
+    <img src="/images/lagoon-image.png" />
+    <img src="/images/mountain-peak-image.png" />
+    <img src="/images/snow-ride-image.png" />
+    <img src="/images/valley-colors-image.png" />
+  </div>
+</section>
+<section class="popular-tour">
+  <div class="container popular-tour-container">
+    <div class="popular-destination-title">
+      <p class="pre-title">по версии отдыхающих</p>
+      <h2 class="title-text">Популярные направления</h2>
+    </div>
+    <div class="popular-offers-grid">
+      @for (destination of destinations; track destination.id) {
+        <div class="destination-container">
+          <img [src]="'/images/' + destination.image + '.png'" />
+          <div class="rating-container">
+            <div class="rating-icon">
+              <img src="/images/rating-icon.svg" />
             </div>
-            <div class="advantage-text">
-              <h3 class="fs-18 bold">{{ advantage.title }}</h3>
-              <p class="fs-14 regular">{{ advantage.description }}</p>
+            <div class="rating-value">
+              <p class="rating-number fs-14 bold">{{ destination.rating }}</p>
             </div>
           </div>
-        }
-      </div>
-      <div class="tour-program-price-btn primary-button">
-        <a id="tour-program-price-btn">Стоимость программ</a>
-      </div>
+          <div class="info-panel">
+            <div class="destination-content">
+              <div class="destination-title">
+                <h3 class="destination-title-text fs-24 bold line-120 white-text">
+                  {{ destination.title }}
+                </h3>
+              </div>
+              <div class="destination-subtitle">
+                <p class="destination-subtitle-text fs-14 regular white-text">
+                  {{ destination.description }}
+                </p>
+              </div>
+            </div>
+            <div class="price-container">
+              <p class="price-text fs-20 bold white-text">{{ destination.price }} $</p>
+            </div>
+          </div>
+        </div>
+      }
     </div>
-    <div class="tour-program-photo">
-      <img src="/images/lagoon-image.png">
-      <img src="/images/mountain-peak-image.png">
-      <img src="/images/snow-ride-image.png">
-      <img src="/images/valley-colors-image.png">
+    <button class="tour-rating-btn primary-button" id="tour-rating-btn" (click)="randomMessage()">
+      Рейтинг направлений
+    </button>
+    <div class="messages-container">
+      @for (msg of mgService.messages; track $index) {
+        <ng-container
+          [ngTemplateOutlet]="message"
+          [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
+        >
+        </ng-container>
+      }
+    </div>
+  </div>
+</section>
+<section class="travel-blog">
+  <div class="container travel-blog-container">
+    <div class="travel-title">
+      <p class="pre-title">делимся впечатлениями</p>
+      <h2 class="title-text">Блог о путешествиях</h2>
+    </div>
+    <div class="travel-cards-container">
+      @for (travelCard of travelCards; track travelCard.id) {
+        <div class="travel-container">
+          <img [src]="'/images/' + travelCard.image + '.png'" />
+          <div class="travel-info-container">
+            <div class="travel-heading">
+              <h3 class="fs-24 bold">{{ travelCard.title }}</h3>
+            </div>
+            <div class="travel-description">
+              <p class="fs-14 regular">{{ travelCard.description }}</p>
+            </div>
+            <div class="travel-details">
+              <time class="fs-14 bold yellow-color">{{ travelCard.date }}</time>
+              <a class="fs-14 bold forest-color" id="read-more">{{ travelCard.link }}</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <button
+      class="travel-card-choice-btn primary-button"
+      id="travel-card-choice-btn"
+      (click)="randomMessage()"
+    >
+      Другие материалы
+    </button>
+    <div class="messages-container">
+      @for (msg of mgService.messages; track $index) {
+        <ng-container
+          [ngTemplateOutlet]="message"
+          [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
+        >
+        </ng-container>
+      }
     </div>
   </div>
 </section>
 
+<ng-template #message let-msg let-idx="index">
+  <div class="message-container">
+    <div class="envelope-icon">
+      <img src="/images/envelope-icon.svg" />
+    </div>
+    <div class="message-content">
+      <h3 class="message-type">{{ msg.type }}</h3>
+      <p class="message-text">{{ msg.text }}</p>
+    </div>
+    <div class="delete-icon" (click)="deleteMessage(idx)">
+      <img src="/images/delete-icon.svg" />
+    </div>
+  </div>
+</ng-template>

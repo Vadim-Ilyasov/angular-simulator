@@ -1,19 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import './training';
 import { Color } from '../enums/Color';
+import { Message } from '../enums/Message';
 import { IAdvantage } from '../interfaces/IAdvantage';
 import { ISearchTours } from '../interfaces/ISearchTours';
+import { IDestination } from '../interfaces/IDestination';
+import { ITravelCard } from '../interfaces/ITravelCard';
 import { DatePipe } from '@angular/common';
+import { MessageService } from './message.service';
+import { GenericStorageService  } from './generic-storage.service';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, DatePipe, CommonModule],
+  imports: [FormsModule, DatePipe, CommonModule, NgTemplateOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
+  public mgService: MessageService = inject(MessageService);
+  private storage: GenericStorageService = inject(GenericStorageService);
+
+  messageText: string = 'Message Content';
+  types: Message[] = [Message.SUCCESS, Message.ERROR, Message.WARN, Message.INFO];
 
   logoName: string = 'румтибет';
 
@@ -43,7 +54,7 @@ export class AppComponent {
         'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
     },
     {
-      id: 1,
+      id: 2,
       image: 'safety-icon',
       iconColor: '#E3E6EE',
       title: 'Безопасный поход',
@@ -51,7 +62,7 @@ export class AppComponent {
         'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
     },
     {
-      id: 1,
+      id: 3,
       image: 'price-icon',
       iconColor: '#F3F1E1',
       title: 'Лояльные цены',
@@ -60,9 +71,78 @@ export class AppComponent {
     },
   ];
 
+  destinations: IDestination[] = [
+    {
+      id: 1,
+      image: 'mountain-lake-image',
+      rating: '4.9',
+      title: 'Озеро возле гор',
+      description: 'романтическое приключение',
+      price: 480,
+      currency: '$',
+    },
+    {
+      id: 2,
+      image: 'night-mountains-image',
+      rating: '4.5',
+      title: 'Ночь в горах',
+      description: 'в компании друзей',
+      price: 500,
+      currency: '$',
+    },
+    {
+      id: 3,
+      image: 'stretching-on-mountain-image',
+      rating: '5.0',
+      title: 'Растяжка в горах',
+      description: 'для тех, кто забоится о себе',
+      price: 230,
+      currency: '$',
+    },
+  ];
+
+  travelCards: ITravelCard[] = [
+    {
+      id: 1,
+      image: 'italian-city-image',
+      title: 'Красивая Италия, какая она в реальности?',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      date: '01/04/2023',
+      link: 'читать статью',
+    },
+     {
+      id: 2,
+      image: 'endless-expanses-image',
+      title: 'Долой сомнения! Весь мир открыт для вас!',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+      date: '01/04/2023',
+      link: 'читать статью',
+    },
+     {
+      id: 3,
+      image: 'solo-adventure-image',
+      title: 'Как подготовиться к путешествию в одиночку? ',
+      description: 'Для современного мира базовый вектор развития предполагает.',
+      date: '01/04/2023',
+      link: 'читать статью',
+    },
+     {
+      id: 4,
+      image: 'indian-pride-image',
+      title: 'Индия ... летим?',
+      description: 'Для современного мира базовый.',
+      date: '01/04/2023',
+      link: 'читать статью',
+    },
+  ];
+
   constructor() {
     this.saveDateLastVisit();
     this.saveSumVisit();
+    this.storage.setItem('user', 1);
+    this.storage.getItem('user');
+    this.storage.deleteItem('user');
+    this.storage.clearAllItem();
 
     setTimeout(() => {
       this.loading = false;
@@ -94,6 +174,15 @@ export class AppComponent {
     let visitNumber: number = parseInt(visit, 10);
     visitNumber++;
     localStorage.setItem(SUM_KEY, visitNumber.toString());
+  }
+
+  randomMessage(): void {
+    const randomType: Message = this.types[Math.floor(Math.random() * this.types.length)];
+    this.mgService.addMessage(this.messageText, randomType);
+  }
+
+  deleteMessage(index: number): void {
+     this.mgService.closeMessage(index);
   }
 
 }

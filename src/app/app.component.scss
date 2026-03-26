@@ -431,3 +431,214 @@
     gap: 10px;
   }
 }
+
+.popular-tour {
+  height: 893px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+
+    .popular-destination-title {
+      height: 66px;
+      width: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .popular-offers-grid {
+      height: 500px;
+      width: 1180px;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+
+      .destination-container {
+        width: 380px;
+        position: relative;
+
+        .rating-container {
+          height: 32px;
+          width: 65px;
+          background: #fdfdfd66;
+          position: absolute;
+          top: 50px;
+          right: 0px;
+          box-sizing: border-box;
+          padding: 4px 8px;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 4px;
+
+          .rating-icon {
+            height: 24px;
+            width: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .rating-value {
+            height: 18px;
+            width: 21px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .rating-number {
+              color: #1a3e3e;
+            }
+          }
+        }
+
+        .info-panel {
+          height: 90px;
+          width: 100%;
+          position: absolute;
+          bottom: 0px;
+          right: 0px;
+          background: #ffffff33;
+          backdrop-filter: blur(6px);
+          border-bottom-left-radius: 32px;
+          border-bottom-right-radius: 32px;
+          box-sizing: border-box;
+          padding: 20px 32px 23px 32px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .destination-content {
+            height: 47px;
+            width: 195px;
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+
+            .destination-title {
+              height: 29px;
+              display: flex;
+              align-items: center;
+
+              .destination-title-text {
+                white-space: nowrap;
+              }
+            }
+
+            .destination-subtitle {
+              height: 18px;
+              display: flex;
+              align-items: center;
+            }
+          }
+
+          .price-container {
+            height: 40px;
+            width: 86px;
+            border-radius: 4px;
+            background: #ffffff4d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+
+    .tour-rating-btn {
+      height: 52px;
+      width: 244px;
+    }
+  }
+}
+
+.travel-blog {
+  height: 1036px;
+  box-sizing: border-box;
+  padding-top: 85px;
+  padding-bottom: 95px;
+  background: #f3f5f4;
+  display: flex;
+  justify-content: center;
+
+  &-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .travel-title {
+      height: 66px;
+      width: 580px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .travel-cards-container {
+      height: 648px;
+      margin: 40px 0 50px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px 20px;
+
+      .travel-container {
+        max-width: 580px;
+        height: 312px;
+        background-color: var(--white-color);
+        box-sizing: border-box;
+        padding: 16px 16px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+
+        .travel-info-container {
+          width: 294px;
+          height: 280px;
+          box-sizing: border-box;
+          padding: 16px 0;
+          display: flex;
+          flex-direction: column;
+
+          .travel-heading {
+            height: 64px;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          .travel-description {
+            height: 116px;
+            margin: 24px 0 24px 0;
+          }
+
+          .travel-details {
+            height: 20px;
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+
+        &:hover {
+          box-shadow: 0px 0px 15px 0px #18121e1f;
+        }
+      }
+    }
+
+    .travel-card-choice-btn {
+      width: 220px;
+      height: 52px;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 @use './fonts';
 @use './normalize';
 @use './button';
+@use './message';
 
 * {
   font-family: 'Nunito Sans', sans-serif;
@@ -11,6 +12,12 @@
 .container {
   width: 1180px;
   display: block;
+}
+
+.center-text-position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pre-title {
@@ -34,6 +41,16 @@
   --primary-color: #000;
   --white-color: #fff;
   --secondary-color: #f2be22;
+  --deep-forest-color: #1A3E3E;
+
+}
+
+.forest-color {
+  color: var(--deep-forest-color);
+}
+
+.yellow-color {
+  color: var(--secondary-color);
 }
 
 .fs-14 {
@@ -46,6 +63,18 @@
 
 .fs-18 {
   font-size: 18px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
+
+.line-120 {
+  line-height: 120%;
 }
 
 .bold {

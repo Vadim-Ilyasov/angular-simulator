@@ -10,7 +10,7 @@ import { IDestination } from '../interfaces/IDestination';
 import { ITravelCard } from '../interfaces/ITravelCard';
 import { DatePipe } from '@angular/common';
 import { MessageService } from './message.service';
-import { GenericStorageService  } from './generic-storage.service';
+import { LocalStorageService  } from './local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -20,29 +20,25 @@ import { GenericStorageService  } from './generic-storage.service';
 })
 export class AppComponent {
 
-  public mgService: MessageService = inject(MessageService);
-  private storage: GenericStorageService = inject(GenericStorageService);
+  mgService: MessageService = inject(MessageService);
+  private storage: LocalStorageService = inject(LocalStorageService);
 
   messageText: string = 'Message Content';
-  types: Message[] = [Message.SUCCESS, Message.ERROR, Message.WARN, Message.INFO];
-
   logoName: string = 'румтибет';
+  currentDate: Date = new Date();
+  count: number = 0;
+  toggle: boolean = true;
+  text: string = '';
+  loading: boolean = true;
+  randomId: number = Math.random();
+
+  types: Message[] = [Message.SUCCESS, Message.ERROR, Message.WARN, Message.INFO];
 
   searchTours: ISearchTours = {
     location: '',
     date: '',
     tourist: '',
   };
-
-  currentDate: Date = new Date();
-
-  count: number = 0;
-
-  toggle: boolean = true;
-
-  text: string = '';
-
-  loading: boolean = true;
 
   advantages: IAdvantage[] = [
     {

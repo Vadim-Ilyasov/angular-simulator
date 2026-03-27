@@ -10,18 +10,21 @@ export class MessageService {
   messages: IMessage[] = [];
 
   addMessage(text: string, type: Message): void {
-    const newMessage = { type, text };
-    this.messages.push(newMessage);
+    const randomId: number = Math.random();
+    const newMessage: IMessage = {
+      id: randomId,
+      text: text,
+      type: type,
+    };
+
+    this.messages = [...this.messages, newMessage];
     setTimeout(() => {
-      const currentIndex = this.messages.lastIndexOf(newMessage);
-      if (currentIndex !== -1) {
-        this.closeMessage(currentIndex);
-      }
+      this.closeMessage(randomId);
     }, 5000);
   }
 
-  closeMessage(index: number): void {
-    this.messages.splice(index, 1);
+  closeMessage(id: number): void {
+    this.messages = this.messages.filter((m) => m.id !== id);
   }
-  
+
 }

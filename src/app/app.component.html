@@ -315,7 +315,7 @@
       <h3 class="message-type">{{ msg.type }}</h3>
       <p class="message-text">{{ msg.text }}</p>
     </div>
-    <div class="delete-icon" (click)="deleteMessage(idx)">
+    <div class="delete-icon" (click)="deleteMessage(msg.id)">
       <img src="/images/delete-icon.svg" />
     </div>
   </div>

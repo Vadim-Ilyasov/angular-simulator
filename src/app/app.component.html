@@ -295,7 +295,7 @@
       Другие материалы
     </button>
     <div class="messages-container">
-      @for (msg of mgService.messages; track $index) {
+      @for (msg of mgService.messages; track msg.id) {
         <ng-container
           [ngTemplateOutlet]="message"
           [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
@@ -306,7 +306,7 @@
   </div>
 </section>
 
-<ng-template #message let-msg let-idx="index">
+<ng-template #message let-msg let-index="idx">
   <div class="message-container">
     <div class="envelope-icon">
       <img src="/images/envelope-icon.svg" />

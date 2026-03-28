@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { DatePipe } from '@angular/common';
+
 import './training';
 import { Color } from '../enums/Color';
 import { Message } from '../enums/Message';
@@ -8,7 +10,6 @@ import { IAdvantage } from '../interfaces/IAdvantage';
 import { ISearchTours } from '../interfaces/ISearchTours';
 import { IDestination } from '../interfaces/IDestination';
 import { ITravelCard } from '../interfaces/ITravelCard';
-import { DatePipe } from '@angular/common';
 import { MessageService } from './message.service';
 import { LocalStorageService  } from './local-storage.service';
 

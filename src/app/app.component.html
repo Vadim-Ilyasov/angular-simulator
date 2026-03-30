@@ -147,19 +147,10 @@
       <button
         class="tour-program-btn primary-button"
         id="tour-program-btn"
-        (click)="randomMessage()"
+        (click)="mgService.info('Подробное описание тура')"
       >
         Программа тура
       </button>
-      <div class="messages-container">
-        @for (msg of mgService.messages; track $index) {
-          <ng-container
-            [ngTemplateOutlet]="message"
-            [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
-          >
-          </ng-container>
-        }
-      </div>
     </div>
   </div>
 </section>
@@ -189,19 +180,10 @@
     <button
       class="tour-program-price-btn primary-button"
       id="tour-program-price-btn"
-      (click)="randomMessage()"
+      (click)="mgService.warning('Стоимость увеличена')"
     >
       Стоимость программ
     </button>
-    <div class="messages-container">
-      @for (msg of mgService.messages; track $index) {
-        <ng-container
-          [ngTemplateOutlet]="message"
-          [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
-        >
-        </ng-container>
-      }
-    </div>
   </div>
   <div class="tour-program-photo">
     <img src="/images/lagoon-image.png" />
@@ -248,18 +230,9 @@
         </div>
       }
     </div>
-    <button class="tour-rating-btn primary-button" id="tour-rating-btn" (click)="randomMessage()">
+    <button class="tour-rating-btn primary-button" id="tour-rating-btn" (click)="mgService.success('Рейтинг обновлен')">
       Рейтинг направлений
     </button>
-    <div class="messages-container">
-      @for (msg of mgService.messages; track $index) {
-        <ng-container
-          [ngTemplateOutlet]="message"
-          [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
-        >
-        </ng-container>
-      }
-    </div>
   </div>
 </section>
 <section class="travel-blog">
@@ -290,23 +263,24 @@
     <button
       class="travel-card-choice-btn primary-button"
       id="travel-card-choice-btn"
-      (click)="randomMessage()"
+      (click)="mgService.error('Материалы не доступны')"
     >
       Другие материалы
     </button>
-    <div class="messages-container">
+  </div>
+</section>
+
+   <div class="messages-container">
       @for (msg of mgService.messages; track msg.id) {
         <ng-container
           [ngTemplateOutlet]="message"
-          [ngTemplateOutletContext]="{ $implicit: msg, idx: $index }"
+          [ngTemplateOutletContext]="{ $implicit: msg, index: $index }"
         >
         </ng-container>
       }
     </div>
-  </div>
-</section>
 
-<ng-template #message let-msg let-index="idx">
+<ng-template #message let-msg let-index="index">
   <div class="message-container">
     <div class="envelope-icon">
       <img src="/images/envelope-icon.svg" />

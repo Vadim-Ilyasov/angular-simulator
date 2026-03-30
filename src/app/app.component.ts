@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { DatePipe } from '@angular/common';
-
 import './training';
 import { Color } from '../enums/Color';
 import { Message } from '../enums/Message';
@@ -24,7 +23,6 @@ export class AppComponent {
   mgService: MessageService = inject(MessageService);
   private storage: LocalStorageService = inject(LocalStorageService);
 
-  messageText: string = 'Message Content';
   logoName: string = 'румтибет';
   currentDate: Date = new Date();
   count: number = 0;
@@ -171,11 +169,6 @@ export class AppComponent {
     let visitNumber: number = parseInt(visit, 10);
     visitNumber++;
     localStorage.setItem(SUM_KEY, visitNumber.toString());
-  }
-
-  randomMessage(): void {
-    const randomType: Message = this.types[Math.floor(Math.random() * this.types.length)];
-    this.mgService.addMessage(this.messageText, randomType);
   }
 
   deleteMessage(index: number): void {

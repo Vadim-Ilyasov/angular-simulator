@@ -17,7 +17,7 @@ export class MessageService {
       type: type,
     };
 
-    this.messages = [...this.messages, newMessage as IMessage];
+    this.messages = [...this.messages, newMessage];
     setTimeout(() => {
       this.closeMessage(randomId);
     }, 5000);

@@ -274,7 +274,7 @@
       @for (msg of mgService.messages; track msg.id) {
         <ng-container
           [ngTemplateOutlet]="message"
-          [ngTemplateOutletContext]="{ $implicit: msg, index: $index }"
+          [ngTemplateOutletContext]="{ $implicit: msg, index: msg.id }"
         >
         </ng-container>
       }

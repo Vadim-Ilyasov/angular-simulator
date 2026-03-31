@@ -1,7 +1,8 @@
-export interface IAdvantage {
+export interface ITravelCard {
   id: number;
   image: string;
-  iconColor: string;
   title: string;
   description: string;
+  date: string;
+  link: string;
 }

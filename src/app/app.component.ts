@@ -69,7 +69,7 @@ export class AppComponent {
   destinations: IDestination[] = [
     {
       id: 1,
-      image: 'mountain-lake-image',
+      image: 'mountain-lake',
       rating: '4.9',
       title: 'Озеро возле гор',
       description: 'романтическое приключение',
@@ -78,7 +78,7 @@ export class AppComponent {
     },
     {
       id: 2,
-      image: 'night-mountains-image',
+      image: 'night-mountains',
       rating: '4.5',
       title: 'Ночь в горах',
       description: 'в компании друзей',
@@ -87,7 +87,7 @@ export class AppComponent {
     },
     {
       id: 3,
-      image: 'stretching-on-mountain-image',
+      image: 'stretching-on-mountain',
       rating: '5.0',
       title: 'Растяжка в горах',
       description: 'для тех, кто забоится о себе',
@@ -99,7 +99,7 @@ export class AppComponent {
   travelCards: ITravelCard[] = [
     {
       id: 1,
-      image: 'italian-city-image',
+      image: 'italian-city',
       title: 'Красивая Италия, какая она в реальности?',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       date: '01/04/2023',
@@ -107,7 +107,7 @@ export class AppComponent {
     },
      {
       id: 2,
-      image: 'endless-expanses-image',
+      image: 'endless-expanses',
       title: 'Долой сомнения! Весь мир открыт для вас!',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
       date: '01/04/2023',
@@ -115,7 +115,7 @@ export class AppComponent {
     },
      {
       id: 3,
-      image: 'solo-adventure-image',
+      image: 'solo-adventure',
       title: 'Как подготовиться к путешествию в одиночку? ',
       description: 'Для современного мира базовый вектор развития предполагает.',
       date: '01/04/2023',
@@ -123,7 +123,7 @@ export class AppComponent {
     },
      {
       id: 4,
-      image: 'indian-pride-image',
+      image: 'indian-pride',
       title: 'Индия ... летим?',
       description: 'Для современного мира базовый.',
       date: '01/04/2023',

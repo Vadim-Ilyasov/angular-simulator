@@ -1,0 +1,25 @@
+<div class="messages-container">
+  @for (msg of mgService.messages; track msg.id) {
+    <ng-container
+      [ngTemplateOutlet]="message"
+      [ngTemplateOutletContext]="{ $implicit: msg, index: msg.id }"
+    >
+    </ng-container>
+  }
+</div>
+
+<ng-template #message let-msg let-index="index">
+  <div class="message-container">
+    <div class="envelope-icon">
+      <img src="/images/envelope-icon.svg" />
+    </div>
+    <div class="message-content">
+      <h3 class="message-type">{{ msg.type }}</h3>
+      <p class="message-text">{{ msg.text }}</p>
+    </div>
+    <div class="delete-icon" (click)="deleteMessage(msg.id)">
+      <img src="/images/delete-icon.svg" />
+    </div>
+  </div>
+</ng-template>
+

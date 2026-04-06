@@ -8,7 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'users', component: UsersPageComponent },
-  {path: 'header', component: HeaderComponent},
-  {path: 'footer', component: FooterComponent},
+  { path: 'header', component: HeaderComponent },
+  { path: 'footer', component: FooterComponent },
   { path: '**', component: NotFoundPageComponent },
 ];

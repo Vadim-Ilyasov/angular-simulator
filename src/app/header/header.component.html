@@ -11,13 +11,15 @@
       </div>
       <div class="main-nav">
         <nav class="menu fs-18 semi-bold white-color flex gap-24">
-          @for(transition of navTransitions; track transition.path) {
+          @for (transition of navTransitions; track transition.path) {
             <a
-            id="navTransition"
-            class="fs-18 semi-bold white-color"
-            [routerLink]="transition.path"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: transition.path === '/'}">{{transition.label}}</a>
+              id="navTransition"
+              class="fs-18 semi-bold white-color"
+              [routerLink]="transition.path"
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: transition.path === '/' }"
+              >{{ transition.label }}</a
+            >
           }
         </nav>
         <div class="consultation-btn minor-button">

@@ -14,6 +14,7 @@ import { ITransition } from '../../interfaces/ITransition';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+
   private storage: LocalStorageService = inject(LocalStorageService);
 
   logoName: string = 'румтибет';
@@ -63,4 +64,5 @@ export class HeaderComponent {
     visitNumber++;
     localStorage.setItem(SUM_KEY, visitNumber.toString());
   }
+  
 }

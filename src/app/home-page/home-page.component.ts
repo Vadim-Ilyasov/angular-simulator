@@ -1,18 +1,29 @@
+import { FormsModule } from '@angular/forms';
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../message.service';
 import { IAdvantage } from '../../interfaces/IAdvantage';
 import { IDestination } from '../../interfaces/IDestination';
 import { ITravelCard } from '../../interfaces/ITravelCard';
+import { ISearchTours } from '../../interfaces/ISearchTours';
+
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
 
   mgService: MessageService = inject(MessageService);
+
+  text: string = '';
+
+  searchTours: ISearchTours = {
+    location: '',
+    date: '',
+    tourist: '',
+  };
 
   advantages: IAdvantage[] = [
     {
@@ -107,5 +118,9 @@ export class HomePageComponent {
       link: 'читать статью',
     },
   ];
-  
+
+   isTourReady(): boolean {
+    return !!(this.searchTours.location && this.searchTours.date && this.searchTours.tourist);
+  }
+
 }

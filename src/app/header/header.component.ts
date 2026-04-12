@@ -21,7 +21,6 @@ export class HeaderComponent {
   currentDate: Date = new Date();
   count: number = 0;
   toggle: boolean = true;
-  text: string = '';
 
   searchTours: ISearchTours = {
     location: '',
@@ -45,10 +44,6 @@ export class HeaderComponent {
     setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
-  }
-
-  isTourReady(): boolean {
-    return !!(this.searchTours.location && this.searchTours.date && this.searchTours.tourist);
   }
 
   saveDateLastVisit(): void {

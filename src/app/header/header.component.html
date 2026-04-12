@@ -1,135 +1,54 @@
 <header class="header">
-  <div class="super-header">
-    <div class="container super-header-container">
-      <div class="logotype">
-        <div class="logo-image">
-          <img src="/images/mountain-logo.svg" />
-        </div>
-        <div>
-          <p class="logo-text">{{ logoName }}</p>
-        </div>
+  <div class="container header-container">
+    <div class="logotype">
+      <div class="logo-image">
+        <img src="/images/mountain-logo.svg" />
       </div>
-      <div class="main-nav">
-        <nav class="menu fs-18 semi-bold white-color flex gap-24">
-          @for (transition of navTransitions; track transition.path) {
-            <a
-              id="transition"
-              class="fs-18 semi-bold white-color"
-              [routerLink]="transition.path"
-              routerLinkActive="active-link"
-              [routerLinkActiveOptions]="{ exact: transition.path === '/' }"
-              >{{ transition.label }}</a
-            >
-          }
-        </nav>
-        <div class="consultation-btn minor-button">
-          <a id="consultation-btn">Консультация</a>
-        </div>
+      <div>
+        <p class="logo-text">{{ logoName }}</p>
       </div>
     </div>
-    <div class="task-container">
-      @if (toggle) {
-        <div class="timer-container">
-          <span class="current-time">
-            {{ currentDate | date: 'dd.MM.yyyy HH:mm:ss' }}
-          </span>
-        </div>
-      } @else {
-        <div class="counter-container">
-          <button
-            (click)="count = count - 1"
-            class="counter-btn"
-            id="reducing-btn"
-            [disabled]="count === 0"
+    <div class="main-nav">
+      <nav class="menu fs-18 semi-bold white-color flex gap-24">
+        @for (transition of navTransitions; track transition.path) {
+          <a
+            id="transition"
+            class="fs-18 semi-bold white-color"
+            [routerLink]="transition.path"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: transition.path === '/' }"
+            >{{ transition.label }}</a
           >
-            -
-          </button>
-          <span class="count-display">{{ count }}</span>
-          <button (click)="count = count + 1" class="counter-btn" id="increasing-btn">+</button>
-        </div>
-      }
-      <button class="toggle-btn minor-button" id="toggle-btn" (click)="toggle = !toggle">
-        {{ toggle ? 'Показать счетчик' : 'Показать таймер' }}
-      </button>
+        }
+      </nav>
+      <div class="consultation-btn minor-button">
+        <a id="consultation-btn">Консультация</a>
+      </div>
     </div>
   </div>
-  <div class="title">
-    <div class="container title-container">
-      <h1 class="title-text">
-        Насладись прогулкой в горах
-        <br />с командой единомышленников
-      </h1>
-    </div>
-  </div>
-  <div class="search-info">
-    <div class="container search-info-container">
-      <form class="search-block">
-        <div class="select-section">
-          <div class="location-tour">
-            <select
-              name="location"
-              [(ngModel)]="searchTours.location"
-              class="selection-field down-arrow-icon"
-              id="location-tour"
-              required
-            >
-              <option value="" disabled selected hidden>Локация для тура</option>
-              <option value="1">Эльбрус</option>
-              <option value="2">Алтай</option>
-              <option value="3">Шерегеш</option>
-            </select>
-          </div>
-          <div class="hint-text fs-14">
-            <label for="my-tour">выберите из списка</label>
-          </div>
-        </div>
-        <div class="select-section">
-          <div class="location-tour">
-            <input
-              name="date"
-              [(ngModel)]="searchTours.date"
-              type="date"
-              class="selection-field selection-date date-icon"
-              id="date-tour"
-              data-placeholder="Дата похода"
-              required
-            />
-          </div>
-          <div class="hint-text-container fs-14">
-            <label class="hint-text" for="my-tour">укажите дату</label>
-          </div>
-        </div>
-        <div class="select-section">
-          <div class="location-tour">
-            <select
-              name="tourist"
-              [(ngModel)]="searchTours.tourist"
-              class="selection-field down-arrow-icon"
-              id="partaker"
-              required
-            >
-              <option value="" disabled selected hidden>Участники</option>
-              <option value="1">1 участник</option>
-              <option value="2">2 участника</option>
-              <option value="3">3-5 участников</option>
-            </select>
-          </div>
-          <div class="hint-text fs-14">
-            <label for="my-tour">выберите из списка</label>
-          </div>
-        </div>
+  <div class="task-container">
+    @if (toggle) {
+      <div class="timer-container">
+        <span class="current-time">
+          {{ currentDate | date: 'dd.MM.yyyy HH:mm:ss' }}
+        </span>
+      </div>
+    } @else {
+      <div class="counter-container">
         <button
-          class="search-tour-btn primary-button"
-          id="search-tour-btn"
-          [disabled]="!isTourReady()"
+          (click)="count = count - 1"
+          class="counter-btn"
+          id="reducing-btn"
+          [disabled]="count === 0"
         >
-          Найти программу
+          -
         </button>
-      </form>
-    </div>
-  </div>
-  <div class="input-container">
-    <input class="input-text" id="input-text" [(ngModel)]="text" />
-    <p>{{ text }}</p>
+        <span class="count-display">{{ count }}</span>
+        <button (click)="count = count + 1" class="counter-btn" id="increasing-btn">+</button>
+      </div>
+    }
+    <button class="toggle-btn minor-button" id="toggle-btn" (click)="toggle = !toggle">
+      {{ toggle ? 'Показать счетчик' : 'Показать таймер' }}
+    </button>
   </div>
 </header>

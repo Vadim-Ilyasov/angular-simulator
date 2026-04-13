@@ -17,8 +17,9 @@
             [routerLink]="transition.path"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: transition.path === '/' }"
-            >{{ transition.label }}</a
           >
+            {{ transition.label }}
+          </a>
         }
       </nav>
       <div class="consultation-btn minor-button">

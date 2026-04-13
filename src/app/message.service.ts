@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IMessage } from '../interfaces/IMessage';
 import { Message } from '../enums/Message';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -29,10 +28,9 @@ export class MessageService {
   }
 
   closeMessage(id: number): void {
-    const currentMessages: IMessage[] = this.messageSubject.getValue();
-    const updatedMessages: IMessage[] = currentMessages.filter(
-      (message: IMessage) => message.id !== id,
-    );
+    const updatedMessages: IMessage[] = this.messageSubject
+      .getValue()
+      .filter((message: IMessage) => message.id !== id);
     this.messageSubject.next(updatedMessages);
   }
 
@@ -48,5 +46,5 @@ export class MessageService {
       this.closeMessage(randomId);
     }, 5000);
   }
-
+  
 }

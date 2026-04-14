@@ -8,7 +8,7 @@ import { LoaderService } from './loader.service';
   providedIn: 'root',
 })
 export class UserService {
-  
+
   userApiService: UserApiService = inject(UserApiService);
   loaderService: LoaderService = inject(LoaderService);
   private userSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
@@ -24,7 +24,8 @@ export class UserService {
 
   loadUsers(): Observable<IUser[]> {
     this.loaderService.showLoader();
-    return this.getUsers().pipe(
+    return this.getUsers()
+    .pipe(
       catchError((error) => {
         return of([]);
       }),
@@ -33,5 +34,5 @@ export class UserService {
       }),
     );
   }
-
+  
 }

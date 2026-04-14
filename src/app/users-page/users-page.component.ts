@@ -16,10 +16,10 @@ export class UsersPageComponent {
   users$: Observable<IUser[]> = this.userService.users$;
 
   constructor() {
-    this.userService.loadUsers()
-    .pipe(
-      tap((users: IUser[]) => this.userService.setUsers(users))
-    ).subscribe();
+    this.userService
+      .loadUsers()
+      .pipe(tap((users: IUser[]) => this.userService.setUsers(users)))
+      .subscribe();
   }
-
+  
 }

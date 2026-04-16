@@ -25,14 +25,14 @@ export class UserService {
   loadUsers(): Observable<IUser[]> {
     this.loaderService.showLoader();
     return this.getUsers()
-    .pipe(
-      catchError((error) => {
-        return of([]);
-      }),
-      finalize(() => {
-        this.loaderService.hideLoader();
-      }),
-    );
+      .pipe(
+        catchError((error) => {
+          return of([]);
+        }),
+        finalize(() => {
+          this.loaderService.hideLoader();
+        }),
+      );
   }
-  
+
 }

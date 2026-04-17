@@ -12,8 +12,4 @@ export class LoaderComponent {
 
   loaderService: LoaderService = inject(LoaderService);
 
-  constructor() {
-    this.loaderService.hideLoader();
-  }
-
 }

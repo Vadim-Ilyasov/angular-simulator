@@ -28,8 +28,7 @@ export class MessageService {
   }
 
   closeMessage(id: number): void {
-    const updatedMessages: IMessage[] = this.messageSubject
-      .getValue()
+    const updatedMessages: IMessage[] = this.messageSubject.getValue()
       .filter((message: IMessage) => message.id !== id);
     this.messageSubject.next(updatedMessages);
   }
@@ -41,10 +40,10 @@ export class MessageService {
       text: text,
       type: type,
     };
-    this.messageSubject.next([...this.messageSubject.getValue(), newMessage]);
+    this.messageSubject.next([newMessage, ...this.messageSubject.getValue()]);
     setTimeout(() => {
       this.closeMessage(randomId);
     }, 5000);
   }
-  
+
 }

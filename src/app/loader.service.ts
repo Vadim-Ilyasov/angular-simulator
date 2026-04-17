@@ -7,17 +7,15 @@ import { IMessage } from '../interfaces/IMessage';
 })
 export class LoaderService {
 
-  private loaderSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  loader$: Observable<boolean> = this.loaderSubject.asObservable();
+  private isLoaderSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isLoader$: Observable<boolean> = this.isLoaderSubject.asObservable();
 
-  showLoader() {
-    this.loaderSubject.next(true);
+  showLoader(): void {
+    this.isLoaderSubject.next(true);
   }
 
-  hideLoader() {
-    setTimeout(() => {
-      this.loaderSubject.next(false);
-    }, 2000);
+  hideLoader(): void {
+    this.isLoaderSubject.next(false);
   }
 
 }

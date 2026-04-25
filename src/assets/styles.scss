@@ -40,6 +40,9 @@
   --white-color: #fff;
   --secondary-color: #f2be22;
   --deep-forest-color: #1A3E3E;
+  --card-primary-color: #1D3939;
+  --card-secondary-color: #667C7C;
+  --camel-color: #D4A373;
 
 }
 
@@ -53,6 +56,18 @@
 
 .white-color {
   color: var(--white-color);
+}
+
+.camel-color {
+  color: var(--camel-color);
+}
+
+.card-primary-color {
+  color: var(--card-primary-color);
+}
+
+.card-secondary-color {
+  color: var(--card-secondary-color);
 }
 
 .fs-14 {

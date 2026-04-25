@@ -1,0 +1,143 @@
+.users-list {
+  height: 1580px;
+  box-sizing: border-box;
+  padding: 80px 230px;
+  background: #f3f5f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    color: #1d3939;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 29.9px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+  }
+
+  .users-container {
+    height: 1310px;
+    width: 1460px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px 70px;
+    overflow: hidden;
+
+    .absence-notification {
+      width: 558px;
+      height: 105px;
+      opacity: 1;
+      border-radius: 20px;
+      background-color: #b15757;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        font-weight: 800;
+        font-size: 26px;
+        line-height: 29.9px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color: var(--white-color)
+      }
+    }
+
+    .user-card {
+      max-width: 440px;
+      height: 630px;
+      opacity: 1;
+      gap: 25px;
+      border-radius: 4px;
+      border-top-width: 4px;
+      background-color: var(--white-color);
+      border-top: 4px solid var(--camel-color);
+      box-sizing: border-box;
+      padding: 35px 30px 49.6px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 9.6px;
+
+      .user-title {
+        width: 380px;
+        height: 51px;
+
+        h2 {
+          font-weight: 800;
+          font-size: 26px;
+          line-height: 29.9px;
+          letter-spacing: 0%;
+          vertical-align: middle;
+        }
+
+        p {
+          font-size: 15px;
+          line-height: 17.25px;
+          letter-spacing: 0%;
+          vertical-align: middle;
+          box-sizing: border-box;
+          margin: 3px 0 20px 0;
+        }
+      }
+
+      .part-info {
+        display: flex;
+        align-items: center;
+        gap: 11.68px;
+        box-sizing: border-box;
+        margin: 15.4px 0 2.4px 0;
+      }
+
+      .part-info::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: #e2e8f0;
+      }
+
+      .detail-info {
+        width: 380px;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+
+        span {
+          font-size: 14px;
+          line-height: 19.6px;
+          letter-spacing: 0%;
+          vertical-align: middle;
+        }
+
+        .mission {
+          font-weight: 700;
+          font-style: Italic;
+          font-size: 13px;
+          line-height: 18.2px;
+          letter-spacing: 0%;
+          text-align: right;
+          vertical-align: middle;
+        }
+
+        .geo-container {
+          width: 133px;
+          height: 20px;
+          opacity: 1;
+          box-sizing: border-box;
+          padding: 0.5px 6px;
+          border-radius: 3px;
+          border-width: 1px;
+          background: #f4f7f5;
+          border: 1px solid #e2e8f0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}

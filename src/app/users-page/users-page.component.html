@@ -1,1 +1,77 @@
-<p>users-page works!</p>
+<section class="users-list">
+  <div class="container users-list-container">
+    <h1>Список Пользователей</h1>
+    <div class="users-container">
+      @for (user of userService.users$ | async; track user.id) {
+        <div class="user-card">
+          <div class="user-title">
+            <h2 class="card-primary-color">{{ user.name }}</h2>
+            <p class="bold camel-color">{{ user.username }}</p>
+          </div>
+          <div class="part-info">
+            <h3 class="card-primary-color">Контакты</h3>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Эл. почта:</span>
+            <span class="camel-color">{{ user.email }}</span>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Телефон:</span>
+            <span class="card-primary-color">{{ user.phone }}</span>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Веб-сайт:</span>
+            <span class="camel-color">{{ user.website }}</span>
+          </div>
+          <div class="part-info">
+            <h3 class="card-primary-color">Адрес Проживания</h3>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Город:</span>
+            <span class="card-primary-color">{{ user.address.city }}</span>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Улица:</span>
+            <span class="card-primary-color">{{ user.address.street }}</span>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Офис:</span>
+            <span class="card-primary-color">{{ user.address.suite }}</span>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Индекс:</span>
+            <span class="card-primary-color">{{ user.address.zipcode }}</span>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Координаты:</span>
+            <div class="geo-container">
+              <span class="card-primary-color">{{ user.address.geo.lat }}</span>
+            </div>
+            <div class="geo-container">
+              <span class="card-primary-color">{{ user.address.geo.lng }}</span>
+            </div>
+          </div>
+          <div class="part-info">
+            <h3 class="card-primary-color">Место работы</h3>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Компания:</span>
+            <span class="card-primary-color">{{ user.company.name }}</span>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Миссия:</span>
+            <span class="mission card-secondary-color">{{ user.company.catchPhrase }}</span>
+          </div>
+          <div class="detail-info">
+            <span class="card-secondary-color">Специализация:</span>
+            <span class="card-primary-color">{{ user.company.bs }}</span>
+          </div>
+        </div>
+      } @empty {
+        <div class="absence-notification">
+          <p>Нет пользователей для отображения</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

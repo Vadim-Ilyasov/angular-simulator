@@ -4,6 +4,7 @@ import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-loader',
+  standalone: true,
   imports: [AsyncPipe],
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',

@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-users-filter',
+  standalone: true,
   imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
   templateUrl: './users-filter.component.html',
   styleUrl: './users-filter.component.scss',
@@ -22,11 +23,11 @@ export class UsersFilterComponent {
     this.nameControl.valueChanges.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(name => name?.trim().toLowerCase() || ''),
-      tap(name => this.OnFilterName.emit(name)),
+      map((name: string | null) => name?.trim().toLowerCase() || ''),
+      tap((name: string) => this.OnFilterName.emit(name)),
       takeUntilDestroyed(this.destroyRef),
     )
-    .subscribe()
+    .subscribe();
   }
 
 }

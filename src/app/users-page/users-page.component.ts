@@ -9,6 +9,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
 
 @Component({
   selector: 'app-users-page',
+  standalone: true,
   imports: [AsyncPipe, UserCardComponent, UserCreateComponent, UsersFilterComponent],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
@@ -21,7 +22,7 @@ export class UsersPageComponent {
   filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.searchUser$]).pipe(
     map(([users, selectedUsers]) => {
       if (!users) return [];
-      return users.filter((user) => user.name?.includes(selectedUsers.trim().toLowerCase()));
+      return users.filter((user: IUser) => user.name?.includes(selectedUsers.trim().toLowerCase()));
     }),
   );
 

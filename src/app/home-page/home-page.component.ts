@@ -9,6 +9,7 @@ import { ISearchTours } from '../../interfaces/ISearchTours';
 
 @Component({
   selector: 'app-home-page',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -119,7 +120,7 @@ export class HomePageComponent {
     },
   ];
 
-   isTourReady(): boolean {
+  isTourReady(): boolean {
     return !!(this.searchTours.location && this.searchTours.date && this.searchTours.tourist);
   }
 

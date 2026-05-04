@@ -4,6 +4,7 @@ import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-message',
+  standalone: true,
   imports: [NgTemplateOutlet, AsyncPipe],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss',

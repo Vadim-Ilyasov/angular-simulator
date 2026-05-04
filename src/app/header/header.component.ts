@@ -9,6 +9,7 @@ import { ITransition } from '../../interfaces/ITransition';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [FormsModule, DatePipe, RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

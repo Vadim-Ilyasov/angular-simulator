@@ -10,7 +10,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class UserService {
-  
+
   userApiService: UserApiService = inject(UserApiService);
   loaderService: LoaderService = inject(LoaderService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
@@ -18,9 +18,9 @@ export class UserService {
   users$: Observable<IUser[]> = this.userSubject.asObservable();
   messageService: MessageService = inject(MessageService);
 
-  setUsers(user: IUser[]): void {
-    this.userSubject.next(user);
-    this.localStorageService.setItem('users', user);
+  setUsers(users: IUser[]): void {
+    this.localStorageService.setItem('users', users);
+    this.userSubject.next(users);
   }
 
   getUsers(): IUser[] {
@@ -28,14 +28,12 @@ export class UserService {
   }
 
   createUser(newUser: IUser): void {
-    const createdUser: IUser[] = [...this.getUsers(), newUser];
-    this.setUsers(createdUser);
-    this.userSubject.next(createdUser);
+    const createdUsers: IUser[] = [...this.getUsers(), newUser];
+    this.setUsers(createdUsers);
   }
 
   deleteUserCard(id: number): void {
-    const selectedUser: IUser[] = this.getUsers();
-    const updateUsers: IUser[] = selectedUser.filter(
+    const updateUsers: IUser[] = this.getUsers().filter(
       (selectedUser: IUser) => selectedUser.id != id,
     );
     this.setUsers(updateUsers);

@@ -16,7 +16,7 @@ export class UsersFilterComponent {
   @Output() OnFilterName: EventEmitter<string> = new EventEmitter<string>();
   private destroyRef: DestroyRef = inject(DestroyRef);
 
-  nameControl:FormControl<string | null> = new FormControl('', [Validators.required]);
+  nameControl: FormControl<string | null> = new FormControl('', [Validators.required]);
 
 
   ngOnInit() {

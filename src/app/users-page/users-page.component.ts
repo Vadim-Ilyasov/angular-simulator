@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { filter, Observable, tap, BehaviorSubject, combineLatest, map } from 'rxjs';
+import { filter, Observable, tap, BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
 import { UserService } from '../user.service';
 import { IUser } from '../../interfaces/IUser';
 import { UserCardComponent } from '../user-card/user-card.component';
@@ -21,16 +21,17 @@ export class UsersPageComponent {
   filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.searchUser$]).pipe(
     map(([users, selectedUsers]) => {
       if (!users) return [];
-      return users.filter((user) => user.name.includes(selectedUsers));
+      return users.filter((user) => user.name?.includes(selectedUsers.trim().toLowerCase()));
     }),
   );
 
   constructor() {
     this.userService
-      .loadUsers()
+    .loadUsers()
       .pipe(tap((users: IUser[]) => this.userService.setUsers(users)))
-      .subscribe();
+    .subscribe();
   }
+ 
 
   deleteUser(id: number): void {
     this.userService.deleteUserCard(id);
@@ -38,7 +39,6 @@ export class UsersPageComponent {
 
   addUser(user: IUser): void {
     this.userService.createUser(user);
-    this.userService.closeUserForm();
   }
 
   selectUserByName(name: string): void {

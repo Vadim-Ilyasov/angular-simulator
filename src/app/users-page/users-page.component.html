@@ -1,17 +1,8 @@
 <section class="users-list">
+  <app-user-create (OnCreateUser)="addUser($event)"></app-user-create>
   <div class="container users-list-container">
     <h1>Список Пользователей</h1>
-    <app-users-filter (OnFilteredName)="selectUserByName($event)"></app-users-filter>
-    <button
-      id="add-user-btn"
-      class="add-user-btn primary-button"
-      (click)="userService.openUserForm()"
-    >
-      Добавить пользователя
-    </button>
-      @if (userService.isVisible$ | async) {
-        <app-user-create (OnCreateUser)="addUser($event)"></app-user-create>
-      }
+    <app-users-filter (OnFilterName)="selectUserByName($event)"></app-users-filter>
     <div class="users-container">
       @for (user of filteredUsers$ | async; track user.id) {
         <app-user-card [user]="user" (OndeleteUser)="deleteUser($event)"></app-user-card>

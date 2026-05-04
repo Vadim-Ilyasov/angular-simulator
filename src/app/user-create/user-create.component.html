@@ -73,6 +73,7 @@
     type="button"
     class="create-user-btn primary-button"
     (click)="onSubmit()"
+    [disabled]="userForm.invalid"
   >
     Create user
   </button>

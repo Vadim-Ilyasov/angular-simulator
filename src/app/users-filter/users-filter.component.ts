@@ -12,19 +12,19 @@ import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
 export class UsersFilterComponent {
 
   @Input() name!: string;
-  @Output() OnFilteredName = new EventEmitter<string>();
-  private destroyRef = inject(DestroyRef);
+  @Output() OnFilterName: EventEmitter<string> = new EventEmitter<string>();
+  private destroyRef: DestroyRef = inject(DestroyRef);
 
-  nameControl = new FormControl('', [Validators.required]);
+  nameControl:FormControl<string | null> = new FormControl('', [Validators.required]);
 
 
   ngOnInit() {
     this.nameControl.valueChanges.pipe(
-      takeUntilDestroyed(this.destroyRef),
       debounceTime(200),
       distinctUntilChanged(),
       map(name => name?.trim().toLowerCase() || ''),
-      tap(name => this.OnFilteredName.emit(name))
+      tap(name => this.OnFilterName.emit(name)),
+      takeUntilDestroyed(this.destroyRef),
     )
     .subscribe()
   }

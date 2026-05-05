@@ -22,7 +22,7 @@ export class UsersPageComponent {
   filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.searchUser$]).pipe(
     map(([users, selectedUsers]) => {
       if (!users) return [];
-      return users.filter((user: IUser) => user.name?.includes(selectedUsers.trim().toLowerCase()));
+      return users.filter((user: IUser) => user.name?.trim().toLowerCase().includes(selectedUsers));
     }),
   );
 
@@ -38,8 +38,8 @@ export class UsersPageComponent {
     this.userService.deleteUserCard(id);
   }
 
-  addUser(user: IUser): void {
-    this.userService.createUser(user);
+  addUser(users: IUser): void {
+    this.userService.createUser(users);
   }
 
   selectUserByName(name: string): void {

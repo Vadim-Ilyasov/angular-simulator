@@ -8,13 +8,13 @@ export interface IUserForm {
     city: FormControl<string | null>;
     street: FormControl<string | null>;
     suite: FormControl<string | null>;
-    zipcode: FormControl<string | null>;
+    zipcode: FormControl<number | null>;
     geo: FormGroup<{
-      lat: FormControl<string | null>;
-      lng: FormControl<string | null>;
+      lat: FormControl<number | null>;
+      lng: FormControl<number | null>;
     }>;
   }>;
-  phone: FormControl<string | null>;
+  phone: FormControl<number | null>;
   website: FormControl<string | null>;
   company: FormGroup<{
     name: FormControl<string | null>;

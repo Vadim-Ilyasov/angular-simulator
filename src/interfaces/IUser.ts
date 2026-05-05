@@ -7,13 +7,13 @@ export interface IUser {
     city: string | null;
     street: string | null;
     suite: string | null;
-    zipcode: string | null;
+    zipcode: number | null;
     geo: {
-      lat: string | null;
-      lng: string | null;
+      lat: number | null;
+      lng: number | null;
     };
   };
-  phone: string | null;
+  phone: number | null;
   website: string | null;
   company: {
     name: string | null;

@@ -14,17 +14,17 @@ export class UserService {
   userApiService: UserApiService = inject(UserApiService);
   loaderService: LoaderService = inject(LoaderService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
-  private userSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
-  users$: Observable<IUser[]> = this.userSubject.asObservable();
+  private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
+  users$: Observable<IUser[]> = this.usersSubject.asObservable();
   messageService: MessageService = inject(MessageService);
 
   setUsers(users: IUser[]): void {
     this.localStorageService.setItem('users', users);
-    this.userSubject.next(users);
+    this.usersSubject.next(users);
   }
 
   getUsers(): IUser[] {
-    return this.userSubject.getValue();
+    return this.usersSubject.getValue();
   }
 
   createUser(newUser: IUser): void {
@@ -37,21 +37,19 @@ export class UserService {
       (selectedUser: IUser) => selectedUser.id != id,
     );
     this.setUsers(updateUsers);
-    this.userSubject.next(updateUsers);
   }
 
   loadUsers(): Observable<IUser[]> {
     this.loaderService.showLoader();
     const localUsers: IUser[] | null = this.localStorageService.getItem<IUser[]>('users');
     if (localUsers) {
-      this.userSubject.next(localUsers);
+      this.usersSubject.next(localUsers);
       this.loaderService.hideLoader();
       return of(localUsers);
     }
     return this.userApiService.getUsers().pipe(
       tap((users) => {
-        this.localStorageService.setItem('users', users);
-        this.userSubject.next(users);
+        this.setUsers(users);
       }),
       catchError((error: string) => {
         this.messageService.showError('Нет пользователей для отображения');

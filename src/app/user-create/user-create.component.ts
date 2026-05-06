@@ -24,13 +24,13 @@ export class UserCreateComponent {
       city: ['', [Validators.required, Validators.maxLength(50)]],
       street: ['', [Validators.required, Validators.maxLength(100)]],
       suite: ['', [Validators.maxLength(50)]],
-      zipcode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
+      zipcode: [0, [Validators.required, Validators.min(5), Validators.max(10)]],
       geo: this.fb.group({
-        lat: ['', [Validators.required]],
-        lng: ['', [Validators.required]],
+        lat: [0, [Validators.required]],
+        lng: [0, [Validators.required]],
       }),
     }),
-    phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(25)]],
+    phone: [0, [Validators.required, Validators.min(10), Validators.max(25)]],
     website: ['', [Validators.maxLength(100)]],
     company: this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],

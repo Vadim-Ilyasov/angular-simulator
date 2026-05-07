@@ -37,10 +37,6 @@ export class HeaderComponent {
   constructor() {
     this.saveDateLastVisit();
     this.saveSumVisit();
-    this.storage.setItem('user', 1);
-    this.storage.getItem('user');
-    this.storage.deleteItem('user');
-    this.storage.clearAllItem();
 
     setInterval(() => {
       this.currentDate = new Date();

@@ -1,7 +1,7 @@
 .users-list {
-  height: 2300px;
+  min-height: 100hv;
   box-sizing: border-box;
-  padding: 30px 200px;
+  padding: 30px 200px 130px 200px;
   background: #f3f5f4;
   margin: 0 auto;
 
@@ -22,12 +22,10 @@
   }
 
   .users-container {
-    height: 1310px;
     width: 1460px;
     display: flex;
     flex-wrap: wrap;
     gap: 50px 70px;
-    overflow: hidden;
 
     .absence-notification {
       width: 558px;

@@ -1,7 +1,11 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder,  ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from "@angular/forms";
 import { IUser } from '../../interfaces/IUser';
-import { ModelFormGroup } from './forms';
+
+export type ModelFormGroup<T> = FormGroup<{
+  [K in keyof T]: T[K] extends object ? ModelFormGroup<T[K]> : FormControl<T[K]> ;
+}>;
 
 @Component({ 
   selector: 'app-user-create',

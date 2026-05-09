@@ -6,6 +6,8 @@ import { IUser } from '../../interfaces/IUser';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { UserCreateComponent } from '../user-create/user-create.component';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
+import { LocalStorageService } from '../local-storage.service';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-users-page',
@@ -17,6 +19,8 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
 export class UsersPageComponent {
 
   userService: UserService = inject(UserService);
+  loaderService: LoaderService = inject(LoaderService);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
   users$: Observable<IUser[]> = this.userService.users$;
   searchUser$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.searchUser$]).pipe(
@@ -26,7 +30,18 @@ export class UsersPageComponent {
     }),
   );
 
-  constructor() {
+  ngOnInit(): void {
+    this.initUsers();
+  }
+
+  initUsers(): void {
+    this.loaderService.showLoader();
+    const usersFromStorage: IUser[] | null = this.localStorageService.getItem<IUser[]>('users');
+    if(usersFromStorage?.length) {
+      this.userService.setUsers(usersFromStorage);
+      this.loaderService.hideLoader();
+      return;
+    }
     this.userService
     .loadUsers()
       .pipe(tap((users: IUser[]) => this.userService.setUsers(users)))

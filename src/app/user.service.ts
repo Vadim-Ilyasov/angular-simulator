@@ -40,13 +40,6 @@ export class UserService {
   }
 
   loadUsers(): Observable<IUser[]> {
-    this.loaderService.showLoader();
-    const localUsers: IUser[] | null = this.localStorageService.getItem<IUser[]>('users');
-    if (localUsers) {
-      this.usersSubject.next(localUsers);
-      this.loaderService.hideLoader();
-      return of(localUsers);
-    }
     return this.userApiService.getUsers().pipe(
       tap((users) => {
         this.setUsers(users);

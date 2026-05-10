@@ -30,24 +30,13 @@ export class UsersPageComponent {
     }),
   );
 
-  ngOnInit(): void {
-    this.initUsers();
-  }
-
-  initUsers(): void {
-    this.loaderService.showLoader();
-    const usersFromStorage: IUser[] | null = this.localStorageService.getItem<IUser[]>('users');
-    if(usersFromStorage?.length) {
-      this.userService.setUsers(usersFromStorage);
-      this.loaderService.hideLoader();
-      return;
-    }
-    this.userService
-    .loadUsers()
-      .pipe(tap((users: IUser[]) => this.userService.setUsers(users)))
-    .subscribe();
-  }
- 
+  constructor() {
+  this.userService.loadUsers()
+    .pipe(
+      tap( (users: IUser[]) => this.userService.setUsers(users) )
+    )
+  .subscribe();
+}
 
   deleteUser(id: number): void {
     this.userService.deleteUserCard(id);

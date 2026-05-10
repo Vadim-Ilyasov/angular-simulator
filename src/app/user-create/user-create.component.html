@@ -1,0 +1,80 @@
+<div class="new-user-card">
+  <form [formGroup]="userForm" class="user-form">
+    <h3 class="fs-24">New user</h3>
+    <h4 class="fs-20">Basic info</h4>
+    <div class="user-details-field">
+      <label>Name</label>
+      <input id="name" type="text" formControlName="name" />
+    </div>
+    <div class="user-details-field">
+      <label>Username</label>
+      <input id="username" type="text" formControlName="username" />
+    </div>
+    <div class="user-details-field">
+      <label>Email</label>
+      <input id="email" type="email" formControlName="email" />
+    </div>
+    <ng-container formGroupName="address">
+      <h4 class="card-primary-color">Address</h4>
+      <div class="user-details-field">
+        <label>City</label>
+        <input id="city" type="text" formControlName="city" />
+      </div>
+      <div class="user-details-field">
+        <label>Street</label>
+        <input id="street" type="text" formControlName="street" />
+      </div>
+      <div class="user-details-field">
+        <label>Suite</label>
+        <input id="suite" type="text" formControlName="suite" />
+      </div>
+      <div class="user-details-field">
+        <label>Zipcode</label>
+        <input id="zipcode" type="number" formControlName="zipcode" />
+      </div>
+      <div formGroupName="geo" class="user-details-field">
+        <label>Geo</label>
+        <div class="geo-details">
+          <label>Lat</label>
+          <input id="lat" class="geo-input" type="number" formControlName="lat" />
+        </div>
+        <div class="geo-details">
+          <label>Lng</label>
+          <input id="lng" class="geo-input" type="number" formControlName="lng" />
+        </div>
+      </div>
+    </ng-container>
+    <div class="user-details-field">
+      <label>Phone</label>
+      <input id="phone" type="number" formControlName="phone" />
+    </div>
+    <div class="user-details-field">
+      <label>Website</label>
+      <input id="website" type="text" formControlName="website" />
+    </div>
+    <ng-container formGroupName="company">
+      <h4>Company</h4>
+      <div class="user-details-field">
+        <label>Name</label>
+        <input id="name" type="text" formControlName="name" />
+      </div>
+      <div class="user-details-field">
+        <label>CatchPhrase</label>
+        <input id="catchPhrase" type="text" formControlName="catchPhrase" />
+      </div>
+      <div class="user-details-field">
+        <label>Bs</label>
+        <input id="bs" type="text" formControlName="bs" />
+      </div>
+    </ng-container>
+  </form>
+  <button
+    id="create-user-btn"
+    type="button"
+    class="create-user-btn primary-button"
+    (click)="onSubmit()"
+    [disabled]="userForm.invalid"
+  >
+    Create user
+  </button>
+</div>

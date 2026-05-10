@@ -1,0 +1,71 @@
+<div class="user-card">
+  <div class="user-title">
+    <h2 class="card-primary-color">{{ user.name }}</h2>
+    <p class="bold camel-color">{{ user.username }}</p>
+  </div>
+  <div class="part-info">
+    <h3 class="card-primary-color">Контакты</h3>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Эл. почта:</span>
+    <span class="camel-color">{{ user.email }}</span>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Телефон:</span>
+    <span class="card-primary-color">{{ user.phone }}</span>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Веб-сайт:</span>
+    <span class="camel-color">{{ user.website || 'Неизвестно'}}</span>
+  </div>
+  <div class="part-info">
+    <h3 class="card-primary-color">Адрес Проживания</h3>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Город:</span>
+    <span class="card-primary-color">{{ user.address.city }}</span>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Улица:</span>
+    <span class="card-primary-color">{{ user.address.street }}</span>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Офис:</span>
+    <span class="card-primary-color">{{ user.address.suite || 'Неизвестно'}}</span>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Индекс:</span>
+    <span class="card-primary-color">{{ user.address.zipcode }}</span>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Координаты:</span>
+    <div class="geo-container">
+      <span class="card-primary-color">{{ user.address.geo.lat }}</span>
+    </div>
+    <div class="geo-container">
+      <span class="card-primary-color">{{ user.address.geo.lng }}</span>
+    </div>
+  </div>
+  <div class="part-info">
+    <h3 class="card-primary-color">Место работы</h3>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Компания:</span>
+    <span class="card-primary-color">{{ user.company.name }}</span>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Миссия:</span>
+    <span class="mission card-secondary-color">{{ user.company.catchPhrase || 'Неизвестно' }}</span>
+  </div>
+  <div class="detail-info">
+    <span class="card-secondary-color">Специализация:</span>
+    <span class="card-primary-color">{{ user.company.bs || 'Неизвестно' }}</span>
+  </div>
+  <button
+    class="delete-users-btn primary-button"
+    id="delete-users-btn"
+    (click)="deleteUserCard()"
+  >
+    Удалить пользователя
+  </button>
+</div>

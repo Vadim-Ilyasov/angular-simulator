@@ -1,23 +1,29 @@
+import { FormControl, FormGroup } from "@angular/forms";
+
+export type ModelFormGroup<T> = {
+    [K in keyof T]: T[K] extends object ? FormGroup<ModelFormGroup<T[K]>> : FormControl<T[K]> ;
+}; 
+
 export interface IUser {
   id: number;
-  name: string;
-  username: string;
-  email: string;
+  name: string | null;
+  username: string | null;
+  email: string | null;
   address: {
-    city: string;
-    street: string;
-    suite: string;
-    zipcode: number;
+    city: string | null;
+    street: string | null;
+    suite: string | null;
+    zipcode: number | null;
     geo: {
-      lat: number;
-      lng: number;
+      lat: number | null;
+      lng: number | null;
     };
   };
-  phone: number;
-  website: string;
+  phone: number | null;
+  website: string | null;
   company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
+    name: string | null;
+    catchPhrase: string | null;
+    bs: string | null;
   };
 }

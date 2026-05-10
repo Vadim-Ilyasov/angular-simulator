@@ -13,6 +13,7 @@ import { LoaderComponent } from './loader/loader.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     FormsModule,
     CommonModule,

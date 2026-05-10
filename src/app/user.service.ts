@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, finalize, of, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, of, Observable, tap } from 'rxjs';
 import { IUser } from '../interfaces/IUser';
 import { UserApiService } from './user-api.service';
 import { LoaderService } from './loader.service';
 import { MessageService } from './message.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,29 +13,51 @@ export class UserService {
 
   userApiService: UserApiService = inject(UserApiService);
   loaderService: LoaderService = inject(LoaderService);
-  private userSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
-  users$: Observable<IUser[]> = this.userSubject.asObservable();
+  localStorageService: LocalStorageService = inject(LocalStorageService);
+  private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
+  users$: Observable<IUser[]> = this.usersSubject.asObservable();
   messageService: MessageService = inject(MessageService);
 
-  setUsers(user: IUser[]): void {
-    this.userSubject.next(user);
+  setUsers(users: IUser[]): void {
+    this.localStorageService.setItem('users', users);
+    this.usersSubject.next(users);
   }
 
   getUsers(): IUser[] {
-    return this.userSubject.getValue();
+    return this.usersSubject.getValue();
+  }
+
+  createUser(newUser: IUser): void {
+    const createdUsers: IUser[] = [...this.getUsers(), newUser];
+    this.setUsers(createdUsers);
+  }
+
+  deleteUserCard(id: number): void {
+    const updateUsers: IUser[] = this.getUsers().filter(
+      (selectedUser: IUser) => selectedUser.id != id,
+    );
+    this.setUsers(updateUsers);
   }
 
   loadUsers(): Observable<IUser[]> {
-    console.log('1. Вызов loadUsers начат');
-    this.loaderService.showLoader();
-    return this.userApiService.getUsers()
-      .pipe(
-        catchError((error: string) => {
-          this.messageService.showError('Нет пользователей для отображения');
-          return of([]);
-        }),
-        finalize(() => this.loaderService.hideLoader()),
-      );
+  this.loaderService.showLoader();
+  const usersFromStorage: IUser[] | null = this.localStorageService.getItem<IUser[]>('users');
+  if (usersFromStorage?.length) {
+    this.loaderService.hideLoader();
+    return of(usersFromStorage);
+  };
+  return this.userApiService.getUsers()
+    .pipe(
+      tap((users) => {
+        this.setUsers(users);
+      }),
+      catchError((error: string) => {
+        this.messageService.showError('Нет пользователей для отображения');
+        console.error(error);
+        return of([]);
+      }),
+      finalize(() => this.loaderService.hideLoader()),
+    );
   }
 
 }

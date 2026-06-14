@@ -1,33 +1,62 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, DestroyRef } from '@angular/core';
+import { tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faMountain, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DOCUMENT } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ToggleSwitch } from 'primeng/toggleswitch';
 import { ISearchTours } from '../../interfaces/ISearchTours';
-import { LocalStorageService } from '../local-storage.service';
 import { ITransition } from '../../interfaces/ITransition';
-
+import { ColorMode } from '../../enums/ColorMode';
+import { Theme } from '../../enums/Theme';
+import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, DatePipe, RouterLink, RouterLinkActive],
+  imports: [
+    FormsModule,
+    DatePipe,
+    RouterLink,
+    RouterLinkActive,
+    FontAwesomeModule,
+    ButtonModule,
+    ToggleSwitch,
+    SelectButtonModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
 
-  private storage: LocalStorageService = inject(LocalStorageService);
+  themeService: ThemeService = inject(ThemeService);
+  private document = inject(DOCUMENT);
+  private destroyRef = inject(DestroyRef);
 
+  currentMode!: ColorMode;
+  currentTheme!: Theme;
   logoName: string = 'румтибет';
   currentDate: Date = new Date();
   count: number = 0;
   toggle: boolean = true;
+  faMountain: IconDefinition = faMountain;
 
   searchTours: ISearchTours = {
     location: '',
     date: '',
     tourist: '',
   };
+
+   themeOptions = [
+    { label: 'Aura', value: Theme.AURA },
+    { label: 'Nora', value: Theme.NORA },
+    { label: 'Lara', value: Theme.LARA },
+  ];
 
   navTransitions: ITransition[] = [
     { path: '/', label: 'Главная' },
@@ -56,5 +85,35 @@ export class HeaderComponent {
     visitNumber++;
     localStorage.setItem(SUM_KEY, visitNumber.toString());
   }
-  
+
+  onSliderClick(): void {
+    this.themeService.setColorMode();
+  }
+
+  onSelectTheme(selectedTheme: Theme): void {
+    if (selectedTheme) {
+      this.themeService.setTheme(selectedTheme);
+    }
+  }
+
+  ngOnInit(): void {
+    this.themeService.display$.pipe(
+      tap((display) => {
+        if (!display) return;
+        this.currentMode = display.colorMode;
+        this.currentTheme = display.theme;
+        const htmlEl: HTMLElement = this.document.documentElement;
+        if (display.colorMode === ColorMode.DARK) {
+          htmlEl.classList.add('p-dark');
+        } else {
+          htmlEl.classList.remove('p-dark');
+        }
+        if (display.theme) {
+          htmlEl.setAttribute('data-theme', display.theme);
+        }
+      }), 
+      takeUntilDestroyed(this.destroyRef))
+    .subscribe();
+  }
+
 }

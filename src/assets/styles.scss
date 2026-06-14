@@ -1,17 +1,86 @@
 @use './fonts';
 @use './normalize';
 @use './button';
-@use './message';
 
 * {
   font-family: 'Nunito Sans', sans-serif;
   margin: 0;
   padding: 0;
+  color: inherit;
+}
+
+html,
+body {
+  background-color: var(--p-content-background);
+  color: var(--p-content-text-color);
+  height: 100%;
 }
 
 .container {
   width: 1180px;
   display: block;
+}
+
+:root {
+  --primary-color: #000;
+  --white-color: #fff;
+  --secondary-color: #f2be22;
+  --deep-forest-color: #1a3e3e;
+  --card-primary-color: #1d3939;
+  --card-secondary-color: #667c7c;
+  --camel-color: #d4a373;
+  --p-content-background: var(--p-surface-0);
+  --p-content-text-color: var(--p-text-color);
+  --p-surface-background: var(--p-surface-50);
+  --p-input-background: rgba(255, 255, 255, 0.2);
+  --p-rating-background: rgba(253, 253, 253, 0.4);
+}
+
+:root[data-theme='aura'] {
+  --deep-forest-color: #1a3e3e;
+  --secondary-color: #f2be22;
+  --card-primary-color: #1d3939;
+  --card-secondary-color: #667c7c;
+  --camel-color: #d4a373;
+}
+
+:root[data-theme='lara'] {
+  --deep-forest-color: #1a2a3e;
+  --secondary-color: #3b82f6;
+  --card-primary-color: #1d2a39;
+  --card-secondary-color: #66737c;
+  --camel-color: #e59866;
+}
+
+:root[data-theme='nora'] {
+  --deep-forest-color: #132e27;
+  --secondary-color: #10b981;
+  --card-primary-color: #17332c;
+  --card-secondary-color: #667c73;
+  --camel-color: #92af80;
+}
+
+:root.p-dark {
+  --p-content-background: var(--p-surface-900);
+  --p-content-text-color: var(--p-surface-0);
+  --p-surface-background: var(--p-surface-800);
+  --p-input-background: rgba(0, 0, 0, 0.35);
+  --p-rating-background: rgba(0, 0, 0, 0.5);
+}
+
+:root.p-dark[data-theme='aura'] {
+  --deep-forest-color: #2a5c5c;
+  --card-primary-color: #244747;
+}
+
+:root.p-dark[data-theme='lara'] {
+  --deep-forest-color: #243b55;
+  --card-primary-color: #1c304a;
+}
+
+:root.p-dark[data-theme='nora'] {
+  --deep-forest-color: #1f4037;
+  --card-primary-color: #16332a;
 }
 
 .center-text-position {
@@ -33,17 +102,6 @@
   font-style: ExtraBold;
   line-height: 120%;
   letter-spacing: 0%;
-}
-
-:root {
-  --primary-color: #000;
-  --white-color: #fff;
-  --secondary-color: #f2be22;
-  --deep-forest-color: #1A3E3E;
-  --card-primary-color: #1D3939;
-  --card-secondary-color: #667C7C;
-  --camel-color: #D4A373;
-
 }
 
 .forest-color {

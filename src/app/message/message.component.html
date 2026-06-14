@@ -11,15 +11,17 @@
 <ng-template #message let-msg let-index="index">
   <div class="message-container">
     <div class="envelope-icon">
-      <img src="/images/envelope-icon.svg" />
+      <fa-icon [icon]="faEnvelope"></fa-icon>
     </div>
     <div class="message-content">
       <h3 class="message-type">{{ msg.type }}</h3>
       <p class="message-text">{{ msg.text }}</p>
     </div>
-    <div class="delete-icon" (click)="deleteMessage(msg.id)">
-      <img src="/images/delete-icon.svg" />
-    </div>
+    <fa-icon
+      [icon]="faCircleXmark"
+      size="xl"
+      class="delete-icon"
+      (click)="deleteMessage(msg.id)"
+    ></fa-icon>
   </div>
 </ng-template>
-

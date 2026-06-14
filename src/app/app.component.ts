@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 import './training';
 import { Color } from '../enums/Color';
 import { Message } from '../enums/Message';
@@ -22,6 +23,7 @@ import { LoaderComponent } from './loader/loader.component';
     HeaderComponent,
     MessageComponent,
     LoaderComponent,
+    ButtonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -36,5 +38,5 @@ export class AppComponent {
     const colors: string[] = [Color.GREEN, Color.BLUE, Color.RED];
     return colors.includes(color);
   }
-  
+
 }

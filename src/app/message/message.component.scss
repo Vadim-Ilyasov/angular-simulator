@@ -1,0 +1,61 @@
+.messages-container {
+  position: fixed;
+  display: flex;
+  z-index: 999;
+  flex-direction: column;
+  gap: 5px;
+  top: 20px;
+  right: 20px;
+
+  .message-container {
+    width: 350px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #0f172ad9;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+
+    .envelope-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+
+      fa-icon {
+        color: var(--white-color);
+        font-size: 2rem;
+      }
+    }
+
+    .message-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      overflow: hidden;
+
+      .message-type {
+        font-weight: 716;
+        font-style: Bold;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0%;
+        margin: 0;
+        color: #e8e9eb;
+      }
+      .message-text {
+        margin: 0;
+        color: #e8e9eb;
+      }
+    }
+
+    .delete-icon {
+      margin-top: 8px;
+      margin-right: 4px;
+      color: var(--white-color);
+      align-self: flex-start;
+      cursor: pointer;
+    }
+  }
+}

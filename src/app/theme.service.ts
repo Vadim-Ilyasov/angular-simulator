@@ -7,6 +7,7 @@ import Nora from '@primeng/themes/nora';
 import { LocalStorageService } from './local-storage.service';
 import { Theme } from '../enums/Theme';
 import { ColorMode } from '../enums/ColorMode';
+import { IThemeState } from '../interfaces/IThemeState';
 
 @Injectable({
   providedIn: 'root',
@@ -14,51 +15,42 @@ import { ColorMode } from '../enums/ColorMode';
 export class ThemeService {
 
   localStorageService: LocalStorageService = inject(LocalStorageService);
-  private displaySubject: BehaviorSubject<{ colorMode: ColorMode; theme: Theme }> =
+  private themeStateSubject: BehaviorSubject<IThemeState> =
     new BehaviorSubject(this.getInitState());
-  display$: Observable<{ colorMode: ColorMode; theme: Theme }> = this.displaySubject.asObservable();
+  themeState$: Observable<IThemeState> = this.themeStateSubject.asObservable();
 
   constructor() {
-    const currentMode: {
-    colorMode: ColorMode;
-    theme: Theme;
-    } = this.displaySubject.getValue();
+    const currentMode: IThemeState = this.themeStateSubject.getValue();
     this.applyTheme(currentMode.theme);
   }
 
   setTheme(newTheme: Theme): void {
-    const newDisplay: {
-      colorMode: ColorMode;
-      theme: Theme;
-    } = { colorMode: this.displaySubject.getValue().colorMode, theme: newTheme };
-    this.localStorageService.setItem('display', newDisplay);
-    this.displaySubject.next(newDisplay);
+    const newDisplay: IThemeState = { colorMode: this.themeStateSubject.getValue().colorMode, theme: newTheme };
+    this.localStorageService.setItem('theme', newDisplay);
+    this.themeStateSubject.next(newDisplay);
     this.applyTheme(newTheme);
   }
 
   setColorMode(): void {
     const newColoMode: ColorMode =
-      this.displaySubject.getValue().colorMode === ColorMode.LIGHT
+      this.themeStateSubject.getValue().colorMode === ColorMode.LIGHT
         ? ColorMode.DARK
         : ColorMode.LIGHT;
-    const newDisplay: {
-      colorMode: ColorMode;
-      theme: Theme;
-    } = { colorMode: newColoMode, theme: this.displaySubject.getValue().theme };
-    this.localStorageService.setItem('display', newDisplay);
-    this.displaySubject.next(newDisplay);
+    const newDisplay: IThemeState = { colorMode: newColoMode, theme: this.themeStateSubject.getValue().theme };
+    this.localStorageService.setItem('theme', newDisplay);
+    this.themeStateSubject.next(newDisplay);
   }
 
-  getInitState(): { colorMode: ColorMode; theme: Theme } {
-    const currentDisplay = this.localStorageService.getItem('display');
-    if (currentDisplay) {
-      return currentDisplay as { colorMode: ColorMode; theme: Theme };
+  getInitState(): IThemeState {
+    const currentThemeState: IThemeState | null = this.localStorageService.getItem('theme');
+    if (currentThemeState) {
+      return currentThemeState as IThemeState;
     }
     return { colorMode: ColorMode.LIGHT, theme: Theme.AURA };
   }
 
   applyTheme(theme: Theme): void {
-    let selectedPreset;
+    let selectedPreset: any = undefined;
     switch (theme) {
       case Theme.LARA:
         selectedPreset = Lara;

@@ -52,7 +52,7 @@ export class HeaderComponent {
     tourist: '',
   };
 
-   themeOptions = [
+  themeOptions = [
     { label: 'Aura', value: Theme.AURA },
     { label: 'Nora', value: Theme.NORA },
     { label: 'Lara', value: Theme.LARA },
@@ -97,19 +97,19 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.themeService.display$.pipe(
-      tap((display) => {
-        if (!display) return;
-        this.currentMode = display.colorMode;
-        this.currentTheme = display.theme;
+    this.themeService.themeState$.pipe(
+      tap((themeState) => {
+        if (!themeState) return;
+        this.currentMode = themeState.colorMode;
+        this.currentTheme = themeState.theme;
         const htmlEl: HTMLElement = this.document.documentElement;
-        if (display.colorMode === ColorMode.DARK) {
+        if (themeState.colorMode === ColorMode.DARK) {
           htmlEl.classList.add('p-dark');
         } else {
           htmlEl.classList.remove('p-dark');
         }
-        if (display.theme) {
-          htmlEl.setAttribute('data-theme', display.theme);
+        if (themeState.theme) {
+          htmlEl.setAttribute('data-theme', themeState.theme);
         }
       }), 
       takeUntilDestroyed(this.destroyRef))

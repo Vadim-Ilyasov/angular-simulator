@@ -5,7 +5,7 @@
     .newsletters {
       height: 196px;
       border-radius: 6px;
-      background-color: var(--p-content-background);
+      background-color: var(--p-footer-news-background);
       box-shadow: 0px 0px 15px 0px #18121e1f;
       box-sizing: border-box;
       padding: 40px 100px;
@@ -59,7 +59,7 @@
 
   .travel-service-info {
     height: 521px;
-    background-color: var(--deep-forest-color);
+    background-color: var(--p-footer-info-background);
     position: relative;
     box-sizing: border-box;
     padding: 178px 0 80px 0;

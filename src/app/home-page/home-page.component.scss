@@ -195,7 +195,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--p-content-background);
+  background-color: var(--p-popular-tour-background);
   color: var(--p-content-text-color);
 
   &-container {
@@ -250,7 +250,7 @@
   justify-content: center;
   align-items: center;
   gap: 90px;
-  background: var(--p-surface-background);
+  background: var(--p-travel-blog-background);
   color: var(--p-content-text-color);
 
   .tour-program-text {
@@ -333,7 +333,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--p-content-background);
+  background-color: var(--p-popular-tour-background);
   color: var(--p-content-text-color);
 
   &-container {
@@ -468,7 +468,7 @@
   box-sizing: border-box;
   padding-top: 85px;
   padding-bottom: 95px;
-  background: var(--p-surface-background);
+  background: var(--p-travel-blog-background);
   display: flex;
   justify-content: center;
 

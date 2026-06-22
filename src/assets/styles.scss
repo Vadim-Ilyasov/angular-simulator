@@ -38,15 +38,15 @@ body {
   --p-rating-background: rgba(253, 253, 253, 0.4);
 }
 
-:root[data-theme='aura'] {
+:root[theme='aura'] {
   --deep-forest-color: #1a3e3e;
 }
 
-:root[data-theme='lara'] {
+:root[theme='lara'] {
   --deep-forest-color: #1a2a3e;
 }
 
-:root[data-theme='nora'] {
+:root[theme='nora'] {
   --deep-forest-color: #132e27;
 }
 
@@ -60,15 +60,15 @@ body {
   --p-rating-background: rgba(0, 0, 0, 0.5);
 }
 
-:root.p-dark[data-theme='aura'] {
+:root.p-dark[theme='aura'] {
   --deep-forest-color: #2a5c5c;
 }
 
-:root.p-dark[data-theme='lara'] {
+:root.p-dark[theme='lara'] {
   --deep-forest-color: #243b55;
 }
 
-:root.p-dark[data-theme='nora'] {
+:root.p-dark[theme='nora'] {
   --deep-forest-color: #1f4037;
 }
 

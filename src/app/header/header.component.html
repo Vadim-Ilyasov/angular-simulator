@@ -53,7 +53,7 @@
     </button>
   </div>
   <div class="theme-controls">
-    <p-toggleswitch [ngModel]="currentMode === 'dark'" (onChange)="onSliderClick()" />
+    <p-toggleswitch [ngModel]="isDark$ | async" (onChange)="toggleDarkMode()" />
     <p-selectbutton
       [options]="themeOptions"
       [ngModel]="currentTheme"

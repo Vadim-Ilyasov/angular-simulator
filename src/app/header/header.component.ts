@@ -1,12 +1,10 @@
-import { Component, inject, DestroyRef } from '@angular/core';
-import { tap } from 'rxjs';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { DatePipe, AsyncPipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMountain, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DOCUMENT } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ToggleSwitch } from 'primeng/toggleswitch';
@@ -22,6 +20,7 @@ import { ThemeService } from '../theme.service';
   imports: [
     FormsModule,
     DatePipe,
+    AsyncPipe,
     RouterLink,
     RouterLinkActive,
     FontAwesomeModule,
@@ -35,8 +34,6 @@ import { ThemeService } from '../theme.service';
 export class HeaderComponent {
 
   themeService: ThemeService = inject(ThemeService);
-  private document = inject(DOCUMENT);
-  private destroyRef = inject(DestroyRef);
 
   currentMode!: ColorMode;
   currentTheme!: Theme;
@@ -45,18 +42,14 @@ export class HeaderComponent {
   count: number = 0;
   toggle: boolean = true;
   faMountain: IconDefinition = faMountain;
+  themeOptions: { label: string; value: Theme }[] = this.themeService.themeOptions;
+  isDark$: Observable<boolean> = this.themeService.isDark$;
 
   searchTours: ISearchTours = {
     location: '',
     date: '',
     tourist: '',
   };
-
-  themeOptions = [
-    { label: 'Aura', value: Theme.AURA },
-    { label: 'Nora', value: Theme.NORA },
-    { label: 'Lara', value: Theme.LARA },
-  ];
 
   navTransitions: ITransition[] = [
     { path: '/', label: 'Главная' },
@@ -86,34 +79,14 @@ export class HeaderComponent {
     localStorage.setItem(SUM_KEY, visitNumber.toString());
   }
 
-  onSliderClick(): void {
-    this.themeService.setColorMode();
+  toggleDarkMode(): void {
+    this.themeService.selectColorMode();
   }
 
   onSelectTheme(selectedTheme: Theme): void {
     if (selectedTheme) {
       this.themeService.setTheme(selectedTheme);
     }
-  }
-
-  ngOnInit(): void {
-    this.themeService.themeState$.pipe(
-      tap((themeState) => {
-        if (!themeState) return;
-        this.currentMode = themeState.colorMode;
-        this.currentTheme = themeState.theme;
-        const htmlEl: HTMLElement = this.document.documentElement;
-        if (themeState.colorMode === ColorMode.DARK) {
-          htmlEl.classList.add('p-dark');
-        } else {
-          htmlEl.classList.remove('p-dark');
-        }
-        if (themeState.theme) {
-          htmlEl.setAttribute('data-theme', themeState.theme);
-        }
-      }), 
-      takeUntilDestroyed(this.destroyRef))
-    .subscribe();
   }
 
 }

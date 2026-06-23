@@ -53,10 +53,10 @@
     </button>
   </div>
   <div class="theme-controls">
-    <p-toggleswitch [ngModel]="isDark$ | async" (onChange)="toggleDarkMode()" />
+    <p-toggleswitch [ngModel]="isDarkMode$ | async" (onChange)="toggleDarkMode($event.checked)" />
     <p-selectbutton
       [options]="themeOptions"
-      [ngModel]="currentTheme"
+      [ngModel]="theme$ |async"
       (ngModelChange)="onSelectTheme($event)"
       optionLabel="label"
       optionValue="value"

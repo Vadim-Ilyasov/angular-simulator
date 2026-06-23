@@ -7,6 +7,7 @@ import Nora from '@primeng/themes/nora';
 import { Preset } from '@primeuix/themes/types';
 import { LocalStorageService } from './local-storage.service';
 import { Theme } from '../enums/Theme';
+import { IThemeOptions } from '../interfaces/IThemeOptions';
 
 @Injectable({
   providedIn: 'root',
@@ -22,14 +23,14 @@ export class ThemeService {
     })
   );
   private isDarkSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getInitDarkMode());
-  isDark$: Observable<boolean> = this.isDarkSubject.asObservable().pipe(
+  isDarkMode$: Observable<boolean> = this.isDarkSubject.asObservable().pipe(
     tap((isDarkMode: boolean) => {
       const element: HTMLHtmlElement = document.querySelector('html')!;
       isDarkMode ? element.classList.add('p-dark') : element.classList.remove('p-dark');
     })
   );
 
-  themeOptions: { label: string; value: Theme }[] = [
+  themeOptions: IThemeOptions[] = [
     { label: 'Aura', value: Theme.AURA },
     { label: 'Nora', value: Theme.NORA },
     { label: 'Lara', value: Theme.LARA },
@@ -45,11 +46,9 @@ export class ThemeService {
     this.applyTheme(newTheme);
   }
 
-  selectColorMode(): void {
-    const currentValue: boolean = this.isDarkSubject.getValue();
-    const newValue: boolean = !currentValue;
-    this.localStorageService.setItem('darkMode', newValue);
-    this.isDarkSubject.next(newValue);
+  selectColorMode(isDarkMode: boolean): void {
+    this.localStorageService.setItem('darkMode', isDarkMode);
+    this.isDarkSubject.next(isDarkMode);
   }
 
   private getInitTheme(): Theme {
@@ -75,10 +74,6 @@ export class ThemeService {
         break;
     }
     usePreset(selectedPreset);
-    const element: HTMLHtmlElement = document.querySelector('html')!;
-    if(element) {
-      element.setAttribute('theme', theme.toLowerCase());
-    }
   }
 
 }

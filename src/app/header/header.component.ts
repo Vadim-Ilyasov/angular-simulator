@@ -10,9 +10,9 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { ISearchTours } from '../../interfaces/ISearchTours';
 import { ITransition } from '../../interfaces/ITransition';
-import { ColorMode } from '../../enums/ColorMode';
 import { Theme } from '../../enums/Theme';
 import { ThemeService } from '../theme.service';
+import { IThemeOptions } from '../../interfaces/IThemeOptions';
 
 @Component({
   selector: 'app-header',
@@ -35,15 +35,14 @@ export class HeaderComponent {
 
   themeService: ThemeService = inject(ThemeService);
 
-  currentMode!: ColorMode;
-  currentTheme!: Theme;
   logoName: string = 'румтибет';
   currentDate: Date = new Date();
   count: number = 0;
   toggle: boolean = true;
   faMountain: IconDefinition = faMountain;
-  themeOptions: { label: string; value: Theme }[] = this.themeService.themeOptions;
-  isDark$: Observable<boolean> = this.themeService.isDark$;
+  themeOptions: IThemeOptions[] = this.themeService.themeOptions;
+  isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
+  theme$: Observable<Theme> = this.themeService.theme$;
 
   searchTours: ISearchTours = {
     location: '',
@@ -79,8 +78,8 @@ export class HeaderComponent {
     localStorage.setItem(SUM_KEY, visitNumber.toString());
   }
 
-  toggleDarkMode(): void {
-    this.themeService.selectColorMode();
+  toggleDarkMode(currentMode: boolean): void {
+    this.themeService.selectColorMode(currentMode);
   }
 
   onSelectTheme(selectedTheme: Theme): void {

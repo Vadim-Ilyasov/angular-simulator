@@ -21,7 +21,11 @@
 
       .logo-image {
         width: 137px;
-        height: 48px;
+        height: 66px;
+
+        fa-icon {
+          font-size: 4rem;
+        }
       }
 
       .logo-text {
@@ -101,5 +105,14 @@
       width: 157px;
       height: 44px;
     }
+  }
+
+.theme-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    align-self: flex-end; 
+    margin-right: 24px;
+    margin-top: -25px;
   }
 }

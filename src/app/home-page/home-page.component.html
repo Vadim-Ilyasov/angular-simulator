@@ -12,18 +12,21 @@
       <form class="search-block">
         <div class="select-section">
           <div class="location-tour">
-            <select
-              name="location"
-              [(ngModel)]="searchTours.location"
-              class="selection-field down-arrow-icon"
-              id="location-tour"
-              required
-            >
-              <option value="" disabled selected hidden>Локация для тура</option>
-              <option value="1">Эльбрус</option>
-              <option value="2">Алтай</option>
-              <option value="3">Шерегеш</option>
-            </select>
+            <div class="input-wrapper">
+              <select
+                name="location"
+                [(ngModel)]="searchTours.location"
+                class="selection-field down-arrow-icon"
+                id="location-tour"
+                required
+              >
+                <option value="" disabled selected hidden>Локация для тура</option>
+                <option value="1">Эльбрус</option>
+                <option value="2">Алтай</option>
+                <option value="3">Шерегеш</option>
+              </select>
+              <fa-icon [icon]="faChevronDown" class="fa-select-icon"></fa-icon>
+            </div>
           </div>
           <div class="hint-text fs-14">
             <label for="my-tour">выберите из списка</label>
@@ -31,15 +34,18 @@
         </div>
         <div class="select-section">
           <div class="location-tour">
-            <input
-              name="date"
-              [(ngModel)]="searchTours.date"
-              type="date"
-              class="selection-field selection-date date-icon"
-              id="date-tour"
-              data-placeholder="Дата похода"
-              required
-            />
+            <div class="input-wrapper">
+              <input
+                name="date"
+                [(ngModel)]="searchTours.date"
+                type="date"
+                class="selection-field selection-date"
+                id="date-tour"
+                data-placeholder="Дата похода"
+                required
+              />
+              <fa-icon [icon]="faCalendar" class="fa-date-icon"></fa-icon>
+            </div>
           </div>
           <div class="hint-text-container fs-14">
             <label class="hint-text" for="my-tour">укажите дату</label>
@@ -47,18 +53,21 @@
         </div>
         <div class="select-section">
           <div class="location-tour">
-            <select
-              name="tourist"
-              [(ngModel)]="searchTours.tourist"
-              class="selection-field down-arrow-icon"
-              id="partaker"
-              required
-            >
-              <option value="" disabled selected hidden>Участники</option>
-              <option value="1">1 участник</option>
-              <option value="2">2 участника</option>
-              <option value="3">3-5 участников</option>
-            </select>
+            <div class="input-wrapper">
+              <select
+                name="tourist"
+                [(ngModel)]="searchTours.tourist"
+                class="selection-field down-arrow-icon"
+                id="partaker"
+                required
+              >
+                <option value="" disabled selected hidden>Участники</option>
+                <option value="1">1 участник</option>
+                <option value="2">2 участника</option>
+                <option value="3">3-5 участников</option>
+              </select>
+              <fa-icon [icon]="faChevronDown" class="fa-select-icon"></fa-icon>
+            </div>
           </div>
           <div class="hint-text fs-14">
             <label for="my-tour">выберите из списка</label>
@@ -116,8 +125,8 @@
     <div class="advantages-list">
       @for (advantage of advantages; track advantage.id) {
         <div class="advantage-container">
-          <div class="icon-container" [style.background-color]="advantage.iconColor">
-            <img class="advantage-icon" [src]="'/images/' + advantage.image + '.svg'" />
+          <div class="advantage-icon-container" [style.background-color]="advantage.iconColor">
+            <fa-icon [icon]="advantage.icon" size="xl" class="advantage-fa-icon"></fa-icon>
           </div>
           <div class="advantage-text">
             <h3 class="fs-18 bold">{{ advantage.title }}</h3>
@@ -153,7 +162,7 @@
           <img [src]="'/images/' + destination.image + '.png'" />
           <div class="rating-container">
             <div class="rating-icon">
-              <img src="/images/rating-star-icon.svg" />
+              <fa-icon [icon]="faStar" class="fa-star"></fa-icon>
             </div>
             <div class="rating-value">
               <p class="rating-number fs-14 bold">{{ destination.rating }}</p>
@@ -173,7 +182,7 @@
               </div>
             </div>
             <div class="price-container">
-              <p class="price-text fs-20 bold white-color">{{ destination.price }} $</p>
+              <p class="price-text fs-20 bold white-color">{{ destination.price }} <fa-icon [icon]="faDollar"></fa-icon></p>
             </div>
           </div>
         </div>

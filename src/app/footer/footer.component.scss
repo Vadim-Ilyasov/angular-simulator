@@ -5,7 +5,7 @@
     .newsletters {
       height: 196px;
       border-radius: 6px;
-      background-color: var(--white-color);
+      background-color: var(--p-footer-news-background);
       box-shadow: 0px 0px 15px 0px #18121e1f;
       box-sizing: border-box;
       padding: 40px 100px;
@@ -59,7 +59,7 @@
 
   .travel-service-info {
     height: 521px;
-    background-color: var(--deep-forest-color);
+    background-color: var(--p-footer-info-background);
     position: relative;
     box-sizing: border-box;
     padding: 178px 0 80px 0;
@@ -89,7 +89,23 @@
 
         .icon-container {
           display: flex;
-          gap: 16px;
+          gap: 8px;
+
+          .telegram-icon {
+            color: #f3f5f4;
+          }
+
+          .vk-icon {
+            color: #f3f5f4;
+          }
+
+          .pinterest-icon {
+            color: #f3f5f4;
+          }
+
+          .skype-icon {
+            color: #f3f5f4;
+          }
         }
       }
       .travel-service {
@@ -107,6 +123,10 @@
           .service-viewing {
             display: flex;
             gap: 8px;
+
+            .fa-chevron-icon {
+              color: #f3f5f4;
+            }
           }
         }
       }
@@ -123,6 +143,10 @@
           .detail-info {
             display: flex;
             gap: 8px;
+
+            .fa-chevron-icon {
+              color: #f3f5f4;
+            }
           }
         }
       }

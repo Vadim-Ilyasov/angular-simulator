@@ -2,7 +2,7 @@
   <div class="container header-container">
     <div class="logotype">
       <div class="logo-image">
-        <img src="/images/mountain-logo.svg" />
+        <fa-icon [icon]="faMountain"></fa-icon>
       </div>
       <div>
         <p class="logo-text">{{ logoName }}</p>
@@ -51,5 +51,16 @@
     <button class="toggle-btn minor-button" id="toggle-btn" (click)="toggle = !toggle">
       {{ toggle ? 'Показать счетчик' : 'Показать таймер' }}
     </button>
+  </div>
+  <div class="theme-controls">
+    <p-toggleswitch [ngModel]="isDarkMode$ | async" (onChange)="toggleDarkMode($event.checked)" />
+    <p-selectbutton
+      [options]="themeOptions"
+      [ngModel]="theme$ |async"
+      (ngModelChange)="onSelectTheme($event)"
+      optionLabel="label"
+      optionValue="value"
+      [allowEmpty]="false"
+    />
   </div>
 </header>

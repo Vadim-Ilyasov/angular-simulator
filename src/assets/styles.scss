@@ -1,17 +1,75 @@
 @use './fonts';
 @use './normalize';
 @use './button';
-@use './message';
 
 * {
   font-family: 'Nunito Sans', sans-serif;
   margin: 0;
   padding: 0;
+  color: inherit;
+}
+
+html,
+body {
+  background-color: var(--p-content-background);
+  color: var(--p-content-text-color);
+  height: 100%;
 }
 
 .container {
   width: 1180px;
   display: block;
+}
+
+:root {
+  --white-color: #fff;
+  --popular-tour-background: #fff;
+  --travel-blog-background: #f3f5f4;
+  --footer-news-background: #fff;
+  --footer-info-background: #1a3e3e;
+  --pre-title-text-color: #f2be22;
+  --deep-forest-color: #1a3e3e;
+  --p-popular-tour-background: var(--popular-tour-background);
+  --p-content-text-color: var(--p-text-color);
+  --p-travel-blog-background: var(--travel-blog-background);
+  --p-footer-news-background: var(--footer-news-background);
+  --p-footer-info-background: var(--footer-info-background);
+  --p-input-background: rgba(255, 255, 255, 0.2);
+  --p-rating-background: rgba(253, 253, 253, 0.4);
+}
+
+:root[theme='aura'] {
+  --deep-forest-color: #1a3e3e;
+}
+
+:root[theme='lara'] {
+  --deep-forest-color: #1a2a3e;
+}
+
+:root[theme='nora'] {
+  --deep-forest-color: #132e27;
+}
+
+:root.p-dark {
+  --p-popular-tour-background: var(--p-surface-900);
+  --p-content-text-color: var(--p-surface-0);
+  --p-travel-blog-background: var(--p-surface-800);
+  --p-footer-news-background: var(--p-rose-800);
+  --p-footer-info-background: var(--p-amber-500);
+  --p-input-background: rgba(0, 0, 0, 0.35);
+  --p-rating-background: rgba(0, 0, 0, 0.5);
+}
+
+:root.p-dark[theme='aura'] {
+  --deep-forest-color: #2a5c5c;
+}
+
+:root.p-dark[theme='lara'] {
+  --deep-forest-color: #243b55;
+}
+
+:root.p-dark[theme='nora'] {
+  --deep-forest-color: #1f4037;
 }
 
 .center-text-position {
@@ -24,7 +82,7 @@
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0%;
-  color: #f2be22;
+  color: var(--pre-title-text-color);
 }
 
 .title-text {
@@ -35,23 +93,12 @@
   letter-spacing: 0%;
 }
 
-:root {
-  --primary-color: #000;
-  --white-color: #fff;
-  --secondary-color: #f2be22;
-  --deep-forest-color: #1A3E3E;
-  --card-primary-color: #1D3939;
-  --card-secondary-color: #667C7C;
-  --camel-color: #D4A373;
-
-}
-
 .forest-color {
   color: var(--deep-forest-color);
 }
 
 .yellow-color {
-  color: var(--secondary-color);
+  color: var(--pre-title-text-color);
 }
 
 .white-color {

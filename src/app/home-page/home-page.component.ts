@@ -1,5 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { Component, inject } from '@angular/core';
+import { faCalendar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faStar, faDollar } from '@fortawesome/free-solid-svg-icons'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faUserCheck, faShieldHalved, faTags } from '@fortawesome/free-solid-svg-icons';
 import { MessageService } from '../message.service';
 import { IAdvantage } from '../../interfaces/IAdvantage';
 import { IDestination } from '../../interfaces/IDestination';
@@ -7,10 +11,11 @@ import { ITravelCard } from '../../interfaces/ITravelCard';
 import { ISearchTours } from '../../interfaces/ISearchTours';
 
 
+
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, FontAwesomeModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -19,6 +24,10 @@ export class HomePageComponent {
   mgService: MessageService = inject(MessageService);
 
   text: string = '';
+  faCalendar: IconDefinition = faCalendar;
+  faChevronDown: IconDefinition = faChevronDown;
+  faStar: IconDefinition = faStar;
+  faDollar: IconDefinition = faDollar;
 
   searchTours: ISearchTours = {
     location: '',
@@ -29,7 +38,7 @@ export class HomePageComponent {
   advantages: IAdvantage[] = [
     {
       id: 1,
-      image: 'guide-icon',
+      icon: faUserCheck,
       iconColor: '#E5EEEB',
       title: 'Опытный гид',
       description:
@@ -37,7 +46,7 @@ export class HomePageComponent {
     },
     {
       id: 2,
-      image: 'safety-icon',
+      icon: faShieldHalved,
       iconColor: '#E3E6EE',
       title: 'Безопасный поход',
       description:
@@ -45,7 +54,7 @@ export class HomePageComponent {
     },
     {
       id: 3,
-      image: 'price-icon',
+      icon: faTags,
       iconColor: '#F3F1E1',
       title: 'Лояльные цены',
       description:

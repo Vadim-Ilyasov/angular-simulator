@@ -8,7 +8,7 @@
   background-color: var(--white-color);
   z-index: 20;
 
-  .spinner {
+  .fa-rotate {
     animation: spin 1s linear infinite;
     transform-origin: 50% 50%;
   }

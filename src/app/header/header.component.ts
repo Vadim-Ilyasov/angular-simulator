@@ -1,27 +1,48 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { DatePipe, AsyncPipe } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faMountain, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ToggleSwitch } from 'primeng/toggleswitch';
 import { ISearchTours } from '../../interfaces/ISearchTours';
-import { LocalStorageService } from '../local-storage.service';
 import { ITransition } from '../../interfaces/ITransition';
-
+import { Theme } from '../../enums/Theme';
+import { ThemeService } from '../theme.service';
+import { IThemeOptions } from '../../interfaces/IThemeOptions';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, DatePipe, RouterLink, RouterLinkActive],
+  imports: [
+    FormsModule,
+    DatePipe,
+    AsyncPipe,
+    RouterLink,
+    RouterLinkActive,
+    FontAwesomeModule,
+    ButtonModule,
+    ToggleSwitch,
+    SelectButtonModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
 
-  private storage: LocalStorageService = inject(LocalStorageService);
+  themeService: ThemeService = inject(ThemeService);
 
   logoName: string = 'румтибет';
   currentDate: Date = new Date();
   count: number = 0;
   toggle: boolean = true;
+  faMountain: IconDefinition = faMountain;
+  themeOptions: IThemeOptions[] = this.themeService.themeOptions;
+  isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
+  theme$: Observable<Theme> = this.themeService.theme$;
 
   searchTours: ISearchTours = {
     location: '',
@@ -56,5 +77,15 @@ export class HeaderComponent {
     visitNumber++;
     localStorage.setItem(SUM_KEY, visitNumber.toString());
   }
-  
+
+  toggleDarkMode(currentMode: boolean): void {
+    this.themeService.selectColorMode(currentMode);
+  }
+
+  onSelectTheme(selectedTheme: Theme): void {
+    if (selectedTheme) {
+      this.themeService.setTheme(selectedTheme);
+    }
+  }
+
 }

@@ -8,11 +8,12 @@ import { UserCreateComponent } from '../user-create/user-create.component';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
 import { LocalStorageService } from '../local-storage.service';
 import { LoaderService } from '../loader.service';
+import { PluralPipe } from '../plural.pipe';
 
 @Component({
   selector: 'app-users-page',
   standalone: true,
-  imports: [AsyncPipe, UserCardComponent, UserCreateComponent, UsersFilterComponent],
+  imports: [AsyncPipe, UserCardComponent, UserCreateComponent, UsersFilterComponent, PluralPipe],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })

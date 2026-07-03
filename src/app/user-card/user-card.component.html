@@ -1,6 +1,6 @@
-<div class="user-card">
+<div class="user-card" animatedGradient>
   <div class="user-title">
-    <h2 class="card-primary-color">{{ user.name }}</h2>
+    <h2 class="card-primary-color">{{ user.name | uppercase}}</h2>
     <p class="bold camel-color">{{ user.username }}</p>
   </div>
   <div class="part-info">
@@ -12,7 +12,7 @@
   </div>
   <div class="detail-info">
     <span class="card-secondary-color">Телефон:</span>
-    <span class="card-primary-color">{{ user.phone }}</span>
+    <span class="card-primary-color">{{ user.phone | phoneFormat: phoneMode}}</span>
   </div>
   <div class="detail-info">
     <span class="card-secondary-color">Веб-сайт:</span>
@@ -65,6 +65,7 @@
     class="delete-users-btn primary-button"
     id="delete-users-btn"
     (click)="deleteUserCard()"
+    addBold
   >
     Удалить пользователя
   </button>

@@ -7,6 +7,9 @@
   border-top-width: 4px;
   background-color: var(--white-color);
   border-top: 4px solid var(--camel-color);
+  border-left: 4px solid transparent;
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid transparent;
   box-sizing: border-box;
   padding: 35px 30px 0 30px;
   display: flex;

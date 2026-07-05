@@ -1,6 +1,6 @@
-import { Theme } from "../enums/Theme";
+import { Theme } from '../enums/Theme';
 
 export interface IThemeOptions {
-    label: string;
-    value: Theme;
+  label: string;
+  value: Theme;
 }

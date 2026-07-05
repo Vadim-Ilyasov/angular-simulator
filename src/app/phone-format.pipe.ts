@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { PhoneFormat } from '../enums/PhoneFormat';
 
 @Pipe({
   name: 'phoneFormat',
@@ -6,7 +7,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PhoneFormatPipe implements PipeTransform {
 
   transform(value: number | null, format: string): string {
-    if(!value) return ''; 
+    if (!value) {
+      return '';
+    }
     let phoneNumberToString: string = value.toString();
     phoneNumberToString = phoneNumberToString.replace(/[^\d+]/g, '');
     const numberWithPlus: string = '+' + phoneNumberToString;
@@ -16,19 +19,19 @@ export class PhoneFormatPipe implements PipeTransform {
     const part1: string = mainNumber.slice(3, 6);
     const part2: string = mainNumber.slice(6, 8);
     const part3: string = mainNumber.slice(8, 10);
-    if(format === 'compact') {
+    if (format === PhoneFormat.COMPACT) {
       return numberWithPlus;
     }
-    if(format === 'international') {
-      return `${countryCode} ${operator} ${part1} ${part2} ${part3}`
+    if (format === PhoneFormat.INTERNATIONAL) {
+      return `${countryCode} ${operator} ${part1} ${part2} ${part3}`;
     }
-    if(format === 'national') {
-      return `${operator} ${part1} ${part2} ${part3}`
+    if (format === PhoneFormat.NATIONAL) {
+      return `${operator} ${part1} ${part2} ${part3}`;
     }
-    if(format === 'masked') {
-      return `${countryCode} ${operator} *** ** ${part3}`
+    if (format === PhoneFormat.MASKED) {
+      return `${countryCode} ${operator} *** ** ${part3}`;
     }
     return numberWithPlus;
   }
-
+  
 }

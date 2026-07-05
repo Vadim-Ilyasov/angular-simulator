@@ -6,16 +6,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PluralPipe implements PipeTransform {
 
   transform(value: number | undefined, items: string[]): string {
-    if (value === undefined) return '';
+    if (value === undefined) { 
+      return '';
+    }
     let index = 2;
-    if (value % 100 >= 11 && value % 100 <= 14) {
+    const twoDigitsModulo = 100;
+    const lastDigit = value % 10;
+    if (value % twoDigitsModulo >= 11 && value % twoDigitsModulo <= 14) {
       index = 2;
     } else {
-      const anotherValue = value % 10;
-      if (anotherValue >= 2 && anotherValue <= 4) {
+      if (lastDigit >= 2 && lastDigit <= 4) {
         index = 1;
       }
-      if (anotherValue === 1) {
+      if (lastDigit === 1) {
         index = 0;
       }
     }

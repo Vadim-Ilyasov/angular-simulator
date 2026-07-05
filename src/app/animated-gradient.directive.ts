@@ -29,7 +29,10 @@ export class AnimatedGradientDirective {
       const colors: string[] = this.gradientConfiguration.colors ?? ['#ff007f', '#7f00ff'];
       const thickness: string = this.gradientConfiguration.thickness ?? '2px';
       this.borderStyle = `${thickness} solid transparent`;
-      this.backgroundImageStyle = `linear-gradient(#fff, #fff), linear-gradient(to right, ${colors.join(', ')})`;
+      this.backgroundImageStyle = `
+        linear-gradient(#fff, #fff), 
+        linear-gradient(to right, ${colors.join(', ')})
+        `.trim();
       this.backgroundOriginStyle = 'border-box';
       this.backgroundClipStyle = 'padding-box, border-box';
     }, delayTime);
@@ -37,7 +40,7 @@ export class AnimatedGradientDirective {
 
   @HostListener('mouseleave')
   onLeave() {
-    if(this.timerId) {
+    if (this.timerId) {
       clearTimeout(this.timerId);
     }
     this.borderStyle = null;

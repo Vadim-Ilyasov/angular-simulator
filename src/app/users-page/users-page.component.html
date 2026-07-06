@@ -1,6 +1,7 @@
 <section class="users-list">
   <app-user-create (OnCreateUser)="addUser($event)"></app-user-create>
   <div class="container users-list-container">
+    <h2>{{ (filteredUsers$ | async)?.length | plural:['пользователь', 'пользователя', 'пользователей'] }}</h2>
     <h1>Список Пользователей</h1>
     <app-users-filter (OnFilterName)="selectUserByName($event)"></app-users-filter>
     <div class="users-container">

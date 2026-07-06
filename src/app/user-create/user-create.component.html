@@ -4,67 +4,67 @@
     <h4 class="fs-20">Basic info</h4>
     <div class="user-details-field">
       <label>Name</label>
-      <input id="name" type="text" formControlName="name" />
+      <input id="name" type="text" formControlName="name" animatedGradient />
     </div>
     <div class="user-details-field">
       <label>Username</label>
-      <input id="username" type="text" formControlName="username" />
+      <input id="username" type="text" formControlName="username" animatedGradient />
     </div>
     <div class="user-details-field">
       <label>Email</label>
-      <input id="email" type="email" formControlName="email" />
+      <input id="email" type="email" formControlName="email" animatedGradient />
     </div>
     <ng-container formGroupName="address">
       <h4 class="card-primary-color">Address</h4>
       <div class="user-details-field">
         <label>City</label>
-        <input id="city" type="text" formControlName="city" />
+        <input id="city" type="text" formControlName="city" animatedGradient />
       </div>
       <div class="user-details-field">
         <label>Street</label>
-        <input id="street" type="text" formControlName="street" />
+        <input id="street" type="text" formControlName="street" animatedGradient />
       </div>
       <div class="user-details-field">
         <label>Suite</label>
-        <input id="suite" type="text" formControlName="suite" />
+        <input id="suite" type="text" formControlName="suite" animatedGradient />
       </div>
       <div class="user-details-field">
         <label>Zipcode</label>
-        <input id="zipcode" type="number" formControlName="zipcode" />
+        <input id="zipcode" type="text" formControlName="zipcode" animatedGradient />
       </div>
       <div formGroupName="geo" class="user-details-field">
         <label>Geo</label>
         <div class="geo-details">
           <label>Lat</label>
-          <input id="lat" class="geo-input" type="number" formControlName="lat" />
+          <input id="lat" class="geo-input" type="text" formControlName="lat" animatedGradient />
         </div>
         <div class="geo-details">
           <label>Lng</label>
-          <input id="lng" class="geo-input" type="number" formControlName="lng" />
+          <input id="lng" class="geo-input" type="text" formControlName="lng" animatedGradient />
         </div>
       </div>
     </ng-container>
     <div class="user-details-field">
       <label>Phone</label>
-      <input id="phone" type="number" formControlName="phone" />
+      <input id="phone" type="text" formControlName="phone" animatedGradient />
     </div>
     <div class="user-details-field">
       <label>Website</label>
-      <input id="website" type="text" formControlName="website" />
+      <input id="website" type="text" formControlName="website" animatedGradient />
     </div>
     <ng-container formGroupName="company">
       <h4>Company</h4>
       <div class="user-details-field">
         <label>Name</label>
-        <input id="name" type="text" formControlName="name" />
+        <input id="name" type="text" formControlName="name" animatedGradient />
       </div>
       <div class="user-details-field">
         <label>CatchPhrase</label>
-        <input id="catchPhrase" type="text" formControlName="catchPhrase" />
+        <input id="catchPhrase" type="text" formControlName="catchPhrase" animatedGradient />
       </div>
       <div class="user-details-field">
         <label>Bs</label>
-        <input id="bs" type="text" formControlName="bs" />
+        <input id="bs" type="text" formControlName="bs" animatedGradient />
       </div>
     </ng-container>
   </form>
@@ -74,6 +74,7 @@
     class="create-user-btn primary-button"
     (click)="onSubmit()"
     [disabled]="userForm.invalid"
+    addBold
   >
     Create user
   </button>

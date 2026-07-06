@@ -2,6 +2,8 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder,  ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from "@angular/forms";
 import { IUser } from '../../interfaces/IUser';
+import { AddBoldDirective } from '../add-bold.directive';
+import { AnimatedGradientDirective } from '../animated-gradient.directive';
 
 export type ModelFormGroup<T> = FormGroup<{
   [K in keyof T]: T[K] extends object ? ModelFormGroup<T[K]> : FormControl<T[K]> ;
@@ -10,7 +12,7 @@ export type ModelFormGroup<T> = FormGroup<{
 @Component({ 
   selector: 'app-user-create',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AddBoldDirective, AnimatedGradientDirective],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss',
 })
@@ -29,20 +31,20 @@ export class UserCreateComponent {
       city: ['', [Validators.required, Validators.maxLength(50)]],
       street: ['', [Validators.required, Validators.maxLength(100)]],
       suite: ['', [Validators.maxLength(50)]],
-      zipcode: [0, [Validators.required, Validators.min(5), Validators.max(10)]],
+      zipcode: [0, [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
       geo: this.fb.nonNullable.group({
         lat: [0, [Validators.required]],
         lng: [0, [Validators.required]],
       }),
     }),
-    phone: [0, [Validators.required, Validators.min(10), Validators.max(25)]],
+    phone: [0, [Validators.required, Validators.minLength(10), Validators.maxLength(25)]],
     website: ['', [Validators.maxLength(100)]],
     company: this.fb.nonNullable.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       catchPhrase: ['', [Validators.maxLength(200)]],
       bs: ['', [Validators.maxLength(100)]],
     }),
-  }) as ModelFormGroup<IUser>;
+  }) as ModelFormGroup<IUser>; 
 
   onSubmit(): void {
     const newUser: IUser = {...this.userForm.getRawValue(), id: Date.now()};

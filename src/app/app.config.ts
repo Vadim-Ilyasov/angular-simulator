@@ -11,13 +11,10 @@ import Nora from '@primeng/themes/nora';
 import { Preset } from '@primeuix/themes/types';
 import { routes } from './app.routes';
 import { Theme } from '../enums/Theme';
-import { IThemeState } from '../interfaces/IThemeState';
 
 
 function getPreset(): Preset {
-  const savedState: string | null = localStorage.getItem('theme');
-  const parsedState: IThemeState = JSON.parse(savedState || '{}');
-  const savedTheme: Theme = parsedState.theme;
+  const savedTheme: string | null = localStorage.getItem('theme');
   switch (savedTheme) {
     case Theme.LARA:
       return Lara;

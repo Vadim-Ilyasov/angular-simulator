@@ -10,8 +10,8 @@ export class PluralPipe implements PipeTransform {
       return '';
     }
     let index = 2;
-    const twoDigitsModulo = 100;
-    const lastDigit = value % 10;
+    const twoDigitsModulo: number = 100;
+    const lastDigit: number = value % 10;
     if (value % twoDigitsModulo >= 11 && value % twoDigitsModulo <= 14) {
       index = 2;
     } else {
@@ -22,7 +22,7 @@ export class PluralPipe implements PipeTransform {
         index = 0;
       }
     }
-    return `${value} ${items[index]}`;
+    return `${ value } ${ items[index] }`;
   }
 
 }

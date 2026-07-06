@@ -28,10 +28,10 @@ export class AnimatedGradientDirective {
     this.timerId = setTimeout(() => {
       const colors: string[] = this.gradientConfiguration.colors ?? ['#ff007f', '#7f00ff'];
       const thickness: string = this.gradientConfiguration.thickness ?? '2px';
-      this.borderStyle = `${thickness} solid transparent`;
+      this.borderStyle = `${ thickness } solid transparent`;
       this.backgroundImageStyle = `
         linear-gradient(#fff, #fff), 
-        linear-gradient(to right, ${colors.join(', ')})
+        linear-gradient(to right, ${ colors.join(', ') })
         `.trim();
       this.backgroundOriginStyle = 'border-box';
       this.backgroundClipStyle = 'padding-box, border-box';

@@ -7,7 +7,7 @@ import Nora from '@primeng/themes/nora';
 import { Preset } from '@primeuix/themes/types';
 import { LocalStorageService } from './local-storage.service';
 import { Theme } from '../enums/Theme';
-import { IThemeOptions } from '../interfaces/IThemeOptions';
+import { IThemeOption } from '../interfaces/IThemeOption';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class ThemeService {
     })
   );
 
-  themeOptions: IThemeOptions[] = [
+  themeOptions: IThemeOption[] = [
     { label: 'Aura', value: Theme.AURA },
     { label: 'Nora', value: Theme.NORA },
     { label: 'Lara', value: Theme.LARA },

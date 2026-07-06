@@ -12,7 +12,7 @@ import { ISearchTours } from '../../interfaces/ISearchTours';
 import { ITransition } from '../../interfaces/ITransition';
 import { Theme } from '../../enums/Theme';
 import { ThemeService } from '../theme.service';
-import { IThemeOptions } from '../../interfaces/IThemeOptions';
+import { IThemeOption } from '../../interfaces/IThemeOption';
 
 @Component({
   selector: 'app-header',
@@ -40,7 +40,7 @@ export class HeaderComponent {
   count: number = 0;
   toggle: boolean = true;
   faMountain: IconDefinition = faMountain;
-  themeOptions: IThemeOptions[] = this.themeService.themeOptions;
+  themeOptions: IThemeOption[] = this.themeService.themeOptions;
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   theme$: Observable<Theme> = this.themeService.theme$;
 

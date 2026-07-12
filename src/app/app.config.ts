@@ -12,7 +12,7 @@ import { Preset } from '@primeuix/themes/types';
 import { routes } from './app.routes';
 import { Theme } from '../enums/Theme';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { appHttpInterceptor } from './app-http.interceptor';
+import { httpLoggingInterceptor } from './http-logging.interceptor';
 import { errorInterceptor } from './error.interceptor';
 
 
@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    provideHttpClient(withInterceptors([appHttpInterceptor, errorInterceptor])),
+    provideHttpClient(withInterceptors([httpLoggingInterceptor, errorInterceptor])),
     providePrimeNG({ 
       theme: { 
         preset: getPreset(), 

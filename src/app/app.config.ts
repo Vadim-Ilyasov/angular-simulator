@@ -11,6 +11,9 @@ import Nora from '@primeng/themes/nora';
 import { Preset } from '@primeuix/themes/types';
 import { routes } from './app.routes';
 import { Theme } from '../enums/Theme';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpLoggingInterceptor } from './http-logging.interceptor';
+import { errorInterceptor } from './error.interceptor';
 
 
 function getPreset(): Preset {
@@ -32,6 +35,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
+    provideHttpClient(withInterceptors([httpLoggingInterceptor, errorInterceptor])),
     providePrimeNG({ 
       theme: { 
         preset: getPreset(), 

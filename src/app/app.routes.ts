@@ -12,6 +12,11 @@ export const routes: Routes = [
       import('./users-page/users-page.component').then((m) => m.UsersPageComponent),
   },
   {
+    path: 'posts',
+    loadChildren: () =>
+      import('./features/posts/posts.routes').then((m) => m.postsRoutes),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./not-found-page/not-found-page.component').then((m) => m.NotFoundPageComponent),

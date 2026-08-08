@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { filter, Observable, tap, BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
+import { Observable, tap, BehaviorSubject, combineLatest, map } from 'rxjs';
 import { UserService } from '../user.service';
 import { IUser } from '../../interfaces/IUser';
 import { UserCardComponent } from '../user-card/user-card.component';

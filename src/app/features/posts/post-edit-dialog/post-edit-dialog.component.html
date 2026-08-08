@@ -1,0 +1,29 @@
+<p-dialog 
+  header="Редактирование поста" 
+  [modal]="true" 
+  [visible]="visible" 
+  (visibleChange)="closeDialog()"
+  [style]="{ width: '30rem' }">
+  
+  <form [formGroup]="editForm" (ngSubmit)="onSave()" class="dialog-form">
+    <div class="field">
+      <label for="title">Название</label>
+      <input pInputText id="title" formControlName="title" />
+    </div>
+
+    <div class="field">
+      <label for="tags">Теги (через запятую)</label>
+      <input pInputText id="tags" formControlName="tags" placeholder="news, tech, angular" />
+    </div>
+
+    <div class="field">
+      <label for="views">Просмотры</label>
+      <p-inputNumber id="views" formControlName="views" [min]="0" />
+    </div>
+
+    <div class="actions">
+      <p-button label="Отмена" severity="secondary" (click)="closeDialog()" type="button" id="cancel-post-btn"/>
+      <p-button label="Сохранить" type="submit" [disabled]="editForm.invalid" id="save-post-btn"/>
+    </div>
+  </form>
+</p-dialog>

@@ -1,16 +1,19 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PostService } from '../post.service';
-import { BehaviorSubject, catchError, EMPTY, finalize, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, finalize, Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { TableModule, TablePageEvent } from 'primeng/table';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { MenuItem } from 'primeng/api';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IPost } from '../IPost';
 import { IPostResponse } from '../IPostResponse';
 import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.component';
 import { ButtonModule } from 'primeng/button';
+import { MessageService } from '../../../message.service';
 
 @Component({
   selector: 'app-posts',
@@ -24,6 +27,7 @@ import { ButtonModule } from 'primeng/button';
     ButtonModule,
     RouterLink,
   ],
+  providers: [DialogService],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
 })
@@ -32,6 +36,8 @@ export class PostsComponent implements OnInit {
   private postService: PostService = inject(PostService);
   private router: Router = inject(Router);
   private cd: ChangeDetectorRef = inject(ChangeDetectorRef);
+  private dialogService: DialogService = inject(DialogService);
+  messageService: MessageService = inject(MessageService);
   private isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
   posts$: Observable<IPostResponse | null> = this.postService.posts$;
@@ -48,6 +54,18 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.loadPostsPage();
     this.initContextMenu();
+    this.postService.posts$
+    .pipe(
+      takeUntilDestroyed(),
+      tap((data: IPostResponse | null) => {
+        if (data) {
+          this.posts = data.posts;
+          this.totalElements = data.total;
+          this.cd.markForCheck();
+        }
+      })
+    )
+  .subscribe();
   }
 
   initContextMenu(): void {
@@ -72,25 +90,28 @@ export class PostsComponent implements OnInit {
 
   loadPostsPage(): void {
     this.isLoadingSubject.next(true);
-    this.skeletonRows = Array.from({ length: this.pageSize }).map((_, i) => `Item #${i}`);
+    this.skeletonRows = Array.from({ length: this.pageSize }).map((_, i) => `Item #${ i }`);
     const skip: number = (this.currentPage - 1) * this.pageSize;
     this.postService
       .showPosts(this.pageSize, skip)
       .pipe(
-        tap((response) => {
+        tap((response: IPostResponse) => {
           this.posts = response.posts;
           this.totalElements = response.total;
         }),
-        catchError(() => EMPTY),
+        catchError(() => {
+          this.messageService.showError('Не удалось загрузить пост');
+          return EMPTY;
+        }),
         finalize(() => {
           this.isLoadingSubject.next(false);
           this.cd.markForCheck();
         }),
       )
-    .subscribe();
+      .subscribe();
   }
 
-  onPageChange(event: any): void {
+  onPageChange(event: TablePageEvent): void {
     this.pageSize = event.rows;
     this.first = event.first;
     this.currentPage = event.first / event.rows + 1;
@@ -104,9 +125,28 @@ export class PostsComponent implements OnInit {
   }
 
   editPost(): void {
-    if (this.selectedPost) {
-      this.isEditDialogVisible = true;
-    }
+    if (!this.selectedPost) return;
+
+    const ref: DynamicDialogRef<PostEditDialogComponent> | null = this.dialogService.open(
+      PostEditDialogComponent,
+      {
+        header: 'Редактировать пост',
+        width: '500px',
+        contentStyle: { overflow: 'auto' },
+        baseZIndex: 10000,
+        data: this.selectedPost,
+      },
+    );
+
+    ref?.onClose
+      .pipe(
+        tap((updatedPost: IPost | undefined) => {
+          if (updatedPost) {
+            this.onSaveEditedPost(updatedPost);
+          }
+        }),
+      )
+    .subscribe();
   }
 
   deletePost(): void {
@@ -116,11 +156,11 @@ export class PostsComponent implements OnInit {
       .deletePostById(idToDelete)
       .pipe(
         tap(() => {
-          this.posts = this.posts.filter((post) => post.id !== idToDelete);
+          this.posts = this.posts.filter((post: IPost) => post.id !== idToDelete);
           this.totalElements--;
         }),
         catchError(() => {
-          this.isLoadingSubject.next(false);
+          this.messageService.showError('Нет поста с этим id');
           return EMPTY;
         }),
         finalize(() => {
@@ -135,12 +175,9 @@ export class PostsComponent implements OnInit {
     this.postService
       .updatePost(updatedPost)
       .pipe(
-        tap((resPost) => {
-          const index: number = this.posts.findIndex((p) => p.id === resPost.id);
-          if (index !== -1) {
-            this.posts[index] = { ...this.posts[index], ...resPost };
-            this.posts = [...this.posts];
-          }
+        catchError(() => {
+          this.messageService.showError('Не удалось обновить пост');
+          return EMPTY;
         }),
         finalize(() => {
           this.cd.markForCheck();

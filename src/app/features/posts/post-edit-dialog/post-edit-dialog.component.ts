@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
@@ -13,7 +13,6 @@ import { IPost } from '../IPost';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    DialogModule,
     ButtonModule,
     InputTextModule,
     InputNumberModule,
@@ -24,12 +23,9 @@ import { IPost } from '../IPost';
 export class PostEditDialogComponent {
 
   private fb: FormBuilder = inject(FormBuilder);
-
-  @Input() visible: boolean = false;
-  @Input() post: IPost | null = null;
-
-  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() save: EventEmitter<IPost> = new EventEmitter<IPost>();
+  private ref: DynamicDialogRef<IPost> = inject(DynamicDialogRef);
+  private config: DynamicDialogConfig<IPost> = inject(DynamicDialogConfig);
+  post: IPost | null = null;
 
   editForm: FormGroup = this.fb.group({
     title: [''],
@@ -37,8 +33,9 @@ export class PostEditDialogComponent {
     views: [0],
   });
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['post'] && this.post) {
+  ngOnInit(): void {
+    this.post = this.config.data ?? null;
+    if (this.post) {
       this.editForm.patchValue({
         title: this.post.title,
         tags: this.post.tags ? this.post.tags.join(', ') : '',
@@ -50,9 +47,8 @@ export class PostEditDialogComponent {
   onSave(): void {
     if (this.editForm.invalid || !this.post) return;
 
-    const formValue = this.editForm.value;
-    const updatedTags = formValue.tags
-      ? formValue.tags
+    const updatedTags: string[] = this.editForm.value.tags
+      ? this.editForm.value.tags
           .split(',')
           .map((tag: string) => tag.trim())
           .filter((tag: string) => tag.length > 0)
@@ -60,17 +56,16 @@ export class PostEditDialogComponent {
 
     const updatedPost: IPost = {
       ...this.post,
-      title: formValue.title,
+      title: this.editForm.value.title,
       tags: updatedTags,
-      views: formValue.views,
+      views: this.editForm.value.views,
     };
 
-    this.save.emit(updatedPost);
-    this.closeDialog();
+    this.ref.close(updatedPost);
   }
 
   closeDialog(): void {
-    this.visibleChange.emit(false);
+    this.ref.close();
   }
 
 }

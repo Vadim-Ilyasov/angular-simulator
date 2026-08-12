@@ -58,9 +58,8 @@ export class PostCreateComponent {
   }
 
   private preparePostData(): IPost {
-    const formValue = this.createForm.value;
-    const tagsArray: string[] = formValue.tags
-      ? formValue.tags
+    const tagsArray: string[] = this.createForm.value.tags
+      ? this.createForm.value.tags
           .split(',')
           .map((tag: string) => tag.trim())
           .filter(Boolean)
@@ -68,12 +67,9 @@ export class PostCreateComponent {
 
     return {
       id: 0,
-      title: formValue.title,
-      body: formValue.body,
-      userId: formValue.userId,
+      ...this.createForm.value,
       tags: tagsArray,
-      views: formValue.views,
-      reactions: { likes: '0', dislikes: '0' },
+      reactions: { likes: 0, dislikes: 0 },
     };
   }
 

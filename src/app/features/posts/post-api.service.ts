@@ -8,10 +8,12 @@ import { IPost } from './IPost';
   providedIn: 'root',
 })
 export class PostApiService {
+
   private http: HttpClient = inject(HttpClient);
+  private postsUrl = 'https://dummyjson.com/posts';
 
   getPosts(limit: number, skip: number): Observable<IPostResponse> {
-    return this.http.get<IPostResponse>('https://dummyjson.com/posts', {
+    return this.http.get<IPostResponse>(this.postsUrl, {
       params: {
         limit: limit.toString(),
         skip: skip.toString(),
@@ -21,15 +23,15 @@ export class PostApiService {
   }
 
   deletePost(id: number | string): Observable<IPost> {
-    return this.http.delete<IPost>(`https://dummyjson.com/posts/${id}`);
+    return this.http.delete<IPost>(`${ this.postsUrl }/${ id }`);
   }
 
   getPostById(id: number | string): Observable<IPost> {
-    return this.http.get<IPost>(`https://dummyjson.com/posts/${id}`);
+    return this.http.get<IPost>(`${ this.postsUrl }/${ id }`);
   }
 
   updatePost(post: IPost): Observable<IPost> {
-    return this.http.put<IPost>(`https://dummyjson.com/posts/${post.id}`, {
+    return this.http.put<IPost>(`${ this.postsUrl }/${ post.id }`, {
       title: post.title,
       tags: post.tags,
       views: post.views
@@ -37,7 +39,7 @@ export class PostApiService {
   }
 
   createPost(post: IPost): Observable<IPost> {
-    return this.http.post<IPost>('https://dummyjson.com/posts/add', post)
+    return this.http.post<IPost>(`${ this.postsUrl }/add`, post)
   }
 
 }

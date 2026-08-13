@@ -1,0 +1,55 @@
+<div class="create-container">
+  <h2>Создание нового поста</h2>
+
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="create-form">
+    <div class="field">
+      <label for="title">Заголовок</label>
+      <input pInputText id="title" formControlName="title" placeholder="Введите заголовок" />
+    </div>
+
+    <div class="field">
+      <label for="body">Содержание</label>
+      <textarea
+        pInputTextarea
+        id="body"
+        formControlName="body"
+        rows="5"
+        placeholder="Текст поста"
+      ></textarea>
+    </div>
+
+    <div class="field">
+      <label for="userId">ID Автора (UserId)</label>
+      <p-inputNumber id="userId" formControlName="userId" [min]="1" />
+    </div>
+
+    <div class="field">
+      <label for="tags">Теги (через запятую)</label>
+      <input pInputText id="tags" formControlName="tags" placeholder="news, tech, angular" />
+    </div>
+
+    <div class="field">
+      <label for="views">Просмотры</label>
+      <p-inputNumber id="views" formControlName="views" [min]="0" />
+    </div>
+
+    <div class="actions">
+      <p-button
+        label="Отмена"
+        severity="secondary"
+        routerLink="/posts"
+        type="button"
+        id="cancel-new-post-btn"
+      >
+      </p-button>
+      <p-button
+        label="Создать"
+        type="submit"
+        [disabled]="createForm.invalid || isSubmitting"
+        [loading]="isSubmitting"
+        id="create-new-post-btn"
+      >
+      </p-button>
+    </div>
+  </form>
+</div>

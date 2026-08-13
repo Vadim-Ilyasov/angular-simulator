@@ -1,0 +1,18 @@
+<div class="post-detail">
+  <button class="back-btn" routerLink="/posts" id="back-btn">
+    ← Назад к списку
+  </button>
+
+  <div class="post-card">
+    <h1 class="post-title">{{ post.title }}</h1>
+    
+    <div class="post-body">
+      {{ post.body }}
+    </div>
+
+    <div class="post-meta">
+      <span>ID поста: {{ post.id }}</span>
+      <span>Автор ID: {{ post.userId }}</span>
+    </div>
+  </div>
+</div>

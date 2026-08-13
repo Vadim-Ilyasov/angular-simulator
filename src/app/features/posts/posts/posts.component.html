@@ -1,0 +1,61 @@
+<div class="posts-header">
+  <h2>Список постов</h2>
+  <p-button
+    label="Создать пост"
+    icon="pi pi-plus"
+    severity="secondary"
+    routerLink="/posts/create"
+    id="create-btn"
+  >
+  </p-button>
+</div>
+<p-contextmenu #cm [model]="menuItems" />
+<p-table
+  [value]="(isLoading$ | async) ? skeletonRows : posts"
+  [lazy]="true"
+  [paginator]="true"
+  [rows]="pageSize"
+  [totalRecords]="totalElements"
+  [rowsPerPageOptions]="[10, 20, 50]"
+  [first]="first"
+  (onPage)="onPageChange($event)"
+  [style]="{ 'margin-bottom': '150px', display: 'block' }"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  dataKey="id"
+  [contextMenu]="cm"
+  [(contextMenuSelection)]="selectedPost"
+>
+  <ng-template #header>
+    <tr>
+      <th style="width: 50%">Название</th>
+      <th style="width: 30%">Теги</th>
+      <th style="width: 20%">Просмотры</th>
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-post>
+    <tr [pContextMenuRow]="post" (dblclick)="onDoubleClick(post)">
+      <td>
+        @if (isLoading$ | async) {
+          <p-skeleton width="85%" height="1.5rem" />
+        } @else {
+          <span class="font-medium">{{ post.title }}</span>
+        }
+      </td>
+      <td>
+        @if (isLoading$ | async) {
+          <p-skeleton width="50%" height="1.5rem" />
+        } @else {
+          <span>{{ post.tags?.join(', ') }}</span>
+        }
+      </td>
+      <td>
+        @if (isLoading$ | async) {
+          <p-skeleton width="30%" height="1.5rem" />
+        } @else {
+          <span class="font-semibold">{{ post.views }}</span>
+        }
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

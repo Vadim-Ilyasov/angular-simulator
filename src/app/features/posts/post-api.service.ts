@@ -10,7 +10,7 @@ import { IPost } from './IPost';
 export class PostApiService {
 
   private http: HttpClient = inject(HttpClient);
-  private postsUrl = 'https://dummyjson.com/posts';
+  private postsUrl: string = 'https://dummyjson.com/posts';
 
   getPosts(limit: number, skip: number): Observable<IPostResponse> {
     return this.http.get<IPostResponse>(this.postsUrl, {

@@ -20,10 +20,6 @@ export class PostService {
       tap((response: IPostResponse) => {
         this.postsSubject.next(response);
       }),
-      catchError((error) => {
-        console.log('Ошибка при загрузке постов из API:', error);
-        return throwError(() => error);
-      }),
     );
   }
 
@@ -50,12 +46,11 @@ export class PostService {
   }
 
   updatePost(updatedPost: IPost): Observable<IPost> {
-    return this.postApiService.updatePost(updatedPost)
-    .pipe(
+    return this.postApiService.updatePost(updatedPost).pipe(
       tap((resPost: IPost) => {
         const currentData: IPostResponse | null = this.postsSubject.getValue();
         if (currentData) {
-          const updatedPosts: IPost[] = currentData.posts.map((post) =>
+          const updatedPosts: IPost[] = currentData.posts.map((post: IPost) =>
             post.id === resPost.id ? { ...post, ...resPost } : post,
           );
           this.postsSubject.next({ ...currentData, posts: updatedPosts });
@@ -65,8 +60,7 @@ export class PostService {
   }
 
   createPost(post: IPost): Observable<IPost> {
-    return this.postApiService.createPost(post)
-    .pipe(
+    return this.postApiService.createPost(post).pipe(
       tap((newPost: IPost) => {
         const currentData: IPostResponse | null = this.postsSubject.getValue();
         if (currentData) {

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DatePipe, AsyncPipe } from '@angular/common';
+import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMountain, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -13,6 +14,7 @@ import { ITransition } from '../../interfaces/ITransition';
 import { Theme } from '../../enums/Theme';
 import { ThemeService } from '../theme.service';
 import { IThemeOption } from '../../interfaces/IThemeOption';
+import { AuthService } from '../features/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -34,6 +36,9 @@ import { IThemeOption } from '../../interfaces/IThemeOption';
 export class HeaderComponent {
 
   themeService: ThemeService = inject(ThemeService);
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
+  isAuthenticated$ = this.authService.isAuthenticated$;
 
   logoName: string = 'румтибет';
   currentDate: Date = new Date();
@@ -86,6 +91,11 @@ export class HeaderComponent {
     if (selectedTheme) {
       this.themeService.setTheme(selectedTheme);
     }
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

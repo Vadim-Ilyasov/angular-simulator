@@ -4,38 +4,37 @@ import { Router } from '@angular/router';
 import { MessageService } from '../../message.service';
 import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
+import { IToken } from './IToken';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService: AuthService = inject(AuthService);
   const messageService: MessageService = inject(MessageService);
   const router: Router = inject(Router);
-  const token: string | null = authService.getAccessToken();
-  let authReq: HttpRequest<unknown> = req;
-  if (token) {
-    authReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`,
-      },
+  const addTokenHeader: (request: HttpRequest<unknown>, token: string) => HttpRequest<unknown> = (
+    request: HttpRequest<unknown>,
+    token: string,
+  ): HttpRequest<unknown> => {
+    return request.clone({
+      setHeaders: { Authorization: `Bearer ${ token }` },
     });
-  }
+  };
+  const token: string | null = authService.getAccessToken();
+  const authReq: HttpRequest<unknown> = token ? addTokenHeader(req, token) : req;
+ 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      const isAuthRequest: boolean = req.url.includes('/auth/login') || req.url.includes('/auth/refresh');
+      const isAuthRequest: boolean =
+        req.url.includes('/auth/login') || req.url.includes('/auth/refresh');
 
       if (error.status === 401 && !isAuthRequest) {
         return authService.refreshToken().pipe(
-          switchMap((response: { accessToken: string; refreshToken: string }) => {
-            const newReq: HttpRequest<unknown> = req.clone({
-              setHeaders: {
-                Authorization: `Bearer ${response.accessToken}`,
-              },
-            });
-            return next(newReq);
+          switchMap((response: IToken) => {
+           return next(addTokenHeader(req, response.accessToken));
           }),
           catchError(() => {
             authService.logout();
             router.navigate(['/login']);
-            messageService.showError('Не удалось обновить токен')
+            messageService.showError('Не удалось обновить токен');
             return EMPTY;
           }),
         );

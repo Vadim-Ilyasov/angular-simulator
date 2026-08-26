@@ -3,32 +3,28 @@ import { inject, Service } from '@angular/core';
 import { BehaviorSubject, Observable, tap, catchError, of } from 'rxjs';
 import { IAuth } from './IAuth';
 import { LocalStorageService } from '../../local-storage.service';
+import { IToken } from './IToken';
 
 @Service()
 export class AuthService {
 
   private http: HttpClient = inject(HttpClient);
-  private ACCESS_TOKEN_KEY: string = 'access_token';
-  private REFRESH_TOKEN_KEY: string = 'refresh_token';
-  private LOGIN_URL: string = 'https://dummyjson.com/auth/login';
-  private REFRESH_URL: string = 'https://dummyjson.com/auth/refresh';
-  private ME_URL: string = 'https://dummyjson.com/auth/me';
   localStorageService: LocalStorageService = inject(LocalStorageService);
+  private TOKEN_KEY: string = 'auth_token';
+  private API_AUTH_URL: string = 'https://dummyjson.com/auth';
   private isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     !!this.getAccessToken(),
   );
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  login(credential: IAuth): Observable<{ accessToken: string; refreshToken: string }> {
-    return this.http
-      .post<{ accessToken: string; refreshToken: string }>(this.LOGIN_URL, credential)
-      .pipe(
-        tap((response) => {
-          if (response.accessToken && response.refreshToken) {
-            this.saveTokens(response.accessToken, response.refreshToken);
-          }
-        }),
-      );
+  login(credential: IAuth): Observable<IToken> {
+    return this.http.post<IToken>(`${ this.API_AUTH_URL }/login`, credential).pipe(
+      tap((response) => {
+        if (response.accessToken && response.refreshToken) {
+          this.saveTokens(response.accessToken, response.refreshToken);
+        }
+      }),
+    );
   }
 
   initAuth(): Observable<unknown> {
@@ -37,7 +33,7 @@ export class AuthService {
       this.logout();
       return of(null);
     }
-    return this.http.get(this.ME_URL).pipe(
+    return this.http.get(`${ this.API_AUTH_URL }/me`).pipe(
       tap(() => {
         this.isAuthenticatedSubject.next(true);
       }),
@@ -48,16 +44,13 @@ export class AuthService {
     );
   }
 
-  refreshToken(): Observable<{ accessToken: string; refreshToken: string }> {
+  refreshToken(): Observable<IToken> {
     const refreshToken: string | null = this.getRefreshToken();
 
     return this.http
-      .post<{
-        accessToken: string;
-        refreshToken: string;
-      }>(this.REFRESH_URL, { refreshToken, expiresInMins: 60 })
+      .post<IToken>(`${ this.API_AUTH_URL }/refresh`, { refreshToken, expiresInMins: 60 })
       .pipe(
-        tap((response: { accessToken: string; refreshToken: string }) => {
+        tap((response: IToken) => {
           if (response.accessToken && response.refreshToken) {
             this.saveTokens(response.accessToken, response.refreshToken);
           }
@@ -66,23 +59,26 @@ export class AuthService {
   }
 
   saveTokens(accessToken: string, refreshToken: string): void {
-    this.localStorageService.setItem(this.ACCESS_TOKEN_KEY, accessToken);
-    this.localStorageService.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
+    const tokens: IToken = { accessToken, refreshToken };
+    this.localStorageService.setItem(this.TOKEN_KEY, tokens);
     this.isAuthenticatedSubject.next(true);
   }
 
+  getTokens(): IToken | null {
+    return this.localStorageService.getItem<IToken>(this.TOKEN_KEY);
+  }
+
   getAccessToken(): string | null {
-    return this.localStorageService.getItem(this.ACCESS_TOKEN_KEY);
+    return this.getTokens()?.accessToken ?? null;
   }
 
   getRefreshToken(): string | null {
-    return this.localStorageService.getItem(this.REFRESH_TOKEN_KEY);
+    return this.getTokens()?.refreshToken ?? null;
   }
 
   logout(): void {
-    this.localStorageService.deleteItem(this.ACCESS_TOKEN_KEY);
-    this.localStorageService.deleteItem(this.REFRESH_TOKEN_KEY);
+    this.localStorageService.deleteItem(this.TOKEN_KEY);
     this.isAuthenticatedSubject.next(false);
   }
-   
+
 }

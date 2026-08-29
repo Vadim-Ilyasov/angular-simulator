@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { BehaviorSubject, catchError, EMPTY, finalize, Observable, tap } from 'rxjs';
 import { IAuth } from '../IAuth';
-import { FormBuilder, Validators, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from '../../../message.service';
@@ -11,10 +11,8 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
+import { ModelFormGroup } from '../Model';
 
-export type ModelFormGroup<T> = FormGroup<{
-  [K in keyof T]: T[K] extends object ? ModelFormGroup<T[K]> : FormControl<T[K]> ;
-}>;
 
 @Component({
   selector: 'app-login',

@@ -1,0 +1,40 @@
+<div class="login-container">
+  <p-card header="Авторизация" [style]="{ width: '360px' }">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="field">
+        <label for="login">Логин</label>
+        <input
+          pInputText
+          id="login"
+          type="text"
+          formControlName="username"
+          placeholder="Введите логин"
+          class="w-full"
+        />
+        @if (loginForm.controls.username.touched && loginForm.controls.username.invalid) {
+          <small class="p-error">Логин обязателен</small>
+        }
+      </div>
+      <div class="field">
+        <label for="password">Пароль</label>
+        <p-password
+          id="password"
+          formControlName="password"
+          [feedback]="false"
+          [toggleMask]="true"
+          placeholder="Введите пароль"
+          [inputStyle]="{ width: '100%' }"
+        ></p-password>
+        @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+          <small class="p-error">Пароль обязателен</small>
+        }
+      </div>
+      <p-button
+        type="submit"
+        label="Войти"
+        [loading]="(isLoading$ | async) ?? false"
+        styleClass="w-full mt-3"
+      ></p-button>
+    </form>
+  </p-card>
+</div>

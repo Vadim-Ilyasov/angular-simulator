@@ -61,6 +61,22 @@
         width: 157px;
         height: 44px;
       }
+
+      .auth-btn-container {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+
+        .logout-btn {
+          width: 157px;
+          height: 44px;
+        }
+
+        .login-btn {
+          width: 157px;
+          height: 44px;
+        } 
+      }
     }
   }
 
@@ -107,11 +123,11 @@
     }
   }
 
-.theme-controls {
+  .theme-controls {
     display: flex;
     align-items: center;
     gap: 16px;
-    align-self: flex-end; 
+    align-self: flex-end;
     margin-right: 24px;
     margin-top: -25px;
   }

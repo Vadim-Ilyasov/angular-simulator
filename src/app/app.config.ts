@@ -2,6 +2,8 @@ import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
+  provideAppInitializer,
+  inject
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
@@ -14,6 +16,8 @@ import { Theme } from '../enums/Theme';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpLoggingInterceptor } from './http-logging.interceptor';
 import { errorInterceptor } from './error.interceptor';
+import { authInterceptor } from './features/auth/auth.interceptor';
+import { AuthService } from './features/auth/auth.service';
 
 
 function getPreset(): Preset {
@@ -35,7 +39,11 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    provideHttpClient(withInterceptors([httpLoggingInterceptor, errorInterceptor])),
+    provideHttpClient(withInterceptors([httpLoggingInterceptor, errorInterceptor, authInterceptor])),
+    provideAppInitializer(() => {
+      const authService: AuthService = inject(AuthService);
+      return authService.initAuth();
+    }),
     providePrimeNG({ 
       theme: { 
         preset: getPreset(), 

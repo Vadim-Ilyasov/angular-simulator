@@ -25,6 +25,17 @@
       <div class="consultation-btn minor-button">
         <a id="consultation-btn">Консультация</a>
       </div>
+      <div class="auth-btn-container">
+        @if (isAuthenticated$ | async) {
+          <button (click)="onLogout()" class="logout-btn minor-button" id="logout-btn">
+            Выйти
+          </button>
+        } @else {
+          <div class="login-btn minor-button">
+            <a routerLink="/login" id="login-btn"> Войти </a>
+          </div>
+        }
+      </div>
     </div>
   </div>
   <div class="task-container">
@@ -56,7 +67,7 @@
     <p-toggleswitch [ngModel]="isDarkMode$ | async" (onChange)="toggleDarkMode($event.checked)" />
     <p-selectbutton
       [options]="themeOptions"
-      [ngModel]="theme$ |async"
+      [ngModel]="theme$ | async"
       (ngModelChange)="onSelectTheme($event)"
       optionLabel="label"
       optionValue="value"

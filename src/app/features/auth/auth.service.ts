@@ -79,5 +79,13 @@ export class AuthService {
     this.localStorageService.deleteItem(this.TOKEN_KEY);
     this.authUserSubject.next(null);
   }
+  
+  getUser(): IAuthUser | null {
+    return this.authUserSubject.value;
+  }
+
+  isAdmin(): boolean {
+    return this.getUser()?.role === 'admin';
+  }
 
 }

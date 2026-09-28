@@ -7,6 +7,7 @@ import { IToken } from './IToken';
 import { IAuthUser } from './IAuthUser';
 import { IAuthResponse } from './IAuthResponse';
 import { TokenType } from './TokenType';
+import { Role } from './Role';
 
 
 @Service()
@@ -85,7 +86,7 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.getUser()?.role === 'admin';
+    return this.getUser()?.role === Role.ADMIN;
   }
 
 }

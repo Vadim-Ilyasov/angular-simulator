@@ -1,4 +1,4 @@
-import { RoleType } from "./RoleType";
+import { Role } from './Role';
 
 export interface IAuthUser {
   id: number;
@@ -8,5 +8,5 @@ export interface IAuthUser {
   lastName: string;
   gender: string;
   image: string;
-  role: RoleType;
+  role: Role;
 }

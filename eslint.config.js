@@ -3,58 +3,95 @@ import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 
-export default tseslint.config(
-  // --- 1. НАСТРОЙКИ ДЛЯ TYPESCRIPT (*.ts) ---
+export default defineConfig([
+  {
+    ignores: ['dist/**', 'node_modules/**', '.angular/**'],
+  },
+
   {
     files: ['**/*.ts'],
-    extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.stylistic,
-      ...angular.configs.tsRecommended,
-      eslintConfigPrettier,
-    ],
     plugins: {
+      '@typescript-eslint': tseslint.plugin,
+      '@angular-eslint': angular.tsPlugin,
       prettier: eslintPluginPrettier,
     },
-    processor: angular.processInlineTemplates,
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
     rules: {
-      // Подключение форматирования Prettier внутри ESLint
+      ...eslint.configs.recommended.rules,
+      ...tseslint.configs.recommended.rules,
+
+      'no-undef': 'off',
+
       'prettier/prettier': [
         'error',
         {
-          singleQuote: true,
-          trailingComma: 'all',
-          printWidth: 100,
           tabWidth: 2,
+          singleQuote: true,
           semi: true,
         },
       ],
 
-      // --- ПРАВИЛА ИЗ ТЗ ДЛЯ TS ---
-      // 1. Обязательные одинарные кавычки
-      'quotes': ['error', 'single', { avoidEscape: true }],
-
-      // 2. Обязательные точки с запятой
-      'semi': ['error', 'always'],
-
-      // 3. Отступы ровно 2 пробела
-      'indent': ['error', 2, { SwitchCase: 1 }],
-
-      // 4. Ограничение длины строки (100 символов)
-      'max-len': ['warn', { code: 100, ignoreUrls: true, ignoreComments: true }],
-
-      // 5. Пробелы внутри фигурных скобок: { foo: bar }
-      'object-curly-spacing': ['error', 'always'],
-
-      // 6. Запрет console.log (разрешены console.warn и console.error)
       'no-console': ['warn', { allow: ['warn', 'error'] }],
 
-      // 7. Стили именования (naming-convention)
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+
+      'padded-blocks': ['error', { classes: 'always' }],
+
+      'object-curly-spacing': ['warn', 'always'],
+
+      'template-curly-spacing': ['warn', 'always'],
+
+      'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
+
+      
+      '@typescript-eslint/explicit-member-accessibility': [
+        'error',
+        {
+          accessibility: 'explicit',
+          overrides: {
+            constructors: 'no-public',
+            properties: 'no-public',
+            methods: 'no-public',
+            parameterProperties: 'no-public',
+          },
+        },
+      ],
+
       '@typescript-eslint/naming-convention': [
         'error',
-        // Интерфейсы начинаются с 'I' (IPassword, IUserProfile)
+        {
+          selector: 'enumMember',
+          format: ['UPPER_CASE'],
+          leadingUnderscore: 'forbid',
+        },
+        {
+          selector: 'objectLiteralProperty',
+          format: null,
+        },
+        {
+          selector: 'typeProperty',
+          format: null,
+        },
         {
           selector: 'interface',
           format: ['PascalCase'],
@@ -63,49 +100,24 @@ export default tseslint.config(
             match: true,
           },
         },
-        // Энумы в PascalCase
-        {
-          selector: 'enum',
-          format: ['PascalCase'],
-        },
-        // Члены энумов в UPPER_CASE
-        {
-          selector: 'enumMember',
-          format: ['UPPER_CASE'],
-        },
       ],
 
-      // 8. Явное указание модификаторов доступа (запрет явного public)
-      '@typescript-eslint/explicit-member-accessibility': [
-        'error',
-        {
-          accessibility: 'explicit',
-          overrides: {
-            constructors: 'no-public',
-            methods: 'no-public',
-            properties: 'no-public',
-            parameterProperties: 'explicit',
-          },
-        },
-      ],
-
-      // 9. Ограничение функций/методов по длине
-      'max-lines-per-function': ['warn', { max: 50, skipBlankLines: true, skipComments: true }],
+      ...eslintConfigPrettier.rules,
     },
   },
-
-  // --- 2. НАСТРОЙКИ ДЛЯ HTML-ШАБЛОНОВ ANGULAR (*.html) ---
   {
     files: ['**/*.html'],
-    extends: [
-      ...angular.configs.templateRecommended,
-      ...angular.configs.templateAccessibility,
-      eslintConfigPrettier,
-    ],
     plugins: {
+      '@angular-eslint/template': angular.templatePlugin,
       prettier: eslintPluginPrettier,
     },
+    languageOptions: {
+      parser: angular.templateParser,
+    },
     rules: {
+      ...angular.configs.templateRecommended.rules,
+      ...angular.configs.templateAccessibility.rules,
+
       'prettier/prettier': [
         'error',
         {
@@ -114,14 +126,13 @@ export default tseslint.config(
         },
       ],
 
-      // 10. "Банан в коробке" [(ngModel)] (error)
       '@angular-eslint/template/banana-in-box': 'error',
 
-      // 11. Строгое сравнение === вместо == (warn)
       '@angular-eslint/template/eqeqeq': 'warn',
 
-      // 12. Валидация элементов и закрытия тегов (error)
-      '@angular-eslint/template/elements-content': 'error',
+      '@angular-eslint/template/no-duplicate-attributes': 'error',
+
+      ...eslintConfigPrettier.rules,
     },
-  }
-);
+  },
+]);

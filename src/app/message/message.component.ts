@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEnvelope, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { MessageService } from '../message.service';
@@ -21,5 +21,5 @@ export class MessageComponent {
   deleteMessage(index: number): void {
     this.mgService.closeMessage(index);
   }
-  
+
 }

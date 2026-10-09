@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { PostApiService } from './post-api.service';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IPostResponse } from './IPostResponse';
 import { IPost } from './IPost';
 
@@ -13,6 +13,7 @@ export class PostService {
 
   private postsSubject: BehaviorSubject<IPostResponse | null> =
     new BehaviorSubject<IPostResponse | null>(null);
+
   posts$: Observable<IPostResponse | null> = this.postsSubject.asObservable();
 
   showPosts(limit: number, skip: number): Observable<IPostResponse> {

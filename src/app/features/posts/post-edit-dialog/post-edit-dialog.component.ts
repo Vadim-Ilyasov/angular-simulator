@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
@@ -10,17 +10,11 @@ import { IPost } from '../IPost';
 @Component({
   selector: 'app-post-edit-dialog',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    InputTextModule,
-    InputNumberModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule, InputNumberModule],
   templateUrl: './post-edit-dialog.component.html',
   styleUrl: './post-edit-dialog.component.scss',
 })
-export class PostEditDialogComponent {
+export class PostEditDialogComponent implements OnInit {
 
   private fb: FormBuilder = inject(FormBuilder);
   private ref: DynamicDialogRef<IPost> = inject(DynamicDialogRef);

@@ -1,7 +1,7 @@
 import { FormsModule } from '@angular/forms';
 import { Component, inject } from '@angular/core';
 import { faCalendar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { faChevronDown, faStar, faDollar } from '@fortawesome/free-solid-svg-icons'; 
+import { faChevronDown, faStar, faDollar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUserCheck, faShieldHalved, faTags } from '@fortawesome/free-solid-svg-icons';
 import { MessageService } from '../message.service';
@@ -9,8 +9,6 @@ import { IAdvantage } from '../../interfaces/IAdvantage';
 import { IDestination } from '../../interfaces/IDestination';
 import { ITravelCard } from '../../interfaces/ITravelCard';
 import { ISearchTours } from '../../interfaces/ISearchTours';
-
-
 
 @Component({
   selector: 'app-home-page',
@@ -23,7 +21,7 @@ export class HomePageComponent {
 
   mgService: MessageService = inject(MessageService);
 
-  text: string = '';
+  text = '';
   faCalendar: IconDefinition = faCalendar;
   faChevronDown: IconDefinition = faChevronDown;
   faStar: IconDefinition = faStar;

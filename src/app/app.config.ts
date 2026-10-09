@@ -3,7 +3,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
   provideAppInitializer,
-  inject
+  inject,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
@@ -18,7 +18,6 @@ import { httpLoggingInterceptor } from './http-logging.interceptor';
 import { errorInterceptor } from './error.interceptor';
 import { authInterceptor } from './features/auth/auth.interceptor';
 import { AuthService } from './features/auth/auth.service';
-
 
 function getPreset(): Preset {
   const savedTheme: string | null = localStorage.getItem('theme');
@@ -39,18 +38,20 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    provideHttpClient(withInterceptors([httpLoggingInterceptor, errorInterceptor, authInterceptor])),
+    provideHttpClient(
+      withInterceptors([httpLoggingInterceptor, errorInterceptor, authInterceptor]),
+    ),
     provideAppInitializer(() => {
       const authService: AuthService = inject(AuthService);
       return authService.initAuth();
     }),
-    providePrimeNG({ 
-      theme: { 
-        preset: getPreset(), 
-        options: { 
-          darkModeSelector: '.p-dark' 
-        } 
-      } 
+    providePrimeNG({
+      theme: {
+        preset: getPreset(),
+        options: {
+          darkModeSelector: '.p-dark',
+        },
+      },
     }),
   ],
 };

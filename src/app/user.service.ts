@@ -40,14 +40,13 @@ export class UserService {
   }
 
   loadUsers(): Observable<IUser[]> {
-  this.loaderService.showLoader();
-  const usersFromStorage: IUser[] | null = this.localStorageService.getItem<IUser[]>('users');
-  if (usersFromStorage?.length) {
-    this.loaderService.hideLoader();
-    return of(usersFromStorage);
-  };
-  return this.userApiService.getUsers()
-    .pipe(
+    this.loaderService.showLoader();
+    const usersFromStorage: IUser[] | null = this.localStorageService.getItem<IUser[]>('users');
+    if (usersFromStorage?.length) {
+      this.loaderService.hideLoader();
+      return of(usersFromStorage);
+    }
+    return this.userApiService.getUsers().pipe(
       tap((users) => {
         this.setUsers(users);
       }),
@@ -61,4 +60,3 @@ export class UserService {
   }
 
 }
- 

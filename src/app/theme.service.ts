@@ -20,14 +20,18 @@ export class ThemeService {
     tap((theme: Theme) => {
       const element: HTMLHtmlElement = document.querySelector('html')!;
       element.setAttribute('theme', theme.toLowerCase());
-    })
+    }),
   );
-  private isDarkSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getInitDarkMode());
+
+  private isDarkSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    this.getInitDarkMode(),
+  );
+
   isDarkMode$: Observable<boolean> = this.isDarkSubject.asObservable().pipe(
     tap((isDarkMode: boolean) => {
       const element: HTMLHtmlElement = document.querySelector('html')!;
       isDarkMode ? element.classList.add('p-dark') : element.classList.remove('p-dark');
-    })
+    }),
   );
 
   themeOptions: IThemeOption[] = [
@@ -77,5 +81,3 @@ export class ThemeService {
   }
 
 }
-
-

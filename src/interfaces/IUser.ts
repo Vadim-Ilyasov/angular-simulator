@@ -1,8 +1,8 @@
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from '@angular/forms';
 
 export type ModelFormGroup<T> = {
-    [K in keyof T]: T[K] extends object ? FormGroup<ModelFormGroup<T[K]>> : FormControl<T[K]> ;
-}; 
+  [K in keyof T]: T[K] extends object ? FormGroup<ModelFormGroup<T[K]>> : FormControl<T[K]>;
+};
 
 export interface IUser {
   id: number;

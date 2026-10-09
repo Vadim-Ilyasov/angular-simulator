@@ -5,7 +5,6 @@ import { PhoneFormatPipe } from '../phone-format.pipe';
 import { AddBoldDirective } from '../add-bold.directive';
 import { AnimatedGradientDirective } from '../animated-gradient.directive';
 
-
 @Component({
   selector: 'app-user-card',
   standalone: true,
@@ -15,12 +14,12 @@ import { AnimatedGradientDirective } from '../animated-gradient.directive';
 })
 export class UserCardComponent {
 
-  @Input({required: true}) user!: IUser;
-  @Input() phoneMode: string = 'international';
+  @Input({ required: true }) user!: IUser;
+  @Input() phoneMode = 'international';
   @Output() OndeleteUser: EventEmitter<number> = new EventEmitter<number>();
 
   deleteUserCard(): void {
-    this.OndeleteUser.emit(this.user.id)
+    this.OndeleteUser.emit(this.user.id);
   }
 
 }

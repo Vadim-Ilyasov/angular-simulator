@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { tap, throwError, catchError, finalize, EMPTY } from 'rxjs';
+import { tap, catchError, finalize, EMPTY } from 'rxjs';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
@@ -54,7 +54,7 @@ export class PostCreateComponent {
           this.isSubmitting = false;
         }),
       )
-    .subscribe();
+      .subscribe();
   }
 
   private preparePostData(): IPost {

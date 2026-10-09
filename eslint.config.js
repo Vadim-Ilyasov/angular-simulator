@@ -1,7 +1,6 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
-import eslintPluginPrettier from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
@@ -16,7 +15,6 @@ export default defineConfig([
     plugins: {
       '@typescript-eslint': tseslint.plugin,
       '@angular-eslint': angular.tsPlugin,
-      prettier: eslintPluginPrettier,
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -35,15 +33,6 @@ export default defineConfig([
 
       'no-undef': 'off',
 
-      'prettier/prettier': [
-        'error',
-        {
-          tabWidth: 2,
-          singleQuote: true,
-          semi: true,
-        },
-      ],
-
       'no-console': ['warn', { allow: ['warn', 'error'] }],
 
       '@typescript-eslint/no-unused-vars': [
@@ -54,12 +43,6 @@ export default defineConfig([
           ignoreRestSiblings: true,
         },
       ],
-
-      'padded-blocks': ['error', { classes: 'always' }],
-
-      'object-curly-spacing': ['warn', 'always'],
-
-      'template-curly-spacing': ['warn', 'always'],
 
       'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
 
@@ -102,6 +85,10 @@ export default defineConfig([
         },
       ],
 
+      // Правила форматирования (переопределяем после Prettier для правил, которые он не обрабатывает)
+      'padded-blocks': ['error', { classes: 'always' }],
+      'template-curly-spacing': ['warn', 'always'],
+
       ...eslintConfigPrettier.rules,
     },
   },
@@ -109,7 +96,6 @@ export default defineConfig([
     files: ['**/*.html'],
     plugins: {
       '@angular-eslint/template': angular.templatePlugin,
-      prettier: eslintPluginPrettier,
     },
     languageOptions: {
       parser: angular.templateParser,
@@ -118,21 +104,11 @@ export default defineConfig([
       ...angular.configs.templateRecommended.rules,
       ...angular.configs.templateAccessibility.rules,
 
-      'prettier/prettier': [
-        'error',
-        {
-          parser: 'html',
-          tabWidth: 2,
-        },
-      ],
-
       '@angular-eslint/template/banana-in-box': 'error',
 
       '@angular-eslint/template/eqeqeq': 'warn',
 
       '@angular-eslint/template/no-duplicate-attributes': 'error',
-
-      ...eslintConfigPrettier.rules,
     },
   },
 ]);

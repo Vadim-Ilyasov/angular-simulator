@@ -22,7 +22,7 @@ class Collection<T> {
     if (index >= 0 && index < this.elements.length) {
       this.elements.splice(index, 1);
     } else {
-      throw new Error(`Index ${index} is out of bounds for elements array.`);
+      throw new Error(`Index ${ index } is out of bounds for elements array.`);
     }
   }
 
@@ -30,7 +30,7 @@ class Collection<T> {
     if (index >= 0 && index < this.elements.length) {
       this.elements[index] = newElement;
     } else {
-      throw new Error(`Index ${index} is out of bounds for elements array.`);
+      throw new Error(`Index ${ index } is out of bounds for elements array.`);
     }
   }
 

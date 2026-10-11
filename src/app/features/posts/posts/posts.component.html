@@ -37,23 +37,23 @@
     <tr [pContextMenuRow]="post" (dblclick)="onDoubleClick(post)">
       <td>
         @if (isLoading$ | async) {
-          <p-skeleton width="85%" height="1.5rem" />
+        <p-skeleton width="85%" height="1.5rem" />
         } @else {
-          <span class="font-medium">{{ post.title }}</span>
+        <span class="font-medium">{{ post.title }}</span>
         }
       </td>
       <td>
         @if (isLoading$ | async) {
-          <p-skeleton width="50%" height="1.5rem" />
+        <p-skeleton width="50%" height="1.5rem" />
         } @else {
-          <span>{{ post.tags?.join(', ') }}</span>
+        <span>{{ post.tags?.join(', ') }}</span>
         }
       </td>
       <td>
         @if (isLoading$ | async) {
-          <p-skeleton width="30%" height="1.5rem" />
+        <p-skeleton width="30%" height="1.5rem" />
         } @else {
-          <span class="font-semibold">{{ post.views }}</span>
+        <span class="font-semibold">{{ post.views }}</span>
         }
       </td>
     </tr>

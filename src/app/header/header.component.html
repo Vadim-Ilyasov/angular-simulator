@@ -11,15 +11,15 @@
     <div class="main-nav">
       <nav class="menu fs-18 semi-bold white-color flex gap-24">
         @for (transition of navTransitions; track transition.path) {
-          <a
-            id="transition"
-            class="fs-18 semi-bold white-color"
-            [routerLink]="transition.path"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{ exact: transition.path === '/' }"
-          >
-            {{ transition.label }}
-          </a>
+        <a
+          id="transition"
+          class="fs-18 semi-bold white-color"
+          [routerLink]="transition.path"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: transition.path === '/' }"
+        >
+          {{ transition.label }}
+        </a>
         }
       </nav>
       <div class="consultation-btn minor-button">
@@ -27,37 +27,33 @@
       </div>
       <div class="auth-btn-container">
         @if (isAuthenticated$ | async) {
-          <button (click)="onLogout()" class="logout-btn minor-button" id="logout-btn">
-            Выйти
-          </button>
+        <button (click)="onLogout()" class="logout-btn minor-button" id="logout-btn">Выйти</button>
         } @else {
-          <div class="login-btn minor-button">
-            <a routerLink="/login" id="login-btn"> Войти </a>
-          </div>
+        <div class="login-btn minor-button">
+          <a routerLink="/login" id="login-btn"> Войти </a>
+        </div>
         }
       </div>
     </div>
   </div>
   <div class="task-container">
     @if (toggle) {
-      <div class="timer-container">
-        <span class="current-time">
-          {{ currentDate | date: 'dd.MM.yyyy HH:mm:ss' }}
-        </span>
-      </div>
+    <div class="timer-container">
+      <span class="current-time"> {{ currentDate | date: 'dd.MM.yyyy HH:mm:ss' }} </span>
+    </div>
     } @else {
-      <div class="counter-container">
-        <button
-          (click)="count = count - 1"
-          class="counter-btn"
-          id="reducing-btn"
-          [disabled]="count === 0"
-        >
-          -
-        </button>
-        <span class="count-display">{{ count }}</span>
-        <button (click)="count = count + 1" class="counter-btn" id="increasing-btn">+</button>
-      </div>
+    <div class="counter-container">
+      <button
+        (click)="count = count - 1"
+        class="counter-btn"
+        id="reducing-btn"
+        [disabled]="count === 0"
+      >
+        -
+      </button>
+      <span class="count-display">{{ count }}</span>
+      <button (click)="count = count + 1" class="counter-btn" id="increasing-btn">+</button>
+    </div>
     }
     <button class="toggle-btn minor-button" id="toggle-btn" (click)="toggle = !toggle">
       {{ toggle ? 'Показать счетчик' : 'Показать таймер' }}

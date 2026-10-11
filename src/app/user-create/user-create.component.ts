@@ -1,15 +1,15 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormBuilder,  ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { IUser } from '../../interfaces/IUser';
 import { AddBoldDirective } from '../add-bold.directive';
 import { AnimatedGradientDirective } from '../animated-gradient.directive';
 
 export type ModelFormGroup<T> = FormGroup<{
-  [K in keyof T]: T[K] extends object ? ModelFormGroup<T[K]> : FormControl<T[K]> ;
+  [K in keyof T]: T[K] extends object ? ModelFormGroup<T[K]> : FormControl<T[K]>;
 }>;
 
-@Component({ 
+@Component({
   selector: 'app-user-create',
   standalone: true,
   imports: [ReactiveFormsModule, AddBoldDirective, AnimatedGradientDirective],
@@ -44,10 +44,10 @@ export class UserCreateComponent {
       catchPhrase: ['', [Validators.maxLength(200)]],
       bs: ['', [Validators.maxLength(100)]],
     }),
-  }) as ModelFormGroup<IUser>; 
+  }) as ModelFormGroup<IUser>;
 
   onSubmit(): void {
-    const newUser: IUser = {...this.userForm.getRawValue(), id: Date.now()};
+    const newUser: IUser = { ...this.userForm.getRawValue(), id: Date.now() };
     this.OnCreateUser.emit(newUser);
   }
 

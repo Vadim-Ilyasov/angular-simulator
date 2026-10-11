@@ -5,13 +5,12 @@ import { adminGuard } from './features/auth/admin.guard';
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./features/auth/login/login.component').then((m) => m.LoginComponent),
   },
   {
     path: '',
-    loadComponent: () => 
-      import('./home-page/home-page.component').then((m) => m.HomePageComponent),
+    loadComponent: () => import('./home-page/home-page.component').then((m) => m.HomePageComponent),
     canActivate: [authGuard],
   },
   {
@@ -22,8 +21,7 @@ export const routes: Routes = [
   },
   {
     path: 'posts',
-    loadChildren: () =>
-      import('./features/posts/posts.routes').then((m) => m.postsRoutes),
+    loadChildren: () => import('./features/posts/posts.routes').then((m) => m.postsRoutes),
     canActivate: [authGuard, adminGuard],
   },
   {

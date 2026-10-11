@@ -40,10 +40,10 @@ export class HeaderComponent {
   private router: Router = inject(Router);
   isAuthenticated$ = this.authService.isAuthenticated$;
 
-  logoName: string = 'румтибет';
+  logoName = 'румтибет';
   currentDate: Date = new Date();
-  count: number = 0;
-  toggle: boolean = true;
+  count = 0;
+  toggle = true;
   faMountain: IconDefinition = faMountain;
   themeOptions: IThemeOption[] = this.themeService.themeOptions;
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
@@ -70,13 +70,13 @@ export class HeaderComponent {
   }
 
   saveDateLastVisit(): void {
-    const DATE_KEY: string = 'last-visit';
+    const DATE_KEY = 'last-visit';
     const date: string = new Date().toISOString();
     localStorage.setItem(DATE_KEY, date);
   }
 
   saveSumVisit(): void {
-    const SUM_KEY: string = 'visits-count';
+    const SUM_KEY = 'visits-count';
     const visit: string = localStorage.getItem(SUM_KEY) || '0';
     let visitNumber: number = parseInt(visit, 10);
     visitNumber++;

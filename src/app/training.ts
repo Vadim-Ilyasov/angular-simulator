@@ -18,7 +18,10 @@ function getCalc(a: number, b: number): number {
   return a + b;
 }
 
-function getTextFormat(text: string, textFormat: 'uppercase' | 'lowercase' | 'capitalize'): string {
+function getTextFormat(
+  text: string,
+  textFormat: 'uppercase' | 'lowercase' | 'capitalize',
+): string {
   if (textFormat === 'uppercase') {
     return text.toUpperCase();
   }
@@ -75,4 +78,4 @@ const users: IUser[] = [
 ];
 
 const matureUsers: IUser[] = users.filter((user: IUser) => user.age > 30);
-console.log(matureUsers);
+console.warn(matureUsers);

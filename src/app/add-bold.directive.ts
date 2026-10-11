@@ -8,11 +8,11 @@ export class AddBoldDirective {
 
   constructor() {}
 
-  @HostBinding('style.font-weight') fontWeight: string = 'bold';
+  @HostBinding('style.font-weight') fontWeight = 'bold';
 
   @HostListener('mouseenter')
   onEnter() {
-    this.fontWeight = 'bold'
+    this.fontWeight = 'bold';
   }
 
   @HostListener('mouseleave')

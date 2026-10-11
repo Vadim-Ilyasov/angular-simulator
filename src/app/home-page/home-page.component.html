@@ -124,15 +124,15 @@
     </div>
     <div class="advantages-list">
       @for (advantage of advantages; track advantage.id) {
-        <div class="advantage-container">
-          <div class="advantage-icon-container" [style.background-color]="advantage.iconColor">
-            <fa-icon [icon]="advantage.icon" size="xl" class="advantage-fa-icon"></fa-icon>
-          </div>
-          <div class="advantage-text">
-            <h3 class="fs-18 bold">{{ advantage.title }}</h3>
-            <p class="fs-14 regular">{{ advantage.description }}</p>
-          </div>
+      <div class="advantage-container">
+        <div class="advantage-icon-container" [style.background-color]="advantage.iconColor">
+          <fa-icon [icon]="advantage.icon" size="xl" class="advantage-fa-icon"></fa-icon>
         </div>
+        <div class="advantage-text">
+          <h3 class="fs-18 bold">{{ advantage.title }}</h3>
+          <p class="fs-14 regular">{{ advantage.description }}</p>
+        </div>
+      </div>
       }
     </div>
     <button
@@ -158,34 +158,36 @@
     </div>
     <div class="popular-offers-grid">
       @for (destination of destinations; track destination.id) {
-        <div class="destination-container">
-          <img [src]="'/images/' + destination.image + '.png'" />
-          <div class="rating-container">
-            <div class="rating-icon">
-              <fa-icon [icon]="faStar" class="fa-star"></fa-icon>
-            </div>
-            <div class="rating-value">
-              <p class="rating-number fs-14 bold">{{ destination.rating }}</p>
-            </div>
+      <div class="destination-container">
+        <img [src]="'/images/' + destination.image + '.png'" />
+        <div class="rating-container">
+          <div class="rating-icon">
+            <fa-icon [icon]="faStar" class="fa-star"></fa-icon>
           </div>
-          <div class="info-panel">
-            <div class="destination-content">
-              <div class="destination-title">
-                <h3 class="destination-title-text fs-24 bold line-120 white-color">
-                  {{ destination.title }}
-                </h3>
-              </div>
-              <div class="destination-subtitle">
-                <p class="destination-subtitle-text fs-14 regular white-color">
-                  {{ destination.description }}
-                </p>
-              </div>
-            </div>
-            <div class="price-container">
-              <p class="price-text fs-20 bold white-color">{{ destination.price }} <fa-icon [icon]="faDollar"></fa-icon></p>
-            </div>
+          <div class="rating-value">
+            <p class="rating-number fs-14 bold">{{ destination.rating }}</p>
           </div>
         </div>
+        <div class="info-panel">
+          <div class="destination-content">
+            <div class="destination-title">
+              <h3 class="destination-title-text fs-24 bold line-120 white-color">
+                {{ destination.title }}
+              </h3>
+            </div>
+            <div class="destination-subtitle">
+              <p class="destination-subtitle-text fs-14 regular white-color">
+                {{ destination.description }}
+              </p>
+            </div>
+          </div>
+          <div class="price-container">
+            <p class="price-text fs-20 bold white-color">
+              {{ destination.price }} <fa-icon [icon]="faDollar"></fa-icon>
+            </p>
+          </div>
+        </div>
+      </div>
       }
     </div>
     <button
@@ -205,21 +207,21 @@
     </div>
     <div class="travel-cards-container">
       @for (travelCard of travelCards; track travelCard.id) {
-        <div class="travel-container">
-          <img [src]="'/images/' + travelCard.image + '.png'" />
-          <div class="travel-info-container">
-            <div class="travel-heading">
-              <h3 class="fs-24 bold">{{ travelCard.title }}</h3>
-            </div>
-            <div class="travel-description">
-              <p class="fs-14 regular">{{ travelCard.description }}</p>
-            </div>
-            <div class="travel-details">
-              <time class="fs-14 bold yellow-color">{{ travelCard.date }}</time>
-              <a class="fs-14 bold forest-color" id="read-more">{{ travelCard.link }}</a>
-            </div>
+      <div class="travel-container">
+        <img [src]="'/images/' + travelCard.image + '.png'" />
+        <div class="travel-info-container">
+          <div class="travel-heading">
+            <h3 class="fs-24 bold">{{ travelCard.title }}</h3>
+          </div>
+          <div class="travel-description">
+            <p class="fs-14 regular">{{ travelCard.description }}</p>
+          </div>
+          <div class="travel-details">
+            <time class="fs-14 bold yellow-color">{{ travelCard.date }}</time>
+            <a class="fs-14 bold forest-color" id="read-more">{{ travelCard.link }}</a>
           </div>
         </div>
+      </div>
       }
     </div>
     <button

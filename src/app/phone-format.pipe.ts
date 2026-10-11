@@ -26,12 +26,12 @@ export class PhoneFormatPipe implements PipeTransform {
       return `${ countryCode } ${ operator } ${ part1 } ${ part2 } ${ part3 }`;
     }
     if (format === PhoneFormat.NATIONAL) {
-      return `${operator} ${ part1 } ${ part2 } ${ part3 }`;
+      return `${ operator } ${ part1 } ${ part2 } ${ part3 }`;
     }
     if (format === PhoneFormat.MASKED) {
       return `${ countryCode } ${ operator } *** ** ${ part3 }`;
     }
     return numberWithPlus;
   }
-  
+
 }

@@ -18,5 +18,5 @@ export class FooterComponent {
   faPinterest: IconDefinition = faPinterest;
   faSkype: IconDefinition = faSkype;
   faChevronRight: IconDefinition = faChevronRight;
-  
+
 }

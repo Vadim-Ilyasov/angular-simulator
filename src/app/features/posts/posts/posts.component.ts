@@ -41,11 +41,11 @@ export class PostsComponent implements OnInit {
   private isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
   posts$: Observable<IPostResponse | null> = this.postService.posts$;
-  pageSize: number = 10;
-  currentPage: number = 1;
-  totalElements: number = 0;
-  first: number = 0;
-  isEditDialogVisible: boolean = false;
+  pageSize = 10;
+  currentPage = 1;
+  totalElements = 0;
+  first = 0;
+  isEditDialogVisible = false;
   skeletonRows: unknown[] = [];
   posts: IPost[] = [];
   selectedPost: IPost | null = null;
@@ -55,17 +55,17 @@ export class PostsComponent implements OnInit {
     this.loadPostsPage();
     this.initContextMenu();
     this.postService.posts$
-    .pipe(
-      takeUntilDestroyed(),
-      tap((data: IPostResponse | null) => {
-        if (data) {
-          this.posts = data.posts;
-          this.totalElements = data.total;
-          this.cd.markForCheck();
-        }
-      })
-    )
-  .subscribe();
+      .pipe(
+        takeUntilDestroyed(),
+        tap((data: IPostResponse | null) => {
+          if (data) {
+            this.posts = data.posts;
+            this.totalElements = data.total;
+            this.cd.markForCheck();
+          }
+        }),
+      )
+      .subscribe();
   }
 
   initContextMenu(): void {
@@ -146,7 +146,7 @@ export class PostsComponent implements OnInit {
           }
         }),
       )
-    .subscribe();
+      .subscribe();
   }
 
   deletePost(): void {
@@ -168,7 +168,7 @@ export class PostsComponent implements OnInit {
           this.cd.markForCheck();
         }),
       )
-    .subscribe();
+      .subscribe();
   }
 
   onSaveEditedPost(updatedPost: IPost): void {
@@ -183,7 +183,7 @@ export class PostsComponent implements OnInit {
           this.cd.markForCheck();
         }),
       )
-    .subscribe();
+      .subscribe();
   }
 
   onDoubleClick(post: IPost): void {

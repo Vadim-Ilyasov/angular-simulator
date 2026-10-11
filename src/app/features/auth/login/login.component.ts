@@ -13,7 +13,6 @@ import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
 import { ModelFormGroup } from '../Model';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -24,7 +23,7 @@ import { ModelFormGroup } from '../Model';
     PasswordModule,
     ButtonModule,
     ToastModule,
-    CardModule
+    CardModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -44,7 +43,7 @@ export class LoginComponent {
   });
 
   onSubmit(): void {
-    if(this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
@@ -54,7 +53,7 @@ export class LoginComponent {
   processLogin(): void {
     this.isLoadingSubject.next(true);
     this.authService
-    .login(this.loginForm.getRawValue())
+      .login(this.loginForm.getRawValue())
       .pipe(
         tap(() => {
           this.router.navigate(['/']);
@@ -65,9 +64,9 @@ export class LoginComponent {
         }),
         finalize(() => {
           this.isLoadingSubject.next(false);
-        })
+        }),
       )
-    .subscribe();
+      .subscribe();
   }
 
 }

@@ -6,11 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PluralPipe implements PipeTransform {
 
   transform(value: number | undefined, items: string[]): string {
-    if (value === undefined) { 
+    if (value === undefined) {
       return '';
     }
     let index = 2;
-    const twoDigitsModulo: number = 100;
+    const twoDigitsModulo = 100;
     const lastDigit: number = value % 10;
     if (value % twoDigitsModulo >= 11 && value % twoDigitsModulo <= 14) {
       index = 2;
@@ -22,7 +22,7 @@ export class PluralPipe implements PipeTransform {
         index = 0;
       }
     }
-    return `${ value } ${ items[index] }`;
+    return `${ value } ${ items[ index ] }`;
   }
 
 }

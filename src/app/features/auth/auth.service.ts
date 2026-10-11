@@ -9,15 +9,16 @@ import { IAuthResponse } from './IAuthResponse';
 import { TokenType } from './TokenType';
 import { Role } from './Role';
 
-
 @Service()
 export class AuthService {
 
   private http: HttpClient = inject(HttpClient);
   localStorageService: LocalStorageService = inject(LocalStorageService);
-  private TOKEN_KEY: string = 'auth_token';
-  private API_AUTH_URL: string = 'https://dummyjson.com/auth';
-  private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
+  private TOKEN_KEY = 'auth_token';
+  private API_AUTH_URL = 'https://dummyjson.com/auth';
+  private authUserSubject: BehaviorSubject<IAuthUser | null> =
+    new BehaviorSubject<IAuthUser | null>(null);
+
   authUser$: Observable<IAuthUser | null> = this.authUserSubject.asObservable();
   isAuthenticated$: Observable<boolean> = this.authUser$.pipe(
     map((user: IAuthUser | null) => !!user),
@@ -71,8 +72,8 @@ export class AuthService {
   }
 
   getToken(type: TokenType = 'access'): string | null {
-    const tokens: IToken  | null = this.localStorageService.getItem<IToken>(this.TOKEN_KEY);
-    if(!tokens) return null;
+    const tokens: IToken | null = this.localStorageService.getItem<IToken>(this.TOKEN_KEY);
+    if (!tokens) return null;
     return type === 'access' ? tokens.accessToken : tokens.refreshToken;
   }
 
@@ -80,7 +81,7 @@ export class AuthService {
     this.localStorageService.deleteItem(this.TOKEN_KEY);
     this.authUserSubject.next(null);
   }
-  
+
   getUser(): IAuthUser | null {
     return this.authUserSubject.value;
   }

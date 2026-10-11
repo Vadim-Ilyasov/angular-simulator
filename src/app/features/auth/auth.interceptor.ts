@@ -20,7 +20,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   };
   const token: string | null = authService.getToken('access');
   const authReq: HttpRequest<unknown> = token ? addTokenHeader(req, token) : req;
- 
+
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       const isAuthRequest: boolean =
@@ -29,7 +29,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 401 && !isAuthRequest) {
         return authService.refreshToken().pipe(
           switchMap((response: IToken) => {
-           return next(addTokenHeader(req, response.accessToken));
+            return next(addTokenHeader(req, response.accessToken));
           }),
           catchError(() => {
             authService.logout();

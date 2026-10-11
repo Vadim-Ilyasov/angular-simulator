@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IPostResponse } from './IPostResponse';
 import { IPost } from './IPost';
 
@@ -10,7 +10,7 @@ import { IPost } from './IPost';
 export class PostApiService {
 
   private http: HttpClient = inject(HttpClient);
-  private postsUrl: string = 'https://dummyjson.com/posts';
+  private postsUrl = 'https://dummyjson.com/posts';
 
   getPosts(limit: number, skip: number): Observable<IPostResponse> {
     return this.http.get<IPostResponse>(this.postsUrl, {
@@ -34,12 +34,12 @@ export class PostApiService {
     return this.http.put<IPost>(`${ this.postsUrl }/${ post.id }`, {
       title: post.title,
       tags: post.tags,
-      views: post.views
-    })
+      views: post.views,
+    });
   }
 
   createPost(post: IPost): Observable<IPost> {
-    return this.http.post<IPost>(`${ this.postsUrl }/add`, post)
+    return this.http.post<IPost>(`${ this.postsUrl }/add`, post);
   }
 
 }

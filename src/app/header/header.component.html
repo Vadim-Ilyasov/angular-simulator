@@ -5,7 +5,7 @@
         <fa-icon [icon]="faMountain"></fa-icon>
       </div>
       <div>
-        <p class="logo-text">{{ logoName }}</p>
+        <p class="logo-text">{{ appConfig.companyName }}</p>
       </div>
     </div>
     <div class="main-nav">
@@ -39,7 +39,10 @@
   <div class="task-container">
     @if (toggle) {
     <div class="timer-container">
-      <span class="current-time"> {{ currentDate | date: 'dd.MM.yyyy HH:mm:ss' }} </span>
+      <span class="current-time"> {{ currentDate | date }} </span>
+      @if (lastVisitDate) {
+      <span class="last-visit">Последний вход: {{ lastVisitDate | date }}</span>
+      }
     </div>
     } @else {
     <div class="counter-container">

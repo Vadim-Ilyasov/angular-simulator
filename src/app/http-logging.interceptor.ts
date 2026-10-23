@@ -7,11 +7,18 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { catchError, tap, throwError } from 'rxjs';
+import { IAppConfig } from '../interfaces/IAppConfig';
+import { inject } from '@angular/core';
+import { APP_CONFIG } from './app.config.token';
 
 export const httpLoggingInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn,
 ) => {
+  const appConfig: IAppConfig = inject(APP_CONFIG);
+  if (!appConfig.enableLogs) {
+    return next(req);
+  }
   console.warn(`${ req.method }`);
   console.warn(`URL: ${ req.urlWithParams }`);
   const startTime: number = performance.now();

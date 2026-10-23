@@ -15,6 +15,8 @@ import { Theme } from '../../enums/Theme';
 import { ThemeService } from '../theme.service';
 import { IThemeOption } from '../../interfaces/IThemeOption';
 import { AuthService } from '../features/auth/auth.service';
+import { APP_CONFIG } from '../app.config.token';
+import { IAppConfig } from '../../interfaces/IAppConfig';
 
 @Component({
   selector: 'app-header',
@@ -36,14 +38,15 @@ import { AuthService } from '../features/auth/auth.service';
 export class HeaderComponent {
 
   themeService: ThemeService = inject(ThemeService);
+  appConfig: IAppConfig = inject(APP_CONFIG);
   private authService: AuthService = inject(AuthService);
   private router: Router = inject(Router);
   isAuthenticated$ = this.authService.isAuthenticated$;
 
-  logoName = 'румтибет';
   currentDate: Date = new Date();
-  count = 0;
-  toggle = true;
+  lastVisitDate: Date | null = null;
+  count: number = 0;
+  toggle: boolean = true;
   faMountain: IconDefinition = faMountain;
   themeOptions: IThemeOption[] = this.themeService.themeOptions;
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
@@ -61,6 +64,7 @@ export class HeaderComponent {
   ];
 
   constructor() {
+    this.loadDateLastVisit();
     this.saveDateLastVisit();
     this.saveSumVisit();
 
@@ -69,14 +73,22 @@ export class HeaderComponent {
     }, 1000);
   }
 
+  loadDateLastVisit(): void {
+    const DATE_KEY: string = 'last-visit';
+    const date: string | null = localStorage.getItem(DATE_KEY);
+    if (date) {
+      this.lastVisitDate = new Date(date);
+    }
+  }
+
   saveDateLastVisit(): void {
-    const DATE_KEY = 'last-visit';
+    const DATE_KEY: string = 'last-visit';
     const date: string = new Date().toISOString();
     localStorage.setItem(DATE_KEY, date);
   }
 
   saveSumVisit(): void {
-    const SUM_KEY = 'visits-count';
+    const SUM_KEY: string = 'visits-count';
     const visit: string = localStorage.getItem(SUM_KEY) || '0';
     let visitNumber: number = parseInt(visit, 10);
     visitNumber++;

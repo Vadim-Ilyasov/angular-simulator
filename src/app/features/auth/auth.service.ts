@@ -17,7 +17,7 @@ export class AuthService {
 
   private http: HttpClient = inject(HttpClient);
   localStorageService: LocalStorageService = inject(LocalStorageService);
-  appConfig: IAppConfig= inject(APP_CONFIG);
+  appConfig: IAppConfig = inject(APP_CONFIG);
   private TOKEN_KEY = 'auth_token';
   private API_AUTH_URL = 'https://dummyjson.com/auth';
   private authUserSubject: BehaviorSubject<IAuthUser | null> =

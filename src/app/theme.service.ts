@@ -49,7 +49,6 @@ export class ThemeService {
 
   setTheme(newTheme: Theme): void {
     if (!this.appConfig.enableTheming) {
-      console.warn('Смена тем отключена глобальной конфигурацией.');
       return;
     }
     this.localStorageService.setItem('theme', newTheme);
@@ -59,7 +58,6 @@ export class ThemeService {
 
   selectColorMode(isDarkMode: boolean): void {
     if (!this.appConfig.enableTheming) {
-      console.warn('Смена тем отключена глобальной конфигурацией.');
       return;
     }
     this.localStorageService.setItem('darkMode', isDarkMode);

@@ -8,6 +8,8 @@ import { Preset } from '@primeuix/themes/types';
 import { LocalStorageService } from './local-storage.service';
 import { Theme } from '../enums/Theme';
 import { IThemeOption } from '../interfaces/IThemeOption';
+import { IAppConfig } from '../interfaces/IAppConfig';
+import { APP_CONFIG } from './app.config.token';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,7 @@ import { IThemeOption } from '../interfaces/IThemeOption';
 export class ThemeService {
 
   localStorageService: LocalStorageService = inject(LocalStorageService);
+  appConfig: IAppConfig = inject(APP_CONFIG);
   private themeSubject: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(this.getInitTheme());
   theme$: Observable<Theme> = this.themeSubject.asObservable().pipe(
     tap((theme: Theme) => {
@@ -45,22 +48,34 @@ export class ThemeService {
   }
 
   setTheme(newTheme: Theme): void {
+    if (!this.appConfig.enableTheming) {
+      return;
+    }
     this.localStorageService.setItem('theme', newTheme);
     this.themeSubject.next(newTheme);
     this.applyTheme(newTheme);
   }
 
   selectColorMode(isDarkMode: boolean): void {
+    if (!this.appConfig.enableTheming) {
+      return;
+    }
     this.localStorageService.setItem('darkMode', isDarkMode);
     this.isDarkSubject.next(isDarkMode);
   }
 
   private getInitTheme(): Theme {
+    if (!this.appConfig.enableTheming) {
+      return Theme.AURA;
+    }
     const currentTheme: Theme = this.localStorageService.getItem('theme') as Theme;
     return currentTheme || Theme.AURA;
   }
 
   private getInitDarkMode(): boolean {
+    if (!this.appConfig.enableTheming) {
+      return false;
+    }
     return this.localStorageService.getItem('darkMode') ?? false;
   }
 

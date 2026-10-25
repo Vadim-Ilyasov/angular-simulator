@@ -9,11 +9,12 @@ import { IAdvantage } from '../../interfaces/IAdvantage';
 import { IDestination } from '../../interfaces/IDestination';
 import { ITravelCard } from '../../interfaces/ITravelCard';
 import { ISearchTours } from '../../interfaces/ISearchTours';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [FormsModule, FontAwesomeModule],
+  imports: [FormsModule, FontAwesomeModule, DatePipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -97,7 +98,7 @@ export class HomePageComponent {
       title: 'Красивая Италия, какая она в реальности?',
       description:
         'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      date: '01/04/2023',
+      date: new Date('2023-04-01'),
       link: 'читать статью',
     },
     {
@@ -106,7 +107,7 @@ export class HomePageComponent {
       title: 'Долой сомнения! Весь мир открыт для вас!',
       description:
         'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
-      date: '01/04/2023',
+      date: new Date('2023-04-01'),
       link: 'читать статью',
     },
     {
@@ -114,7 +115,7 @@ export class HomePageComponent {
       image: 'solo-adventure',
       title: 'Как подготовиться к путешествию в одиночку? ',
       description: 'Для современного мира базовый вектор развития предполагает.',
-      date: '01/04/2023',
+      date: new Date('2023-04-01'),
       link: 'читать статью',
     },
     {
@@ -122,7 +123,7 @@ export class HomePageComponent {
       image: 'indian-pride',
       title: 'Индия ... летим?',
       description: 'Для современного мира базовый.',
-      date: '01/04/2023',
+      date: new Date('2023-04-01'),
       link: 'читать статью',
     },
   ];

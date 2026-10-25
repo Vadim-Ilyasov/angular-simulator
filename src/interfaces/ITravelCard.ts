@@ -3,6 +3,6 @@ export interface ITravelCard {
   image: string;
   title: string;
   description: string;
-  date: string;
+  date: Date | string;
   link: string;
 }

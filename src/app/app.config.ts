@@ -18,6 +18,9 @@ import { httpLoggingInterceptor } from './http-logging.interceptor';
 import { errorInterceptor } from './error.interceptor';
 import { authInterceptor } from './features/auth/auth.interceptor';
 import { AuthService } from './features/auth/auth.service';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
+import { APP_CONFIG } from './app.config.token';
+import { IAppConfig } from '../interfaces/IAppConfig';
 
 function getPreset(): Preset {
   const savedTheme: string | null = localStorage.getItem('theme');
@@ -32,6 +35,15 @@ function getPreset(): Preset {
       return Aura;
   }
 }
+
+const defaultConfig: IAppConfig = {
+  companyName: 'румтибет',
+  enableLogs: true,
+  enableNotifications: false,
+  enableTheming: true,
+  sessionTimeout: 3600000
+};
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -53,5 +65,7 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'dd.MM.yyyy HH:mm' } },
+    { provide: APP_CONFIG, useValue: defaultConfig },
   ],
 };

@@ -8,12 +8,16 @@ import { IAuthUser } from './IAuthUser';
 import { IAuthResponse } from './IAuthResponse';
 import { TokenType } from './TokenType';
 import { Role } from './Role';
+import { IAppConfig } from '../../../interfaces/IAppConfig';
+import { APP_CONFIG } from '../../app.config.token';
+import { ILoginRequest } from './ILoginRequest';
 
 @Service()
 export class AuthService {
 
   private http: HttpClient = inject(HttpClient);
   localStorageService: LocalStorageService = inject(LocalStorageService);
+  appConfig: IAppConfig = inject(APP_CONFIG);
   private TOKEN_KEY = 'auth_token';
   private API_AUTH_URL = 'https://dummyjson.com/auth';
   private authUserSubject: BehaviorSubject<IAuthUser | null> =
@@ -25,7 +29,12 @@ export class AuthService {
   );
 
   login(credential: IAuth): Observable<IAuthUser> {
-    return this.http.post<IAuthResponse>(`${ this.API_AUTH_URL }/login`, credential).pipe(
+    const expiresInMins: number = this.appConfig.sessionTimeout / 60 / 1000;
+    const requestBody: ILoginRequest = {
+      ...credential,
+      expiresInMins: expiresInMins 
+    };
+    return this.http.post<IAuthResponse>(`${ this.API_AUTH_URL }/login`, requestBody).pipe(
       tap((response: IAuthResponse) => {
         if (response.accessToken && response.refreshToken) {
           this.saveTokens(response.accessToken, response.refreshToken);
@@ -54,9 +63,9 @@ export class AuthService {
 
   refreshToken(): Observable<IToken> {
     const refreshToken: string | null = this.getToken('refresh');
-
+    const expiresInMins: number = this.appConfig.sessionTimeout / 60 / 1000;
     return this.http
-      .post<IToken>(`${ this.API_AUTH_URL }/refresh`, { refreshToken, expiresInMins: 60 })
+      .post<IToken>(`${ this.API_AUTH_URL }/refresh`, { refreshToken, expiresInMins: expiresInMins })
       .pipe(
         tap((response: IToken) => {
           if (response.accessToken && response.refreshToken) {

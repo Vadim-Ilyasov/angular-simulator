@@ -1,0 +1,20 @@
+<div class="experiment-container">
+  <div class="experiment-card">
+    <h2>Эксперимент со стратегией DEFAULT</h2>
+    <div class="counter-display">
+      Текущее значение Count: <span>{{ count }}</span>
+    </div>
+    <div class="button-group">
+      <button (click)="changeAfterClick()">Сценарий 1: Обычный Click (+1)</button>
+      <button (click)="changeAfterSetTimeOut()">
+        Сценарий 2: Через setTimeout (+10 через 1 сек)
+      </button>
+      <button (click)="changeAfterHttpClient()">Сценарий 3: Через Promise (+5)</button>
+      <button (click)="changeAfterPromise()">Сценарий 4: Через HttpClient (Запрос к API)</button>
+      <button (click)="changeAfterSetInterval()">
+        Сценарий 5: Через setInterval (+1 каждые 2 сек)
+      </button>
+      <button (click)="changeAfterThreeOperation()">Сценарий 6: ВСЁ ОДНОВРЕМЕННО</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="card">
+  <h2>Счетчик: {{ count }}</h2>
+  <div class="buttons">
+    <button (click)="runMarkForCheck()">1. markForCheck (+5 через 1с)</button>
+    <button (click)="runDetectChanges()">2. detectChanges (+10 через 1с)</button>
+    <button (click)="runDetachWithAllScenarios()">3. detach (заморозить)</button>
+    <button (click)="runReattach()">4. reattach (разморозить)</button>
+    <button (click)="(0)">Пустой клик (триггер Zone.js)</button>
+  </div>
+</div>

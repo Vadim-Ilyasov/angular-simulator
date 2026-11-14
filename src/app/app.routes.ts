@@ -4,6 +4,21 @@ import { adminGuard } from './features/auth/admin.guard';
 
 export const routes: Routes = [
   {
+    path: 'parent',
+    loadComponent: () =>
+      import('./homework-28/parent/parent.component').then((m) => m.ParentComponent),
+  },
+  {
+    path: 'counter-default',
+    loadComponent: () =>
+      import('./homework-28/counter-default/counter-default.component').then((m) => m.CounterDefaultComponent),
+  },
+   {
+    path: 'counter-on-push',
+    loadComponent: () =>
+      import('./homework-28/counter-on-push/counter-on-push.component').then((m) => m.CounterOnPushComponent),
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./features/auth/login/login.component').then((m) => m.LoginComponent),

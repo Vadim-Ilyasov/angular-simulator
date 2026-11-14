@@ -22,7 +22,7 @@ export class HomePageComponent {
 
   mgService: MessageService = inject(MessageService);
 
-  text = '';
+  text: string = '';
   faCalendar: IconDefinition = faCalendar;
   faChevronDown: IconDefinition = faChevronDown;
   faStar: IconDefinition = faStar;
